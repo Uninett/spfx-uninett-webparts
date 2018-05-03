@@ -1,0 +1,8 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "version": "1.4.1",
+    "libraryName": "spfx-social-links",
+    "libraryId": "84337d42-178c-4f2b-b469-de5bcdd23f1f",
+    "environment": "spo"
+  }
+}

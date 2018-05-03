@@ -1,0 +1,25 @@
+{
+  "$schema": "https://dev.office.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "58897e63-5376-4883-bead-16a83b203aea",
+  "alias": "SocialLinksWebPart",
+  "componentType": "WebPart",
+
+  "version": "*",
+  "manifestVersion": 2,
+
+  "requiresCustomScript": false,
+
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+    "group": { "default": "Other" },
+    "title": { "default": "Social Links" },
+    "description": { "default": "Links to social media" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "facebookField": "https://www.facebook.com/UNINETT",
+      "twitterField": "https://twitter.com/uninett",
+      "linkedinField": "http://www.linkedin.com/company/uninett",
+      "youtubeField": "https://www.youtube.com/user/uninettnorge"
+    }
+  }]
+}
