@@ -7,6 +7,9 @@ define([], function() {
     "twitterUrl": "Twitter",
     "linkedinUrl": "LinedIn",
     "youtubeUrl": "YouTube",
-    "bgColorLabel": "Background Color"
+    "bgColorLabel": "Background Color",
+    "iconColorLabel": "Icon Color",
+    "iconColorOffLabel": "Black",
+    "iconColorOnLabel": "White"
   }
 });

@@ -7,6 +7,9 @@ declare interface ISocialLinksWebPartStrings {
   linkedinUrl: string;
   youtubeUrl: string;
   bgColorLabel: string;
+  iconColorLabel: string;
+  iconColorOffLabel: string;
+  iconColorOnLabel: string;
 }
 
 declare module 'SocialLinksWebPartStrings' {

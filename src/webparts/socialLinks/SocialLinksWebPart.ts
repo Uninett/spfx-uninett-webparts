@@ -4,7 +4,8 @@ import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
   PropertyPaneTextField,
-  PropertyPaneLink
+  PropertyPaneLink,
+  PropertyPaneToggle
 } from '@microsoft/sp-webpart-base';
 import { escape } from '@microsoft/sp-lodash-subset';
 
@@ -17,6 +18,7 @@ export interface ISocialLinksWebPartProps {
   linkedinField: string;
   youtubeField: string;
   bgColorField: string;
+  iconColorField: boolean;
 }
 
 
@@ -26,31 +28,51 @@ require("@microsoft/loader-set-webpack-public-path!");
 
 export default class SocialLinksWebPart extends BaseClientSideWebPart<ISocialLinksWebPartProps> {
 
+
+
   public render(): void {
-    this.domElement.innerHTML = `
+    var iconColor = "";
+
+    if(this.properties.iconColorField == true) {
+      iconColor = "white";
+    }
+    else {
+      iconColor = "black";
+    }
+
+    var facebookSvg = require<string>("./images/facebook_" + iconColor + ".svg");
+    var linkedinSvg = require<string>("./images/linkedin_" + iconColor + ".svg");
+    var twitterSvg = require<string>("./images/twitter_" + iconColor + ".svg");
+    var youtubeSvg = require<string>("./images/youtube_" + iconColor + ".svg");
+
+    var dynHtml = `
     <div class="${ styles.socialLinks }">
       <div class="${ styles.container }">
         <div class="${ styles.row }" style="background-color:${escape(this.properties.bgColorField)};">
           <div class="${ styles.column }">
 
-          
+            <div class="${ styles.socialContent}">
+              <table>
+                <tbody>
+                  <tr>` +
+                    
+                      `<td><a href="${escape(this.properties.facebookField)}"><img src="${facebookSvg}" class="svg"></a></td>`
+                    +
+                    
+                    `<td><a href="${escape(this.properties.twitterField)}"><img src="${twitterSvg}" class="svg"></a></td>
+                    <td><a href="${escape(this.properties.linkedinField)}"><img src="${linkedinSvg}" class="svg"></a></td>
+                    <td><a href="${escape(this.properties.youtubeField)}"><img src="${youtubeSvg}" class="svg"></a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-        <div class="${ styles.socialContent}">
-          <table>
-            <tbody>
-              <tr>
-                <td><a href="${escape(this.properties.facebookField)}"><img src="${require<string>('./images/facebook_white.svg')}" class="svg"></a></td>
-                <td><a href="${escape(this.properties.twitterField)}"><img src="${require<string>('./images/twitter_white.svg')}" class="svg"></a></td>
-                <td><a href="${escape(this.properties.linkedinField)}"><img src="${require<string>('./images/linkedin_white.svg')}" class="svg"></a></td>
-                <td><a href="${escape(this.properties.youtubeField)}"><img src="${require<string>('./images/youtube_white.svg')}" class="svg"></a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
           </div>
         </div> 
       </div>
     </div>`;
+
+    this.domElement.innerHTML = dynHtml;
   }
 
   protected get dataVersion(): Version {
@@ -92,6 +114,11 @@ export default class SocialLinksWebPart extends BaseClientSideWebPart<ISocialLin
                 PropertyPaneTextField('bgColorField', {
                   label: strings.bgColorLabel,
                   value: this.properties.bgColorField
+                }),
+                PropertyPaneToggle('iconColorField', {
+                  label: strings.iconColorLabel,
+                  offText: strings.iconColorOffLabel,
+                  onText: strings.iconColorOnLabel
                 })
               ]
             }
