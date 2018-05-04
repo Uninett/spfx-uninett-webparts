@@ -45,6 +45,21 @@ export default class SocialLinksWebPart extends BaseClientSideWebPart<ISocialLin
     var twitterSvg = require<string>("./images/twitter_" + iconColor + ".svg");
     var youtubeSvg = require<string>("./images/youtube_" + iconColor + ".svg");
 
+    var dynHtmlIcons = ""
+    
+    if(this.properties.facebookField != "") {
+      dynHtmlIcons += `<td><a href="${escape(this.properties.facebookField)}"><img src="${facebookSvg}" class="svg"></a></td>`
+    }
+    if(this.properties.twitterField != "") {
+      dynHtmlIcons += `<td><a href="${escape(this.properties.twitterField)}"><img src="${twitterSvg}" class="svg"></a></td>`
+    }
+    if(this.properties.linkedinField != "") {
+      dynHtmlIcons += `<td><a href="${escape(this.properties.facebookField)}"><img src="${linkedinSvg}" class="svg"></a></td>`
+    }
+    if(this.properties.youtubeField != "") {
+      dynHtmlIcons += `<td><a href="${escape(this.properties.youtubeField)}"><img src="${youtubeSvg}" class="svg"></a></td>`
+    }
+
     var dynHtml = `
     <div class="${ styles.socialLinks }">
       <div class="${ styles.container }">
@@ -54,15 +69,7 @@ export default class SocialLinksWebPart extends BaseClientSideWebPart<ISocialLin
             <div class="${ styles.socialContent}">
               <table>
                 <tbody>
-                  <tr>` +
-                    
-                      `<td><a href="${escape(this.properties.facebookField)}"><img src="${facebookSvg}" class="svg"></a></td>`
-                    +
-                    
-                    `<td><a href="${escape(this.properties.twitterField)}"><img src="${twitterSvg}" class="svg"></a></td>
-                    <td><a href="${escape(this.properties.linkedinField)}"><img src="${linkedinSvg}" class="svg"></a></td>
-                    <td><a href="${escape(this.properties.youtubeField)}"><img src="${youtubeSvg}" class="svg"></a></td>
-                  </tr>
+                  <tr>` + dynHtmlIcons + `</tr>
                 </tbody>
               </table>
             </div>
