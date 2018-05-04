@@ -54,7 +54,7 @@ export default class SocialLinksWebPart extends BaseClientSideWebPart<ISocialLin
       dynHtmlIcons += `<td><a href="${escape(this.properties.twitterField)}"><img src="${twitterSvg}"></a></td>`;
     }
     if(this.properties.linkedinField != "") {
-      dynHtmlIcons += `<td><a href="${escape(this.properties.facebookField)}"><img src="${linkedinSvg}"></a></td>`;
+      dynHtmlIcons += `<td><a href="${escape(this.properties.linkedinField)}"><img src="${linkedinSvg}"></a></td>`;
     }
     if(this.properties.youtubeField != "") {
       dynHtmlIcons += `<td><a href="${escape(this.properties.youtubeField)}"><img src="${youtubeSvg}"></a></td>`;
