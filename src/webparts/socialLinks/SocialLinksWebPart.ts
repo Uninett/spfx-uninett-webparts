@@ -45,19 +45,19 @@ export default class SocialLinksWebPart extends BaseClientSideWebPart<ISocialLin
     var twitterSvg = require<string>("./images/twitter_" + iconColor + ".svg");
     var youtubeSvg = require<string>("./images/youtube_" + iconColor + ".svg");
 
-    var dynHtmlIcons = ""
+    var dynHtmlIcons = "";
     
     if(this.properties.facebookField != "") {
-      dynHtmlIcons += `<td><a href="${escape(this.properties.facebookField)}"><img src="${facebookSvg}"></a></td>`
+      dynHtmlIcons += `<td><a href="${escape(this.properties.facebookField)}"><img src="${facebookSvg}"></a></td>`;
     }
     if(this.properties.twitterField != "") {
-      dynHtmlIcons += `<td><a href="${escape(this.properties.twitterField)}"><img src="${twitterSvg}"></a></td>`
+      dynHtmlIcons += `<td><a href="${escape(this.properties.twitterField)}"><img src="${twitterSvg}"></a></td>`;
     }
     if(this.properties.linkedinField != "") {
-      dynHtmlIcons += `<td><a href="${escape(this.properties.facebookField)}"><img src="${linkedinSvg}"></a></td>`
+      dynHtmlIcons += `<td><a href="${escape(this.properties.facebookField)}"><img src="${linkedinSvg}"></a></td>`;
     }
     if(this.properties.youtubeField != "") {
-      dynHtmlIcons += `<td><a href="${escape(this.properties.youtubeField)}"><img src="${youtubeSvg}"></a></td>`
+      dynHtmlIcons += `<td><a href="${escape(this.properties.youtubeField)}"><img src="${youtubeSvg}"></a></td>`;
     }
 
     var dynHtml = `
