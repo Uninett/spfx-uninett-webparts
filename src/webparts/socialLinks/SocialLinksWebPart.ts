@@ -16,6 +16,7 @@ export interface ISocialLinksWebPartProps {
   twitterField: string;
   linkedinField: string;
   youtubeField: string;
+  bgColorField: string;
 }
 
 
@@ -29,7 +30,7 @@ export default class SocialLinksWebPart extends BaseClientSideWebPart<ISocialLin
     this.domElement.innerHTML = `
     <div class="${ styles.socialLinks }">
       <div class="${ styles.container }">
-        <div class="${ styles.row }">
+        <div class="${ styles.row }" style="background-color:${escape(this.properties.bgColorField)};">
           <div class="${ styles.column }">
 
           
@@ -82,6 +83,15 @@ export default class SocialLinksWebPart extends BaseClientSideWebPart<ISocialLin
                 PropertyPaneTextField('youtubeField', {
                   label: strings.youtubeUrl,
                   value: this.properties.youtubeField
+                })
+              ]
+            },
+            {
+              groupName: strings.ColorGroupName,
+              groupFields: [
+                PropertyPaneTextField('bgColorField', {
+                  label: strings.bgColorLabel,
+                  value: this.properties.bgColorField
                 })
               ]
             }

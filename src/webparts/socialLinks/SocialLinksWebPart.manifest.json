@@ -19,7 +19,8 @@
       "facebookField": "https://www.facebook.com/UNINETT",
       "twitterField": "https://twitter.com/uninett",
       "linkedinField": "http://www.linkedin.com/company/uninett",
-      "youtubeField": "https://www.youtube.com/user/uninettnorge"
+      "youtubeField": "https://www.youtube.com/user/uninettnorge",
+      "bgColorField": "#9A9896"
     }
   }]
 }
