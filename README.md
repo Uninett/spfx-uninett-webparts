@@ -1,6 +1,16 @@
-## spfx-social-links
+# Uninett SPFx SharePoint Web Parts
 
-This is where you include your WebPart documentation.
+Contains currently only one web part.
+
+## Social Links
+
+Web part that contains icons, with link, to social media. Property to change background color and toggle icon color between black and white. If URL to a social media is empty then the icon is removed. Supports:
+- Facebook
+- Twitter
+- LinkedIn
+- YouTube
+
+![spfx-uninett-webparts-social_links](/readme-images/spfx-uninett-webparts-social_links.jpg)
 
 ### Building the code
 
