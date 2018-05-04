@@ -1,9 +1,9 @@
 {
   "$schema": "https://dev.office.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "spfx-social-links-client-side-solution",
+    "name": "Uninett SPFx Web Parts",
     "id": "84337d42-178c-4f2b-b469-de5bcdd23f1f",
-    "version": "1.0.0.0",
+    "version": "1.0.0.1",
     "includeClientSideAssets": true
   },
   "paths": {
