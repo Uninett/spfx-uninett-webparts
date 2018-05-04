@@ -7,6 +7,6 @@
     "includeClientSideAssets": true
   },
   "paths": {
-    "zippedPackage": "solution/spfx-social-links.sppkg"
+    "zippedPackage": "solution/spfx-uninett-webparts.sppkg"
   }
 }
