@@ -1,5 +1,5 @@
 {
-  "name": "spfx-uninett-webparts",
+  "name": "uninett-webparts-test",
   "version": "0.0.1",
   "private": true,
   "engines": {
@@ -12,29 +12,23 @@
   },
   "dependencies": {
     "@microsoft/sp-core-library": "1.8.1",
-    "@microsoft/sp-lodash-subset": "1.8.1",
-    "@microsoft/sp-office-ui-fabric-core": "1.8.1",
     "@microsoft/sp-property-pane": "1.8.1",
     "@microsoft/sp-webpart-base": "1.8.1",
-    "@types/es6-promise": "0.0.33",
-    "@types/jquery": "^3.3.29",
+    "@microsoft/sp-lodash-subset": "1.8.1",
+    "@microsoft/sp-office-ui-fabric-core": "1.8.1",
     "@types/webpack-env": "1.13.1",
-    "flipclock": "^0.10.8",
-    "jquery": "^3.4.1",
-    "natives": "^1.1.6",
-    "npm": "^6.0.0"
+    "@types/es6-promise": "0.0.33"
   },
   "devDependencies": {
-    "@microsoft/loader-set-webpack-public-path": "^3.2.37",
-    "@microsoft/set-webpack-public-path-plugin": "^1.5.7",
+    "@microsoft/loader-set-webpack-public-path": "^3.2.153",
+    "@microsoft/rush-stack-compiler-2.7": "0.4.0",
     "@microsoft/sp-build-web": "1.8.1",
     "@microsoft/sp-module-interfaces": "1.8.1",
+    "@microsoft/sp-tslint-rules": "1.8.1",
     "@microsoft/sp-webpart-workbench": "1.8.1",
     "@types/chai": "3.4.34",
     "@types/mocha": "2.2.38",
     "ajv": "~5.2.2",
-    "gulp": "~3.9.1",
-    "@microsoft/sp-tslint-rules": "1.8.1",
-    "@microsoft/rush-stack-compiler-2.7": "0.4.0"
+    "gulp": "~3.9.1"
   }
 }

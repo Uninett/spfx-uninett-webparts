@@ -30,6 +30,3 @@ obj
 
 # Styles Generated Code
 *.scss.ts
-
-#Visual Studio Code
-.vscode/*

@@ -1,10 +1,12 @@
 {
   "@microsoft/generator-sharepoint": {
-    "version": "1.4.1",
-    "libraryName": "spfx-social-links",
-    "libraryId": "84337d42-178c-4f2b-b469-de5bcdd23f1f",
+    "isCreatingSolution": true,
     "environment": "spo",
-    "isCreatingSolution": false,
+    "version": "1.8.1",
+    "libraryName": "uninett-webparts-test",
+    "libraryId": "e7b6dc50-727d-44fa-95ff-23d5d97d6163",
+    "packageManager": "npm",
+    "isDomainIsolated": false,
     "componentType": "webpart"
   }
 }

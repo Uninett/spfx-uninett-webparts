@@ -1,5 +1,5 @@
 {
-  "$schema": "https://dev.office.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
     "social-links-web-part": {
@@ -9,19 +9,10 @@
           "manifest": "./src/webparts/socialLinks/SocialLinksWebPart.manifest.json"
         }
       ]
-    },
-    "flipclock-web-part": {
-      "components": [
-        {
-          "entrypoint": "./lib/webparts/flipclock/FlipclockWebPart.js",
-          "manifest": "./src/webparts/flipclock/FlipclockWebPart.manifest.json"
-        }
-      ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "SocialLinksWebPartStrings": "lib/webparts/socialLinks/loc/{locale}.js",
-    "FlipclockWebPartStrings": "lib/webparts/flipclock/loc/{locale}.js"
+    "SocialLinksWebPartStrings": "lib/webparts/socialLinks/loc/{locale}.js"
   }
 }
