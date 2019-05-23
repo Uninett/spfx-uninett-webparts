@@ -20,6 +20,7 @@
     "@types/jquery": "^3.3.29",
     "@types/webpack-env": "1.13.1",
     "flipclock": "^0.10.8",
+    "jquery": "^3.4.1",
     "natives": "^1.1.6",
     "npm": "^6.0.0"
   },
