@@ -12,12 +12,15 @@
   },
   "dependencies": {
     "@microsoft/sp-core-library": "1.8.1",
-    "@microsoft/sp-property-pane": "1.8.1",
-    "@microsoft/sp-webpart-base": "1.8.1",
     "@microsoft/sp-lodash-subset": "1.8.1",
     "@microsoft/sp-office-ui-fabric-core": "1.8.1",
+    "@microsoft/sp-property-pane": "1.8.1",
+    "@microsoft/sp-webpart-base": "1.8.1",
+    "@types/es6-promise": "0.0.33",
+    "@types/jquery": "^3.3.29",
     "@types/webpack-env": "1.13.1",
-    "@types/es6-promise": "0.0.33"
+    "flipclock": "^0.10.8",
+    "jquery": "^3.4.1"
   },
   "devDependencies": {
     "@microsoft/loader-set-webpack-public-path": "^3.2.153",

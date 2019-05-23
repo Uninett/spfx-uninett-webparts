@@ -9,10 +9,19 @@
           "manifest": "./src/webparts/socialLinks/SocialLinksWebPart.manifest.json"
         }
       ]
+    },
+    "flip-clock-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/flipClock/FlipClockWebPart.js",
+          "manifest": "./src/webparts/flipClock/FlipClockWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "SocialLinksWebPartStrings": "lib/webparts/socialLinks/loc/{locale}.js"
+    "SocialLinksWebPartStrings": "lib/webparts/socialLinks/loc/{locale}.js",
+    "FlipClockWebPartStrings": "lib/webparts/flipClock/loc/{locale}.js"
   }
 }
