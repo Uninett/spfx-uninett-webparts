@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "uninett-webparts-test-client-side-solution",
+    "name": "spfx-uninett-webparts-client-side-solution",
     "id": "e7b6dc50-727d-44fa-95ff-23d5d97d6163",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "isDomainIsolated": false
   },
   "paths": {
-    "zippedPackage": "solution/uninett-webparts-test.sppkg"
+    "zippedPackage": "solution/spfx-uninett-webparts.sppkg"
   }
 }

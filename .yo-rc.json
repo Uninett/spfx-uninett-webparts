@@ -3,7 +3,7 @@
     "isCreatingSolution": false,
     "environment": "spo",
     "version": "1.8.1",
-    "libraryName": "uninett-webparts-test",
+    "libraryName": "spfx-uninett-webparts",
     "libraryId": "e7b6dc50-727d-44fa-95ff-23d5d97d6163",
     "packageManager": "npm",
     "isDomainIsolated": false,
