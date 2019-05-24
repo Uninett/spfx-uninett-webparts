@@ -25,7 +25,7 @@ Flip clock that lets you toggle between two modes:
 
 General properties let you switch between the modes, change clock size and toggle between black and white text color.
 
-![spfx-uninett-webparts-social_links](/readme-images/spfx-uninett-webparts-flipclock.jpg)
+![spfx-uninett-webparts-flipclock](/readme-images/spfx-uninett-webparts-flipclock.jpg)
 
 ### Building the code
 
