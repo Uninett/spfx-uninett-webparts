@@ -27,6 +27,7 @@ General properties let you switch between the modes, change clock size and toggl
 
 ![spfx-uninett-webparts-flipclock](/readme-images/spfx-uninett-webparts-flipclock.jpg)
 
+
 ### Building the code
 
 ```bash
