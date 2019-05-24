@@ -22,6 +22,7 @@
   "externals": {},
   "localizedResources": {
     "SocialLinksWebPartStrings": "lib/webparts/socialLinks/loc/{locale}.js",
-    "FlipClockWebPartStrings": "lib/webparts/flipClock/loc/{locale}.js"
+    "FlipClockWebPartStrings": "lib/webparts/flipClock/loc/{locale}.js",
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js"
   }
 }

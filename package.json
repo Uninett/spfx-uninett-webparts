@@ -16,6 +16,7 @@
     "@microsoft/sp-office-ui-fabric-core": "1.8.1",
     "@microsoft/sp-property-pane": "1.8.1",
     "@microsoft/sp-webpart-base": "1.8.1",
+    "@pnp/spfx-property-controls": "1.15.0",
     "@types/es6-promise": "0.0.33",
     "@types/jquery": "^3.3.29",
     "@types/webpack-env": "1.13.1",

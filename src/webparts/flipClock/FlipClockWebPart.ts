@@ -8,27 +8,64 @@ import {
   PropertyPaneChoiceGroup,
   PropertyPaneLabel,
   IPropertyPaneGroup,
-  PropertyPaneHorizontalRule
+  PropertyPaneHorizontalRule,
+  PropertyPaneSlider
 } from '@microsoft/sp-property-pane';
-import { escape } from '@microsoft/sp-lodash-subset';
+import { escape, times } from '@microsoft/sp-lodash-subset';
 
+import styles from './FlipClockWebPart.module.scss';
 require('flipclock/dist/flipclock.css');
 import * as strings from 'FlipClockWebPartStrings';
 import * as FlipClock from 'flipclock';
 
 export interface IFlipClockWebPartProps {
   clockType: string;
+  clockSize: string;
+  fontColor: string;
   format: string;
   showSeconds: boolean;
   weekDay: number;
   timeOfDay: number;
+  untilText: string;
 }
 
 export default class FlipClockWebPart extends BaseClientSideWebPart<IFlipClockWebPartProps> {
 
   public render(): void {
+
+    var extraHtml = ``;
+    var clockSize = 0.8;
+    var fontColor = 'black';
+
+    if (this.properties.clockType == 'countdown') {
+      extraHtml = `
+      <div class="${ styles.untilStyle }">
+        <p>${escape(this.properties.untilText)}</p>
+      </div>
+      `;
+    }
+
+    switch (this.properties.clockSize) {
+      case 'small':
+        clockSize = 0.5;
+        break;
+      case 'medium':
+        clockSize = 0.8;
+        break;
+      case 'big':
+        clockSize = 1;
+        break;
+    }
+
+    fontColor = this.properties.fontColor ? 'white' : 'black';
+
     this.domElement.innerHTML = `
-      <div class="clock"></div>
+      <div class="${ styles.flipClock }">
+        <div class="${ styles.container }" style="zoom: ${ clockSize }; color: ${ fontColor }">
+          <div class="clock ${ styles.clockStyle }"></div>
+          ` + extraHtml + `
+        </div>
+      </div>
       `;
 
       const el = document.querySelector('.clock');
@@ -51,20 +88,27 @@ export default class FlipClockWebPart extends BaseClientSideWebPart<IFlipClockWe
         const clock = new FlipClock(el, nextFriday, {
           face: 'DayCounter',
           countdown: true
-        })
+        });
       }
 
-      function getTimeUntilDate(date: Date, dayOfWeek: number, timeOfDay:  number) {
+      function getTimeUntilDate(date: Date, dayOfWeek: number, timeOfDay: number) {
         // gets days until selected weekday
-        var resultDate = new Date(date.getTime());0
+        var resultDate = new Date(date.getTime());
         resultDate.setDate(date.getDate() + (7 + dayOfWeek - date.getDay() - 1) % 7 +1);
+        
         // gets milliseconds since midnight
         var d = new Date(),
           msSinceMidnight = d.getTime() - d.setHours(0,0,0,0);
         // converts selected time of day into milliseconds
+        if (timeOfDay == 24) timeOfDay = 0;
         var msUntilTimeOfDay = timeOfDay*60*60*1000;
 
         resultDate.setTime(resultDate.getTime() - msSinceMidnight + msUntilTimeOfDay);
+
+        // if day of week is today, set days remaining to 0 instead of 7
+        const _MS_PER_WEEK = 1000 * 60 * 60 * 24 * 7;
+        if (Math.abs(resultDate.getTime() - date.getTime()) >= _MS_PER_WEEK) resultDate.setTime(resultDate.getTime() - _MS_PER_WEEK);
+        
         return resultDate;
       }
       
@@ -75,22 +119,36 @@ export default class FlipClockWebPart extends BaseClientSideWebPart<IFlipClockWe
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
-    let clockProps: any;    
-    let typeName: string;
-
+    let groupTitle: string;
+    let clockProps1: any;
+    let clockProps2: any;
+    let clockProps3: any;
+    
     if (this.properties.clockType != 'countdown') {
-      clockProps = PropertyPaneChoiceGroup('format', {
+      groupTitle = 'Time settings';
+
+      clockProps1 = PropertyPaneChoiceGroup('format', {
         label: 'Time format',
         options: [
           { key: 'TwentyFourHourClock', text: '24-hour', checked: true},
           { key: 'TwelveHourClock', text: '12-hour', checked: false}
         ]                
       });
-      typeName = 'Time clock properties'
+      clockProps2 = PropertyPaneToggle('showSeconds', {
+        label: 'Show seconds',
+        onText: 'Yes',
+        offText: 'No'
+      });
+      clockProps3 = PropertyPaneLabel('emptylabel', {
+        text: ""
+      });      
     }
+
     else {
-      clockProps = PropertyPaneDropdown('weekDay', {
-        label: 'Select weekday',
+      groupTitle = 'Weekly countdown settings';
+
+      clockProps1 = PropertyPaneDropdown('weekDay', {
+        label: 'Weekday',
         options: [
           { key: 1, text: 'Monday' },
           { key: 2, text: 'Tuesday' },
@@ -101,9 +159,40 @@ export default class FlipClockWebPart extends BaseClientSideWebPart<IFlipClockWe
           { key: 7, text: 'Sunday' }
         ],
         selectedKey: 5
-      })
-      typeName = 'Countdown clock properties'
-
+      });
+      clockProps2 = PropertyPaneDropdown('timeOfDay', {
+        label: 'Time of day',
+        options: [
+          { key: 24, text: '00:00' },
+          { key: 1, text: '01:00' },
+          { key: 2, text: '02:00' },
+          { key: 3, text: '03:00' },
+          { key: 4, text: '04:00' },
+          { key: 5, text: '05:00' },
+          { key: 6, text: '06:00' },
+          { key: 7, text: '07:00' },
+          { key: 8, text: '08:00' },
+          { key: 9, text: '09:00' },
+          { key: 10, text: '10:00' },
+          { key: 11, text: '11:00' },
+          { key: 12, text: '12:00' },
+          { key: 13, text: '13:00' },
+          { key: 14, text: '14:00' },
+          { key: 15, text: '15:00' },
+          { key: 16, text: '16:00' },
+          { key: 17, text: '17:00' },
+          { key: 18, text: '18:00' },
+          { key: 19, text: '19:00' },
+          { key: 20, text: '20:00' },
+          { key: 21, text: '21:00' },
+          { key: 22, text: '22:00' },
+          { key: 23, text: '23:00' }
+        ],
+        selectedKey: 12
+      });
+      clockProps3 = PropertyPaneTextField('untilText', {
+        label: 'Countdown description'
+      });
     }
 
 
@@ -111,67 +200,44 @@ export default class FlipClockWebPart extends BaseClientSideWebPart<IFlipClockWe
       pages: [
         {
           header: {
-            description: strings.PropertyPaneDescription
+            description: 'Time displays the current time, while weekly countdown lets you customize a countdown for a weekly recurring event.'
           },
           groups: [
             {
-              groupName: '',
+              groupName: 'General settings',
               groupFields: [
                 PropertyPaneChoiceGroup('clockType', {
                   label: 'Clock type',
                   options: [
                     { key: 'time', text: 'Time', checked: true},
-                    { key: 'countdown', text: 'Countdown', checked: false}
+                    { key: 'countdown', text: 'Weekly countdown', checked: false}
                   ]                
+                }),
+                PropertyPaneChoiceGroup('clockSize', {
+                  label: 'Size',
+                  options: [
+                    { key: 'small', text: 'Small', checked: false},
+                    { key: 'medium', text: 'Medium', checked: true},
+                    { key: 'big', text: 'Big', checked: false}
+                  ]                
+                }),
+                PropertyPaneToggle('fontColor', {
+                  label: 'Text color',
+                  onText: 'White',
+                  offText: 'Black',
+                  disabled: this.properties.clockType == 'time'
                 }),
                 PropertyPaneHorizontalRule()
               ]
             },
             {
-              groupName: '',
+              groupName: groupTitle,
               groupFields: [
-                clockProps,
-                PropertyPaneToggle('showSeconds', {
-                  label: 'Show seconds',
-                  onText: 'Yes',
-                  offText: 'No'
-                })
+                clockProps1,
+                clockProps2,
+                clockProps3
               ]
             }
-             /* {
-              groupName: 'Clock options',
-              groupFields: [
-                PropertyPaneChoiceGroup('format', {
-                  label: 'Time format',
-                  options: [
-                    { key: 'TwentyFourHourClock', text: '24-hour', checked: true},
-                    { key: 'TwelveHourClock', text: '12-hour', checked: false}
-                  ]                
-                }),
-                PropertyPaneToggle('showSeconds', {
-                  label: 'Show seconds',
-                  onText: 'Yes',
-                  offText: 'No'
-                })
-              ]
-            },
-            {
-              groupName: 'Countdown options',
-              groupFields: [
-                PropertyPaneChoiceGroup('format', {
-                  label: 'Time format',
-                  options: [
-                    { key: 'TwentyFourHourClock', text: '24-hour', checked: true},
-                    { key: 'TwelveHourClock', text: '12-hour', checked: false}
-                  ]                
-                }),
-                PropertyPaneToggle('showSeconds', {
-                  label: 'Show seconds',
-                  onText: 'Yes',
-                  offText: 'No'
-                })
-              ]
-            } */
           ]
         }
       ]
