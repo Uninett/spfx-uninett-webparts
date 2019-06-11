@@ -91,7 +91,7 @@ export default class FlipClockWebPart extends BaseClientSideWebPart<IFlipClockWe
         });
       }
 
-      function getTimeUntilDate(date: Date, dayOfWeek: number, timeOfDay: number) {
+      function getTimeUntilDate(date: Date, dayOfWeek: number, time: number) {
         // gets days until selected weekday
         var resultDate = new Date(date.getTime());
         resultDate.setDate(date.getDate() + (7 + dayOfWeek - date.getDay() - 1) % 7 +1);
@@ -100,8 +100,8 @@ export default class FlipClockWebPart extends BaseClientSideWebPart<IFlipClockWe
         var d = new Date(),
           msSinceMidnight = d.getTime() - d.setHours(0,0,0,0);
         // converts selected time of day into milliseconds
-        if (timeOfDay == 24) timeOfDay = 0;
-        var msUntilTimeOfDay = timeOfDay*60*60*1000;
+        if (time == 24) time = 0;
+        var msUntilTimeOfDay = time*60*60*1000;
 
         resultDate.setTime(resultDate.getTime() - msSinceMidnight + msUntilTimeOfDay);
 

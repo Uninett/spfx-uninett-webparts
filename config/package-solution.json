@@ -5,7 +5,21 @@
     "id": "e7b6dc50-727d-44fa-95ff-23d5d97d6163",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
-    "isDomainIsolated": false
+    "isDomainIsolated": false,
+    "webApiPermissionRequests": [
+      {
+        "resource": "Microsoft Graph",
+        "scope": "User.ReadBasic.All"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "User.Read.All"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Group.Read.All"
+      }
+    ]
   },
   "paths": {
     "zippedPackage": "solution/spfx-uninett-webparts.sppkg"
