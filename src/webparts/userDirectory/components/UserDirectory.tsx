@@ -12,9 +12,11 @@ import { MSGraphClient } from "@microsoft/sp-http";
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import { Fabric } from 'office-ui-fabric-react/lib/Fabric';
-import { DetailsList, DetailsListLayoutMode, Selection, SelectionMode, IColumn, ConstrainMode } from 'office-ui-fabric-react/lib/DetailsList';
+import { DetailsList, DetailsListLayoutMode, Selection, SelectionMode, IColumn, ConstrainMode, buildColumns } from 'office-ui-fabric-react/lib/DetailsList';
 import { MarqueeSelection } from 'office-ui-fabric-react/lib/MarqueeSelection';
-import { mergeStyleSets } from 'office-ui-fabric-react/lib/Styling';
+import { mergeStyleSets, mergeStyles } from 'office-ui-fabric-react/lib/Styling';
+import { Link } from 'office-ui-fabric-react/lib/Link';
+import { Image, ImageFit } from 'office-ui-fabric-react/lib/Image';
 
 const classNames = mergeStyleSets({
   controlWrapper: {
@@ -37,6 +39,7 @@ const controlStyles = {
   }
 };
 
+
 export default class UserDirectory extends React.Component<IUserDirectoryProps, IUserDirectoryState> {
 
   private _selection: Selection;  
@@ -48,6 +51,14 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     console.log("Number of users: " + this._allUsers.length);
 
     const columns: IColumn[] = [
+      {
+        key: 'colPhoto',
+        name: '',
+        fieldName: 'photo',
+        minWidth: 30,
+        maxWidth: 30,
+        //isPadded: true
+      },
       {
         key: 'colName',
         name: 'Name',
@@ -86,7 +97,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       },
       {
         key: 'colPhone',
-        name: 'Mobile phone',
+        name: 'Phone',
         fieldName: 'mobilePhone',
         minWidth: 70,
         maxWidth: 90,        
@@ -162,6 +173,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
             ariaLabelForSelectionColumn="Toggle selection"
             ariaLabelForSelectAllCheckbox="Toggle selection for all items"
             constrainMode={ConstrainMode.unconstrained}
+            onRenderItemColumn={_renderItemColumn}
           />
         </MarqueeSelection>
       </Fabric>
@@ -244,7 +256,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
         client
           .api(this.props.api)
           .version("v1.0")
-          .select("displayName,jobTitle,mail,mobilePhone")
+          .select("userPrincipalName,displayName,jobTitle,mail,mobilePhone")
           .get((err, res) => {  
   
             if (err) {
@@ -255,10 +267,11 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
             // Map the JSON response to the output array
             res.value.map((item: any) => {
               users.push( { 
+                userPrincipalName: item.userPrincipalName,
                 displayName: item.displayName,
                 jobTitle: item.jobTitle,
                 mail: item.mail,
-                mobilePhone: item.mobilePhone                
+                mobilePhone: item.mobilePhone
               });
             });
   
@@ -274,6 +287,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
 
       return users;
   }
+  
 }
 
 function _copyAndSort<T>(items: T[], columnKey: string, isSortedDescending?: boolean): T[] {
@@ -281,4 +295,22 @@ function _copyAndSort<T>(items: T[], columnKey: string, isSortedDescending?: boo
   return items
     .slice(0)
     .sort((a: T, b: T) => ((isSortedDescending ? a[key] < b[key] : a[key] > b[key]) ? 1 : -1));
+}
+
+function _renderItemColumn(item: IUserItem, index: number, column: IColumn) {
+  const fieldContent = item[column.fieldName as keyof IUserItem] as string;
+
+  switch (column.key) {
+    case 'colPhoto':
+      return <Image src={"/_layouts/15/userphoto.aspx?size=L&username=" + fieldContent} width={30} height={30} imageFit={ImageFit.cover} />;
+
+    case 'colMail':
+      return <Link href={"mailto:" + fieldContent}>{fieldContent}</Link>;
+
+    case 'colPhone':
+      return <Link href={"tel:" + fieldContent}>{fieldContent}</Link>;
+
+    default:
+      return <span>{fieldContent}</span>;
+  }
 }
