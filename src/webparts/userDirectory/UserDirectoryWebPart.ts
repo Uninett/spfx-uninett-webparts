@@ -49,7 +49,8 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
               groupName: strings.BasicGroupName,
               groupFields: [
                 PropertyPaneTextField('api', {
-                  label: strings.ApiLabel
+                  label: strings.ApiLabel,
+                  value: "users"
                 })
               ]
             }

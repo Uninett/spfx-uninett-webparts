@@ -24,7 +24,7 @@ export interface ISocialLinksWebPartProps {
 
 // This line is required for the image path
 //require('set-webpack-public-path!')
-require("@microsoft/loader-set-webpack-public-path!");
+//require("@microsoft/loader-set-webpack-public-path!");
 
 export default class SocialLinksWebPart extends BaseClientSideWebPart<ISocialLinksWebPartProps> {
 

@@ -1,5 +1,6 @@
 export interface IUserItem {
     displayName: string;
+    jobTitle: string;
     mail: string;
-    userPrincipalName: string;
+    mobilePhone: string;
   }

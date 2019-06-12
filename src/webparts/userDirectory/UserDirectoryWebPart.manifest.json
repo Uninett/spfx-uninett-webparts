@@ -21,7 +21,8 @@
     "description": { "default": "UserDirectory description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "UserDirectory"
+      "description": "UserDirectory",
+      "api": "users"
     }
   }]
 }
