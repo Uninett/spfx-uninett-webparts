@@ -5,7 +5,8 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField,
-  PropertyPaneToggle
+  PropertyPaneToggle,
+  PropertyPaneCheckbox
 } from '@microsoft/sp-property-pane';
 
 import * as strings from 'UserDirectoryWebPartStrings';
@@ -14,6 +15,10 @@ import { IUserDirectoryProps } from './components/IUserDirectoryProps';
 
 export interface IUserDirectoryWebPartProps {
   api: string;
+  showPhoto: boolean;
+  showJobTitle: boolean;
+  showMail: boolean;
+  showPhone: boolean;
   compactMode: boolean;
 }
 
@@ -26,6 +31,10 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
       {
         context: this.context,
         api: this.properties.api,
+        showPhoto: this.properties.showPhoto,
+        showJobTitle: this.properties.showJobTitle,
+        showMail: this.properties.showMail,
+        showPhone: this.properties.showPhone,
         compactMode: this.properties.compactMode
       }
     );
@@ -55,12 +64,33 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                 PropertyPaneTextField('api', {
                   label: strings.ApiLabel,
                   value: "users"
-                }),
+                }),                
                 PropertyPaneToggle('compactMode', {
                   label: strings.CompactModeLabel,
                   checked: false,
                   onText:"Compact",
                   offText:"Normal"
+                })
+              ]
+            },
+            {
+              groupName: "Select columns to display",
+              groupFields: [
+                PropertyPaneCheckbox('showPhoto', {                
+                  text: "Photo",
+                  checked: true
+                }),
+                PropertyPaneCheckbox('showJobTitle', {                
+                  text: "Job Title",
+                  checked: true
+                }),
+                PropertyPaneCheckbox('showMail', {                
+                  text: "Mail",
+                  checked: true
+                }),
+                PropertyPaneCheckbox('showPhone', {                
+                  text: "Phone",
+                  checked: true
                 })
               ]
             }

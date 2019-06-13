@@ -128,6 +128,69 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
 
   public render(): React.ReactElement<IUserDirectoryProps> {
     
+    let cols: IColumn[] = [];
+    
+    if (this.props.showPhoto)
+    cols.push({
+      key: 'colPhoto',
+      name: '',
+      fieldName: 'photo',
+      minWidth: 30,
+      maxWidth: 30,
+    });
+
+    cols.push({
+      key: 'colName',
+      name: 'Name',
+      fieldName: 'displayName',
+      minWidth: 180,
+      maxWidth: 200,
+      //isRowHeader: true,
+      //isSorted: true,
+      //isSortedDescending: false,
+      sortAscendingAriaLabel: 'Sorted A to Z',
+      sortDescendingAriaLabel: 'Sorted Z to A',
+      onColumnClick: this._onColumnClick,
+      data: 'string',
+      isPadded: true
+    });
+
+    if (this.props.showJobTitle)
+    cols.push({
+      key: 'colTitle',
+      name: 'Job Title',
+      fieldName: 'jobTitle',
+      minWidth: 70,
+      maxWidth: 90,
+      onColumnClick: this._onColumnClick,
+      data: 'string',
+      isPadded: true
+    });
+
+    if (this.props.showMail)
+    cols.push({
+      key: 'colMail',
+      name: 'Mail',
+      fieldName: 'mail',
+      minWidth: 240,
+      maxWidth: 260,
+      isCollapsible: false,
+      data: 'string',
+      onColumnClick: this._onColumnClick,
+      isPadded: true
+    });
+
+    if (this.props.showPhone)
+    cols.push({
+      key: 'colPhone',
+      name: 'Phone',
+      fieldName: 'mobilePhone',
+      minWidth: 70,
+      maxWidth: 90,        
+      data: 'string'
+    });
+    
+
     const { columns, isCompactMode, users, selectionDetails, isModalSelection } = this.state;
     return (
       <Fabric>
@@ -162,7 +225,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
           <DetailsList
             items={users}
             compact={this.props.compactMode}
-            columns={columns}
+            columns={cols}
             selectionMode={isModalSelection ? SelectionMode.multiple : SelectionMode.none}
             setKey="set"
             layoutMode={DetailsListLayoutMode.justified}

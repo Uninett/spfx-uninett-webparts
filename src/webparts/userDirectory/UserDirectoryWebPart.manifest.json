@@ -22,9 +22,12 @@
     "description": { "default": "UserDirectory description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "UserDirectory",
       "api": "users",
-      "compactMode": false
+      "compactMode": false,
+      "showPhoto": true,
+      "showJobTitle": true,
+      "showMail": true,
+      "showPhone": true
     }
   }]
 }
