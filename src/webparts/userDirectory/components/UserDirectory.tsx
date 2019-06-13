@@ -17,6 +17,7 @@ import { MarqueeSelection } from 'office-ui-fabric-react/lib/MarqueeSelection';
 import { mergeStyleSets, mergeStyles } from 'office-ui-fabric-react/lib/Styling';
 import { Link } from 'office-ui-fabric-react/lib/Link';
 import { Image, ImageFit } from 'office-ui-fabric-react/lib/Image';
+import { autobind } from 'office-ui-fabric-react';
 
 const classNames = mergeStyleSets({
   controlWrapper: {
@@ -47,8 +48,9 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
   
   constructor(props: IUserDirectoryProps, state: IUserDirectoryState) {
     super(props);
-    this._allUsers = this._search();
-    console.log("Number of users: " + this._allUsers.length);
+    this._search();
+
+    //console.log("Number of users (start of constructor): " + this.state.users);
 
     const columns: IColumn[] = [
       {
@@ -64,7 +66,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
         name: 'Name',
         fieldName: 'displayName',
         minWidth: 180,
-        maxWidth: 190,
+        maxWidth: 200,
         //isRowHeader: true,
         //isSorted: true,
         //isSortedDescending: false,
@@ -88,8 +90,8 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
         key: 'colMail',
         name: 'Mail',
         fieldName: 'mail',
-        minWidth: 150,
-        maxWidth: 160,
+        minWidth: 240,
+        maxWidth: 260,
         isCollapsible: false,
         data: 'string',
         onColumnClick: this._onColumnClick,
@@ -113,21 +115,20 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
         });
       }
     });
-
+    
     this.state = {
-      users: this._allUsers,
-      searchFor: "",
+      users: [],
       columns: columns,
       selectionDetails: this._getSelectionDetails(),
       isModalSelection: false,
-      isCompactMode: false
+      isCompactMode: this.props.compactMode
     };
+
   }
 
   public render(): React.ReactElement<IUserDirectoryProps> {
-
-    const { columns, isCompactMode, users, selectionDetails, isModalSelection } = this.state;
     
+    const { columns, isCompactMode, users, selectionDetails, isModalSelection } = this.state;
     return (
       <Fabric>
         {/*
@@ -159,8 +160,8 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
 
         <MarqueeSelection selection={this._selection}>
           <DetailsList
-            items={this.state.users}
-            compact={isCompactMode}
+            items={users}
+            compact={this.props.compactMode}
             columns={columns}
             selectionMode={isModalSelection ? SelectionMode.multiple : SelectionMode.none}
             setKey="set"
@@ -244,11 +245,9 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     });
   }
 
-  private _search(): Array<IUserItem> {
+  @autobind
+  private _search(): void {
 
-    // Prepare the output array
-    var users: Array<IUserItem> = new Array<IUserItem>();
-    console.log("API: " + this.props.api);
     this.props.context.msGraphClientFactory
       .getClient()
       .then((client: MSGraphClient): void => {
@@ -263,7 +262,10 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
               console.error(err);
               return;
             }            
-  
+            
+            // Prepare the output array
+            var users: Array<IUserItem> = new Array<IUserItem>();
+
             // Map the JSON response to the output array
             res.value.map((item: any) => {
               users.push( { 
@@ -274,18 +276,22 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
                 mobilePhone: item.mobilePhone
               });
             });
-  
+            
             // Update the component state accordingly to the result
             this.setState(
               {
                 users: users,
               }
             );
-            console.log("Number of users: " + this._allUsers.length);
+            console.log("Number of users (end of client): " + users.length);
+            
+            // Update all-users array and re-render component
+            this._allUsers = users;
+            this.render();
           });
       });
-
-      return users;
+    
+    
   }
   
 }

@@ -4,7 +4,8 @@ import { Version } from '@microsoft/sp-core-library';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import {
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  PropertyPaneToggle
 } from '@microsoft/sp-property-pane';
 
 import * as strings from 'UserDirectoryWebPartStrings';
@@ -13,16 +14,19 @@ import { IUserDirectoryProps } from './components/IUserDirectoryProps';
 
 export interface IUserDirectoryWebPartProps {
   api: string;
+  compactMode: boolean;
 }
 
 export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDirectoryWebPartProps> {
 
   public render(): void {
+    console.log("compact mode on render: " + this.properties.compactMode);
     const element: React.ReactElement<IUserDirectoryProps > = React.createElement(
       UserDirectory,
       {
         context: this.context,
-        api: this.properties.api
+        api: this.properties.api,
+        compactMode: this.properties.compactMode
       }
     );
 
@@ -51,6 +55,12 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                 PropertyPaneTextField('api', {
                   label: strings.ApiLabel,
                   value: "users"
+                }),
+                PropertyPaneToggle('compactMode', {
+                  label: strings.CompactModeLabel,
+                  checked: false,
+                  onText:"Compact",
+                  offText:"Normal"
                 })
               ]
             }

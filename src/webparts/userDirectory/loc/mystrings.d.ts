@@ -2,6 +2,7 @@ declare interface IUserDirectoryWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
   ApiLabel: string;
+  CompactModeLabel: string;
   SearchFor: string;
   SearchForValidationErrorMessage: string;
 }
