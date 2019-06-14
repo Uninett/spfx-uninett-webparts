@@ -5,7 +5,8 @@ export interface IUserDirectoryProps {
   api: string;
   showPhoto: boolean;
   showJobTitle: boolean;
-  showMail: boolean;
+  showDepartment: boolean;  
   showPhone: boolean;
+  showMail: boolean;
   compactMode: boolean;
 }

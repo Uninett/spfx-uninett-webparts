@@ -42,92 +42,55 @@ const controlStyles = {
 
 
 export default class UserDirectory extends React.Component<IUserDirectoryProps, IUserDirectoryState> {
-
-  private _selection: Selection;  
+ 
   private _allUsers: IUserItem[];
+  private _visibleColumns: IColumn[];
+  private _showSorted: boolean;
   
   constructor(props: IUserDirectoryProps, state: IUserDirectoryState) {
     super(props);
     this._search();
+    this._showSorted = false;
 
-    //console.log("Number of users (start of constructor): " + this.state.users);
-
-    const columns: IColumn[] = [
-      {
-        key: 'colPhoto',
-        name: '',
-        fieldName: 'photo',
-        minWidth: 30,
-        maxWidth: 30,
-        //isPadded: true
-      },
-      {
-        key: 'colName',
-        name: 'Name',
-        fieldName: 'displayName',
-        minWidth: 180,
-        maxWidth: 200,
-        //isRowHeader: true,
-        //isSorted: true,
-        //isSortedDescending: false,
-        sortAscendingAriaLabel: 'Sorted A to Z',
-        sortDescendingAriaLabel: 'Sorted Z to A',
-        onColumnClick: this._onColumnClick,
-        data: 'string',
-        isPadded: true
-      },
-      {
-        key: 'colTitle',
-        name: 'Job Title',
-        fieldName: 'jobTitle',
-        minWidth: 70,
-        maxWidth: 90,
-        onColumnClick: this._onColumnClick,
-        data: 'string',
-        isPadded: true
-      },
-      {
-        key: 'colMail',
-        name: 'Mail',
-        fieldName: 'mail',
-        minWidth: 240,
-        maxWidth: 260,
-        isCollapsible: false,
-        data: 'string',
-        onColumnClick: this._onColumnClick,
-        isPadded: true
-      },
-      {
-        key: 'colPhone',
-        name: 'Phone',
-        fieldName: 'mobilePhone',
-        minWidth: 70,
-        maxWidth: 90,        
-        data: 'string',
-        //onColumnClick: this._onColumnClick
-      }
-    ];
-
-    this._selection = new Selection({
-      onSelectionChanged: () => {
-        this.setState({
-          selectionDetails: this._getSelectionDetails()
-        });
-      }
-    });
-    
     this.state = {
-      users: [],
-      columns: columns,
-      selectionDetails: this._getSelectionDetails(),
-      isModalSelection: false,
-      isCompactMode: this.props.compactMode
+      users: []
     };
-
   }
 
-  public render(): React.ReactElement<IUserDirectoryProps> {
-    
+  public render(): React.ReactElement<IUserDirectoryProps> {       
+
+    const { users } = this.state;
+
+    // Check flag to avoid rendering un-sorted columns
+    if (!this._showSorted) {
+      this._visibleColumns = this._getCheckedColumns();
+    }
+
+    this._showSorted = false;
+
+    return (
+      <Fabric>        
+        <div className={classNames.controlWrapper}>
+          <TextField label="Filter by name:" onChange={this._onChangeText} styles={controlStyles} />
+        </div>
+
+        <DetailsList
+          items={users}
+          compact={this.props.compactMode}
+          columns={this._visibleColumns}
+          selectionMode={SelectionMode.none}
+          setKey="set"
+          layoutMode={DetailsListLayoutMode.justified}
+          isHeaderVisible={true}
+          constrainMode={ConstrainMode.horizontalConstrained}
+          onRenderItemColumn={_renderItemColumn}
+        />
+      </Fabric>
+    );
+  }
+  
+  private _getCheckedColumns(): IColumn[] {
+    // Return an array of columns that the user has selected in the web part's property pane
     let cols: IColumn[] = [];
     
     if (this.props.showPhoto)
@@ -160,11 +123,33 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       key: 'colTitle',
       name: 'Job Title',
       fieldName: 'jobTitle',
-      minWidth: 70,
+      minWidth: 80,
       maxWidth: 90,
       onColumnClick: this._onColumnClick,
       data: 'string',
       isPadded: true
+    });
+
+    if (this.props.showDepartment)
+    cols.push({
+      key: 'colDepartment',
+      name: 'Department',
+      fieldName: 'department',
+      minWidth: 80,
+      maxWidth: 90,
+      onColumnClick: this._onColumnClick,
+      data: 'string',
+      isPadded: true
+    });
+
+    if (this.props.showPhone)
+    cols.push({
+      key: 'colPhone',
+      name: 'Phone',
+      fieldName: 'mobilePhone',
+      minWidth: 90,
+      maxWidth: 100,        
+      data: 'string'
     });
 
     if (this.props.showMail)
@@ -180,84 +165,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       isPadded: true
     });
 
-    if (this.props.showPhone)
-    cols.push({
-      key: 'colPhone',
-      name: 'Phone',
-      fieldName: 'mobilePhone',
-      minWidth: 70,
-      maxWidth: 90,        
-      data: 'string'
-    });
-    
-
-    const { columns, isCompactMode, users, selectionDetails, isModalSelection } = this.state;
-    return (
-      <Fabric>
-        {/*
-        <div className={classNames.controlWrapper}>
-          <Toggle
-            label="Enable compact mode"
-            checked={isCompactMode}
-            onChange={this._onChangeCompactMode}
-            onText="Compact"
-            offText="Normal"
-            styles={controlStyles}
-          />
-          <Toggle
-            label="Enable modal selection"
-            checked={isModalSelection}
-            onChange={this._onChangeModalSelection}
-            onText="Modal"
-            offText="Normal"
-            styles={controlStyles}
-          />
-          <TextField label="Filter by name:" onChange={this._onChangeText} styles={controlStyles} />
-        </div>
-        <div className={classNames.selectionDetails}>{selectionDetails}</div>
-        */}
-
-        <div className={classNames.controlWrapper}>
-          <TextField label="Filter by name:" onChange={this._onChangeText} styles={controlStyles} />
-        </div>
-
-        <MarqueeSelection selection={this._selection}>
-          <DetailsList
-            items={users}
-            compact={this.props.compactMode}
-            columns={cols}
-            selectionMode={isModalSelection ? SelectionMode.multiple : SelectionMode.none}
-            setKey="set"
-            layoutMode={DetailsListLayoutMode.justified}
-            isHeaderVisible={true}
-            selection={this._selection}
-            selectionPreservedOnEmptyClick={false}
-            //onItemInvoked={this._onItemInvoked}
-            enterModalSelectionOnTouch={true}
-            ariaLabelForSelectionColumn="Toggle selection"
-            ariaLabelForSelectAllCheckbox="Toggle selection for all items"
-            constrainMode={ConstrainMode.unconstrained}
-            onRenderItemColumn={_renderItemColumn}
-          />
-        </MarqueeSelection>
-      </Fabric>
-    );
-  }
-  public componentDidUpdate(previousProps: any, previousState: IUserDirectoryState) {
-    if (
-      previousState.isModalSelection !== this.state.isModalSelection &&
-      !this.state.isModalSelection
-    ) {
-      this._selection.setAllSelected(false);
-    }
-  }
-
-  private _onChangeCompactMode = (ev: React.MouseEvent<HTMLElement>, checked: boolean): void => {
-    this.setState({ isCompactMode: checked });
-  }
-
-  private _onChangeModalSelection = (ev: React.MouseEvent<HTMLElement>, checked: boolean): void => {
-    this.setState({ isModalSelection: checked });
+    return cols;
   }
 
   private _onChangeText = (
@@ -271,25 +179,10 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     });
   }
 
-  private _onItemInvoked(item: any): void {
-    alert(`Item invoked: ${item.name}`);
-  }
-
-  private _getSelectionDetails(): string {
-    const selectionCount = this._selection.getSelectedCount();
-
-    switch (selectionCount) {
-      case 0:
-        return 'No items selected';
-      case 1:
-        return '1 item selected: ' + (this._selection.getSelection()[0] as IUserItem).displayName;
-      default:
-        return `${selectionCount} items selected`;
-    }
-  }
-
   private _onColumnClick = (ev: React.MouseEvent<HTMLElement>, column: IColumn): void => {
-    const { columns, users } = this.state;
+
+    const columns = this._visibleColumns;
+    const users = this.state.users;
     const newColumns: IColumn[] = columns.slice();
     const currColumn: IColumn = newColumns.filter(currCol => column.key === currCol.key)[0];
     newColumns.forEach((newCol: IColumn) => {
@@ -302,8 +195,10 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       }
     });
     const newUsers = _copyAndSort(users, currColumn.fieldName!, currColumn.isSortedDescending);
+    // Set flag to avoid rendering un-sorted columns
+    this._showSorted = true;
+    this._visibleColumns = newColumns;
     this.setState({
-      columns: newColumns,
       users: newUsers
     });
   }
@@ -318,7 +213,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
         client
           .api(this.props.api)
           .version("v1.0")
-          .select("userPrincipalName,displayName,jobTitle,mail,mobilePhone")
+          .select("userPrincipalName,displayName,jobTitle,department,mobilePhone,mail")
           .get((err, res) => {  
   
             if (err) {
@@ -335,28 +230,22 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
                 userPrincipalName: item.userPrincipalName,
                 displayName: item.displayName,
                 jobTitle: item.jobTitle,
-                mail: item.mail,
-                mobilePhone: item.mobilePhone
+                department: item.department,                
+                mobilePhone: item.mobilePhone,
+                mail: item.mail
               });
             });
             
-            // Update the component state accordingly to the result
+            // Update user array and component state
+            this._allUsers = users;
             this.setState(
               {
                 users: users,
               }
             );
-            console.log("Number of users (end of client): " + users.length);
-            
-            // Update all-users array and re-render component
-            this._allUsers = users;
-            this.render();
           });
-      });
-    
-    
-  }
-  
+      });    
+  }  
 }
 
 function _copyAndSort<T>(items: T[], columnKey: string, isSortedDescending?: boolean): T[] {

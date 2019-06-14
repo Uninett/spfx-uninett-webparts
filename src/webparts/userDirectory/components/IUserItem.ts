@@ -2,6 +2,7 @@ export interface IUserItem {
     userPrincipalName: string;
     displayName: string;
     jobTitle: string;
-    mail: string;
+    department: string;    
     mobilePhone: string;
+    mail: string;
   }

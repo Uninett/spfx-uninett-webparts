@@ -26,8 +26,9 @@
       "compactMode": false,
       "showPhoto": true,
       "showJobTitle": true,
+      "showDepartment": true,
+      "showPhone": true,
       "showMail": true,
-      "showPhone": true
     }
   }]
 }

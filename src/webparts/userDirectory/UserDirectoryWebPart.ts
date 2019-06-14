@@ -17,15 +17,15 @@ export interface IUserDirectoryWebPartProps {
   api: string;
   showPhoto: boolean;
   showJobTitle: boolean;
-  showMail: boolean;
+  showDepartment: boolean;
   showPhone: boolean;
+  showMail: boolean;
   compactMode: boolean;
 }
 
 export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDirectoryWebPartProps> {
 
   public render(): void {
-    console.log("compact mode on render: " + this.properties.compactMode);
     const element: React.ReactElement<IUserDirectoryProps > = React.createElement(
       UserDirectory,
       {
@@ -33,6 +33,7 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
         api: this.properties.api,
         showPhoto: this.properties.showPhoto,
         showJobTitle: this.properties.showJobTitle,
+        showDepartment: this.properties.showDepartment,
         showMail: this.properties.showMail,
         showPhone: this.properties.showPhone,
         compactMode: this.properties.compactMode
@@ -83,13 +84,17 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                 PropertyPaneCheckbox('showJobTitle', {                
                   text: "Job Title",
                   checked: true
+                }),         
+                PropertyPaneCheckbox('showDepartment', {                
+                  text: "Department",
+                  checked: true
+                }),       
+                PropertyPaneCheckbox('showPhone', {                
+                  text: "Phone",
+                  checked: true
                 }),
                 PropertyPaneCheckbox('showMail', {                
                   text: "Mail",
-                  checked: true
-                }),
-                PropertyPaneCheckbox('showPhone', {                
-                  text: "Phone",
                   checked: true
                 })
               ]
