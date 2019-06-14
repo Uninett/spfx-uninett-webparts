@@ -5,8 +5,11 @@ export interface IUserDirectoryProps {
   api: string;
   showPhoto: boolean;
   showJobTitle: boolean;
-  showDepartment: boolean;  
+  showDepartment: boolean;
+  showOfficeLocation: boolean;
+  showCity: boolean; 
   showPhone: boolean;
   showMail: boolean;
   compactMode: boolean;
+  alternatingColours: boolean;
 }

@@ -18,9 +18,12 @@ export interface IUserDirectoryWebPartProps {
   showPhoto: boolean;
   showJobTitle: boolean;
   showDepartment: boolean;
+  showOfficeLocation: boolean;
+  showCity: boolean;
   showPhone: boolean;
   showMail: boolean;
   compactMode: boolean;
+  alternatingColours: boolean;
 }
 
 export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDirectoryWebPartProps> {
@@ -34,9 +37,12 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
         showPhoto: this.properties.showPhoto,
         showJobTitle: this.properties.showJobTitle,
         showDepartment: this.properties.showDepartment,
+        showOfficeLocation: this.properties.showOfficeLocation,
+        showCity: this.properties.showCity,
         showMail: this.properties.showMail,
         showPhone: this.properties.showPhone,
-        compactMode: this.properties.compactMode
+        compactMode: this.properties.compactMode,
+        alternatingColours: this.properties.alternatingColours
       }
     );
 
@@ -65,12 +71,23 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                 PropertyPaneTextField('api', {
                   label: strings.ApiLabel,
                   value: "users"
-                }),                
+                })
+              ]
+            },
+            {
+              groupName: "Appearance",
+              groupFields: [
                 PropertyPaneToggle('compactMode', {
                   label: strings.CompactModeLabel,
                   checked: false,
                   onText:"Compact",
                   offText:"Normal"
+                }),
+                PropertyPaneToggle('alternatingColours', {
+                  label: "Row colour",
+                  checked: false,
+                  onText:"Alternating colours",
+                  offText:"Single colour"
                 })
               ]
             },
@@ -88,7 +105,15 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                 PropertyPaneCheckbox('showDepartment', {                
                   text: "Department",
                   checked: true
-                }),       
+                }),
+                PropertyPaneCheckbox('showOfficeLocation', {                
+                  text: "Office Location",
+                  checked: false
+                }),
+                PropertyPaneCheckbox('showCity', {                
+                  text: "City",
+                  checked: false
+                }),      
                 PropertyPaneCheckbox('showPhone', {                
                   text: "Phone",
                   checked: true

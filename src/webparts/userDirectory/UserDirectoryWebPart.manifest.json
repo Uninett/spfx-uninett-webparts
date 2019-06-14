@@ -24,9 +24,12 @@
     "properties": {
       "api": "users",
       "compactMode": false,
+      "alternatingColours": false,
       "showPhoto": true,
       "showJobTitle": true,
       "showDepartment": true,
+      "showOfficeLocation": false,
+      "showCity": false,
       "showPhone": true,
       "showMail": true,
     }

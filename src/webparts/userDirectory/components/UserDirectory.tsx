@@ -12,25 +12,24 @@ import { MSGraphClient } from "@microsoft/sp-http";
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import { Fabric } from 'office-ui-fabric-react/lib/Fabric';
-import { DetailsList, DetailsListLayoutMode, Selection, SelectionMode, IColumn, ConstrainMode, buildColumns } from 'office-ui-fabric-react/lib/DetailsList';
+import { DetailsList, DetailsListLayoutMode, Selection, SelectionMode, IColumn, ConstrainMode, buildColumns, IDetailsRowProps, IDetailsRowStyles, DetailsRow } from 'office-ui-fabric-react/lib/DetailsList';
 import { MarqueeSelection } from 'office-ui-fabric-react/lib/MarqueeSelection';
 import { mergeStyleSets, mergeStyles } from 'office-ui-fabric-react/lib/Styling';
 import { Link } from 'office-ui-fabric-react/lib/Link';
 import { Image, ImageFit } from 'office-ui-fabric-react/lib/Image';
 import { autobind } from 'office-ui-fabric-react';
 
+import { getTheme } from 'office-ui-fabric-react/lib/Styling';
+
+const theme = getTheme();
+
 const classNames = mergeStyleSets({
   controlWrapper: {
     display: 'flex',
     flexWrap: 'wrap'
   },
-  exampleToggle: {
-    display: 'inline-block',
-    marginBottom: '10px',
-    marginRight: '30px'
-  },
-  selectionDetails: {
-    marginBottom: '20px'
+  row: {
+    
   }
 });
 const controlStyles = {
@@ -84,11 +83,31 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
           isHeaderVisible={true}
           constrainMode={ConstrainMode.horizontalConstrained}
           onRenderItemColumn={_renderItemColumn}
+          onRenderRow={this._onRenderRow}
         />
       </Fabric>
     );
   }
   
+  private _onRenderRow = (props: IDetailsRowProps): JSX.Element => {
+    const customStyles: Partial<IDetailsRowStyles> = {};
+
+    customStyles.fields = {      
+      alignItems: "center"
+    };
+
+    if (this.props.alternatingColours) {
+      if (props.itemIndex % 2 === 0) {
+        // Every other row renders with a different background color
+        customStyles.fields = { 
+          backgroundColor: theme.palette.themeLighterAlt,
+          alignItems: "center"
+          };
+      }
+    }
+    return <DetailsRow {...props} styles={customStyles} />;
+  }
+
   private _getCheckedColumns(): IColumn[] {
     // Return an array of columns that the user has selected in the web part's property pane
     let cols: IColumn[] = [];
@@ -135,6 +154,30 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       key: 'colDepartment',
       name: 'Department',
       fieldName: 'department',
+      minWidth: 100,
+      maxWidth: 110,
+      onColumnClick: this._onColumnClick,
+      data: 'string',
+      isPadded: true
+    });
+
+    if (this.props.showOfficeLocation)
+    cols.push({
+      key: 'colOfficeLocation',
+      name: 'Office Location',
+      fieldName: 'officeLocation',
+      minWidth: 80,
+      maxWidth: 90,
+      onColumnClick: this._onColumnClick,
+      data: 'string',
+      isPadded: true
+    });
+
+    if (this.props.showCity)
+    cols.push({
+      key: 'colCity',
+      name: 'City',
+      fieldName: 'city',
       minWidth: 80,
       maxWidth: 90,
       onColumnClick: this._onColumnClick,
@@ -149,7 +192,8 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       fieldName: 'mobilePhone',
       minWidth: 90,
       maxWidth: 100,        
-      data: 'string'
+      data: 'string',      
+      isPadded: true
     });
 
     if (this.props.showMail)
@@ -213,7 +257,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
         client
           .api(this.props.api)
           .version("v1.0")
-          .select("userPrincipalName,displayName,jobTitle,department,mobilePhone,mail")
+          .select("userPrincipalName,displayName,jobTitle,department,officeLocation,city,mobilePhone,mail")
           .get((err, res) => {  
   
             if (err) {
@@ -230,7 +274,9 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
                 userPrincipalName: item.userPrincipalName,
                 displayName: item.displayName,
                 jobTitle: item.jobTitle,
-                department: item.department,                
+                department: item.department,
+                officeLocation: item.officeLocation,
+                city: item.city,            
                 mobilePhone: item.mobilePhone,
                 mail: item.mail
               });
