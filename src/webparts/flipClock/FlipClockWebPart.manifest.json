@@ -19,7 +19,7 @@
     "group": { "default": "Other" },
     "title": { "default": "FlipClock" },
     "description": { "default": "Flip clock with different functions, including a countdown." },
-    "officeFabricIconFontName": "Page",
+    "officeFabricIconFontName": "Clock",
     "properties": {
       "description": "FlipClock"
     }

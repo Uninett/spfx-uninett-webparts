@@ -19,7 +19,7 @@
     "group": { "default": "Other" },
     "title": { "default": "Social Links" },
     "description": { "default": "Links to social media" },
-    "officeFabricIconFontName": "Page",
+    "officeFabricIconFontName": "Link",
     "properties": {
       "facebookField": "https://www.facebook.com/UNINETT",
       "twitterField": "https://twitter.com/uninett",

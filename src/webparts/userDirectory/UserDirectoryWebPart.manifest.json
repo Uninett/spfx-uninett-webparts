@@ -20,7 +20,7 @@
     "group": { "default": "Other" },
     "title": { "default": "UserDirectory" },
     "description": { "default": "UserDirectory description" },
-    "officeFabricIconFontName": "Page",
+    "officeFabricIconFontName": "CompanyDirectory",
     "properties": {
       "api": "users",
       "compactMode": false,

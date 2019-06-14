@@ -17,7 +17,7 @@ import { MarqueeSelection } from 'office-ui-fabric-react/lib/MarqueeSelection';
 import { mergeStyleSets, mergeStyles } from 'office-ui-fabric-react/lib/Styling';
 import { Link } from 'office-ui-fabric-react/lib/Link';
 import { Image, ImageFit } from 'office-ui-fabric-react/lib/Image';
-import { autobind } from 'office-ui-fabric-react';
+import { autobind, IconBase } from 'office-ui-fabric-react';
 
 import { getTheme } from 'office-ui-fabric-react/lib/Styling';
 
@@ -45,6 +45,9 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
   private _allUsers: IUserItem[];
   private _visibleColumns: IColumn[];
   private _showSorted: boolean;
+
+  private _showSearchBox: boolean;
+  private _searchBox: any;
   
   constructor(props: IUserDirectoryProps, state: IUserDirectoryState) {
     super(props);
@@ -68,7 +71,8 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     this._showSorted = false;
 
     return (
-      <Fabric>        
+      <Fabric>
+
         <div className={classNames.controlWrapper}>
           <TextField label="Filter by name:" onChange={this._onChangeText} styles={controlStyles} />
         </div>
