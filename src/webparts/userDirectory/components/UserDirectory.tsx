@@ -74,7 +74,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       <Fabric>
 
         <div className={classNames.controlWrapper}>
-          <TextField label="Filter by name:" onChange={this._onChangeText} styles={controlStyles} />
+          <TextField label={strings.SearchBoxLabel} onChange={this._onChangeText} styles={controlStyles} />
         </div>
 
         <DetailsList
@@ -127,7 +127,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
 
     cols.push({
       key: 'colName',
-      name: 'Name',
+      name: this.props.colNameTitle,
       fieldName: 'displayName',
       minWidth: 180,
       maxWidth: 200,
@@ -144,7 +144,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     if (this.props.showJobTitle)
     cols.push({
       key: 'colTitle',
-      name: 'Job Title',
+      name: this.props.colJobTitleTitle,
       fieldName: 'jobTitle',
       minWidth: 80,
       maxWidth: 90,
@@ -156,7 +156,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     if (this.props.showDepartment)
     cols.push({
       key: 'colDepartment',
-      name: 'Department',
+      name: this.props.colDepartmentTitle,
       fieldName: 'department',
       minWidth: 100,
       maxWidth: 110,
@@ -168,7 +168,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     if (this.props.showOfficeLocation)
     cols.push({
       key: 'colOfficeLocation',
-      name: 'Office Location',
+      name: this.props.colOfficeLocationTitle,
       fieldName: 'officeLocation',
       minWidth: 80,
       maxWidth: 90,
@@ -180,7 +180,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     if (this.props.showCity)
     cols.push({
       key: 'colCity',
-      name: 'City',
+      name: this.props.colCityTitle,
       fieldName: 'city',
       minWidth: 80,
       maxWidth: 90,
@@ -192,7 +192,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     if (this.props.showPhone)
     cols.push({
       key: 'colPhone',
-      name: 'Phone',
+      name: this.props.colPhoneTitle,
       fieldName: 'mobilePhone',
       minWidth: 90,
       maxWidth: 100,        
@@ -203,7 +203,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     if (this.props.showMail)
     cols.push({
       key: 'colMail',
-      name: 'Mail',
+      name: this.props.colMailTitle,
       fieldName: 'mail',
       minWidth: 240,
       maxWidth: 260,

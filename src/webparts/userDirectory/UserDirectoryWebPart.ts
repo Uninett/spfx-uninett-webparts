@@ -6,7 +6,8 @@ import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField,
   PropertyPaneToggle,
-  PropertyPaneCheckbox
+  PropertyPaneCheckbox,
+  PropertyPaneHorizontalRule
 } from '@microsoft/sp-property-pane';
 
 import * as strings from 'UserDirectoryWebPartStrings';
@@ -15,6 +16,8 @@ import { IUserDirectoryProps } from './components/IUserDirectoryProps';
 
 export interface IUserDirectoryWebPartProps {
   api: string;
+  compactMode: boolean;
+  alternatingColours: boolean;
   showPhoto: boolean;
   showJobTitle: boolean;
   showDepartment: boolean;
@@ -22,8 +25,13 @@ export interface IUserDirectoryWebPartProps {
   showCity: boolean;
   showPhone: boolean;
   showMail: boolean;
-  compactMode: boolean;
-  alternatingColours: boolean;
+  colNameTitle: string;
+  colJobTitleTitle: string;
+  colDepartmentTitle: string;
+  colOfficeLocationTitle: string;
+  colCityTitle: string;
+  colPhoneTitle: string;
+  colMailTitle: string;
 }
 
 export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDirectoryWebPartProps> {
@@ -34,15 +42,22 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
       {
         context: this.context,
         api: this.properties.api,
+        compactMode: this.properties.compactMode,
+        alternatingColours: this.properties.alternatingColours,
         showPhoto: this.properties.showPhoto,
         showJobTitle: this.properties.showJobTitle,
         showDepartment: this.properties.showDepartment,
         showOfficeLocation: this.properties.showOfficeLocation,
         showCity: this.properties.showCity,
-        showMail: this.properties.showMail,
         showPhone: this.properties.showPhone,
-        compactMode: this.properties.compactMode,
-        alternatingColours: this.properties.alternatingColours
+        showMail: this.properties.showMail,
+        colNameTitle: this.properties.colNameTitle,
+        colJobTitleTitle: this.properties.colJobTitleTitle,
+        colDepartmentTitle: this.properties.colDepartmentTitle,
+        colOfficeLocationTitle: this.properties.colOfficeLocationTitle,
+        colCityTitle: this.properties.colCityTitle,
+        colPhoneTitle: this.properties.colPhoneTitle,
+        colMailTitle: this.properties.colMailTitle
       }
     );
 
@@ -62,11 +77,11 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
       pages: [
         {
           header: {
-            description: strings.PropertyPaneDescription
+            description: strings.PageGeneralDescription
           },
           groups: [
             {
-              groupName: strings.BasicGroupName,
+              groupName: strings.GroupDataSource,
               groupFields: [
                 PropertyPaneTextField('api', {
                   label: strings.ApiLabel,
@@ -75,56 +90,97 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
               ]
             },
             {
-              groupName: "Appearance",
+              groupName: strings.GroupAppearance,
               groupFields: [
                 PropertyPaneToggle('compactMode', {
                   label: strings.CompactModeLabel,
                   checked: false,
-                  onText:"Compact",
-                  offText:"Normal"
+                  onText: strings.CompactModeOn,
+                  offText: strings.CompactModeOff
                 }),
                 PropertyPaneToggle('alternatingColours', {
-                  label: "Row colour",
+                  label: strings.AlternateColoursLabel,
                   checked: false,
-                  onText:"Alternating colours",
-                  offText:"Single colour"
+                  onText: strings.AlternateColoursOn,
+                  offText: strings.AlternateColoursOff
+                })
+              ]
+            },
+            
+          ]
+        },
+        {
+          header: {
+            description: strings.PageColumnsDescription
+          },
+          groups: [
+            {
+              groupName: strings.GroupColumns,
+              groupFields: [
+                PropertyPaneCheckbox('showPhoto', {                
+                  text: strings.ColPhotoText,
+                  checked: true
+                }),
+                PropertyPaneCheckbox('showJobTitle', {                
+                  text: strings.ColJobTitleText,
+                  checked: true
+                }),         
+                PropertyPaneCheckbox('showDepartment', {                
+                  text: strings.ColDepartmentText,
+                  checked: true
+                }),
+                PropertyPaneCheckbox('showOfficeLocation', {                
+                  text: strings.ColOfficeLocationText,
+                  checked: false
+                }),
+                PropertyPaneCheckbox('showCity', {                
+                  text: strings.ColCityText,
+                  checked: false
+                }),      
+                PropertyPaneCheckbox('showPhone', {                
+                  text: strings.ColPhoneText,
+                  checked: true
+                }),
+                PropertyPaneCheckbox('showMail', {                
+                  text: strings.ColMailText,
+                  checked: true
                 })
               ]
             },
             {
-              groupName: "Select columns to display",
+              groupName: strings.GroupColumnTitles,
               groupFields: [
-                PropertyPaneCheckbox('showPhoto', {                
-                  text: "Photo",
-                  checked: true
+                PropertyPaneTextField('colNameTitle',{
+                  value: strings.ColNameText,
                 }),
-                PropertyPaneCheckbox('showJobTitle', {                
-                  text: "Job Title",
-                  checked: true
-                }),         
-                PropertyPaneCheckbox('showDepartment', {                
-                  text: "Department",
-                  checked: true
+                PropertyPaneTextField('colJobTitleTitle',{
+                  value: strings.ColJobTitleText,
+                  disabled: !this.properties.showJobTitle
                 }),
-                PropertyPaneCheckbox('showOfficeLocation', {                
-                  text: "Office Location",
-                  checked: false
+                PropertyPaneTextField('colDepartmentTitle',{
+                  value: strings.ColDepartmentText,
+                  disabled: !this.properties.showDepartment
                 }),
-                PropertyPaneCheckbox('showCity', {                
-                  text: "City",
-                  checked: false
-                }),      
-                PropertyPaneCheckbox('showPhone', {                
-                  text: "Phone",
-                  checked: true
+                PropertyPaneTextField('colOfficeLocationTitle',{
+                  value: strings.ColOfficeLocationText,
+                  disabled: !this.properties.showOfficeLocation
                 }),
-                PropertyPaneCheckbox('showMail', {                
-                  text: "Mail",
-                  checked: true
+                PropertyPaneTextField('colCityTitle',{
+                  value: strings.ColCityText,
+                  disabled: !this.properties.showCity
+                }),
+                PropertyPaneTextField('colPhoneTitle',{
+                  value: strings.ColPhoneText,
+                  disabled: !this.properties.showPhone
+                }),
+                PropertyPaneTextField('colMailTitle',{
+                  value: strings.ColMailText,
+                  disabled: !this.properties.showMail
                 })
               ]
             }
           ]
+            
         }
       ]
     };

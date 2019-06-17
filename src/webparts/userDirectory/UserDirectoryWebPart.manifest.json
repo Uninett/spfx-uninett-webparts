@@ -18,8 +18,8 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
     "group": { "default": "Other" },
-    "title": { "default": "UserDirectory" },
-    "description": { "default": "UserDirectory description" },
+    "title": { "default": "User directory", "nb-no": "Brukerkatalog" },
+    "description": { "default": "Display a searchable list of users from your tenant", "nb-no": "Vis en søkbar liste over brukere fra tenanten din" },
     "officeFabricIconFontName": "CompanyDirectory",
     "properties": {
       "api": "users",
@@ -31,7 +31,7 @@
       "showOfficeLocation": false,
       "showCity": false,
       "showPhone": true,
-      "showMail": true,
+      "showMail": true
     }
   }]
 }
