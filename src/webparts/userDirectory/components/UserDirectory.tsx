@@ -72,7 +72,6 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
 
     return (
       <Fabric>
-
         <div className={classNames.controlWrapper}>
           <TextField label={strings.SearchBoxLabel} onChange={this._onChangeText} styles={controlStyles} />
         </div>
