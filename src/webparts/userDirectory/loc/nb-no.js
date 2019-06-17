@@ -15,15 +15,16 @@ define([], function() {
     "AlternateColoursLabel": "Radfarge",
     "AlternateColoursOn": "Alternerende farger",
     "AlternateColoursOff": "Ensfarget",
+    "BtnResetText": "Tilbakestill alle overskrifter",
     // Column names
-    "ColPhotoText": "Bilde",
-    "ColNameText": "Navn",
-    "ColJobTitleText": "Stilling",
-    "ColDepartmentText": "Avdeling",
-    "ColOfficeLocationText": "Kontor",
-    "ColCityText": "By",
-    "ColPhoneText": "Telefon",
-    "ColMailText": "Epost",
+    "ColPhotoTitle": "Bilde",
+    "ColNameTitle": "Navn",
+    "ColJobTitleTitle": "Stilling",
+    "ColDepartmentTitle": "Avdeling",
+    "ColOfficeLocationTitle": "Kontor",
+    "ColCityTitle": "By",
+    "ColPhoneTitle": "Telefon",
+    "ColMailTitle": "Epost",
     // Web part contents
     "SearchBoxLabel": "Filtrer etter navn:"
   }

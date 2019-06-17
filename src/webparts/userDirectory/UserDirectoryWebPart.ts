@@ -7,7 +7,9 @@ import {
   PropertyPaneTextField,
   PropertyPaneToggle,
   PropertyPaneCheckbox,
-  PropertyPaneHorizontalRule
+  PropertyPaneHorizontalRule,
+  PropertyPaneButton,
+  PropertyPaneButtonType
 } from '@microsoft/sp-property-pane';
 
 import * as strings from 'UserDirectoryWebPartStrings';
@@ -35,8 +37,16 @@ export interface IUserDirectoryWebPartProps {
 }
 
 export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDirectoryWebPartProps> {
+  private _hasBeenInitialised: boolean = false;
+
 
   public render(): void {
+
+    if (!this._hasBeenInitialised) {
+      this.resetPropertyStrings();
+      this._hasBeenInitialised = true;
+    }
+
     const element: React.ReactElement<IUserDirectoryProps > = React.createElement(
       UserDirectory,
       {
@@ -72,7 +82,24 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
     return Version.parse('1.0');
   }
 
+  private resetColumnTitles() {
+    this.resetPropertyStrings();
+    this.context.propertyPane.refresh();
+    this.render();
+  }
+
+  private resetPropertyStrings() {
+    this.properties.colNameTitle = strings.ColNameTitle;
+    this.properties.colJobTitleTitle = strings.ColJobTitleTitle;
+    this.properties.colDepartmentTitle = strings.ColDepartmentTitle;
+    this.properties.colOfficeLocationTitle = strings.ColOfficeLocationTitle;
+    this.properties.colCityTitle = strings.ColCityTitle;
+    this.properties.colPhoneTitle = strings.ColPhoneTitle;
+    this.properties.colMailTitle = strings.ColMailTitle;
+  }
+
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
+
     return {
       pages: [
         {
@@ -118,31 +145,31 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
               groupName: strings.GroupColumns,
               groupFields: [
                 PropertyPaneCheckbox('showPhoto', {                
-                  text: strings.ColPhotoText,
+                  text: strings.ColPhotoTitle,
                   checked: true
                 }),
                 PropertyPaneCheckbox('showJobTitle', {                
-                  text: strings.ColJobTitleText,
+                  text: strings.ColJobTitleTitle,
                   checked: true
                 }),         
                 PropertyPaneCheckbox('showDepartment', {                
-                  text: strings.ColDepartmentText,
+                  text: strings.ColDepartmentTitle,
                   checked: true
                 }),
                 PropertyPaneCheckbox('showOfficeLocation', {                
-                  text: strings.ColOfficeLocationText,
+                  text: strings.ColOfficeLocationTitle,
                   checked: false
                 }),
                 PropertyPaneCheckbox('showCity', {                
-                  text: strings.ColCityText,
+                  text: strings.ColCityTitle,
                   checked: false
                 }),      
                 PropertyPaneCheckbox('showPhone', {                
-                  text: strings.ColPhoneText,
+                  text: strings.ColPhoneTitle,
                   checked: true
                 }),
                 PropertyPaneCheckbox('showMail', {                
-                  text: strings.ColMailText,
+                  text: strings.ColMailTitle,
                   checked: true
                 })
               ]
@@ -151,32 +178,37 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
               groupName: strings.GroupColumnTitles,
               groupFields: [
                 PropertyPaneTextField('colNameTitle',{
-                  value: strings.ColNameText,
+                  placeholder: strings.ColNameTitle,
                 }),
                 PropertyPaneTextField('colJobTitleTitle',{
-                  value: strings.ColJobTitleText,
+                  placeholder: strings.ColJobTitleTitle,
                   disabled: !this.properties.showJobTitle
                 }),
                 PropertyPaneTextField('colDepartmentTitle',{
-                  value: strings.ColDepartmentText,
+                  placeholder: strings.ColDepartmentTitle,
                   disabled: !this.properties.showDepartment
                 }),
                 PropertyPaneTextField('colOfficeLocationTitle',{
-                  value: strings.ColOfficeLocationText,
+                  placeholder: strings.ColOfficeLocationTitle,
                   disabled: !this.properties.showOfficeLocation
                 }),
                 PropertyPaneTextField('colCityTitle',{
-                  value: strings.ColCityText,
+                  placeholder: strings.ColCityTitle,
                   disabled: !this.properties.showCity
                 }),
                 PropertyPaneTextField('colPhoneTitle',{
-                  value: strings.ColPhoneText,
+                  placeholder: strings.ColPhoneTitle,
                   disabled: !this.properties.showPhone
                 }),
                 PropertyPaneTextField('colMailTitle',{
-                  value: strings.ColMailText,
+                  placeholder: strings.ColMailTitle,
                   disabled: !this.properties.showMail
-                })
+                }),
+                PropertyPaneButton('btnReset', {
+                  text: strings.BtnResetText,
+                  buttonType: PropertyPaneButtonType.Normal,
+                  onClick: this.resetColumnTitles.bind(this)
+                 })
               ]
             }
           ]

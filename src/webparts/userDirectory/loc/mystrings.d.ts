@@ -15,15 +15,16 @@ declare interface IUserDirectoryWebPartStrings {
   AlternateColoursLabel: string;
   AlternateColoursOn: string;
   AlternateColoursOff: string;
+  BtnResetText: string;
   // Column names
-  ColPhotoText: string;
-  ColNameText: string;
-  ColJobTitleText: string;
-  ColDepartmentText: string;
-  ColOfficeLocationText: string;
-  ColCityText: string;
-  ColPhoneText: string;
-  ColMailText: string;
+  ColPhotoTitle: string;
+  ColNameTitle: string;
+  ColJobTitleTitle: string;
+  ColDepartmentTitle: string;
+  ColOfficeLocationTitle: string;
+  ColCityTitle: string;
+  ColPhoneTitle: string;
+  ColMailTitle: string;
   // Web part contents
   SearchBoxLabel: string;
 }

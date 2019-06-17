@@ -53,7 +53,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     super(props);
     this._search();
     this._showSorted = false;
-
+    
     this.state = {
       users: []
     };
@@ -119,7 +119,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     cols.push({
       key: 'colPhoto',
       name: '',
-      fieldName: 'photo',
+      fieldName: 'userPrincipalName',
       minWidth: 30,
       maxWidth: 30,
     });

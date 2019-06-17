@@ -25,6 +25,14 @@
           "manifest": "./src/webparts/userDirectory/UserDirectoryWebPart.manifest.json"
         }
       ]
+    },
+    "search-box-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/searchBox/SearchBoxWebPart.js",
+          "manifest": "./src/webparts/searchBox/SearchBoxWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -33,6 +41,7 @@
     "FlipClockWebPartStrings": "lib/webparts/flipClock/loc/{locale}.js",
     "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
     "UserDirectoryWebPartStrings": "lib/webparts/userDirectory/loc/{locale}.js",
-    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js"
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
+    "SearchBoxWebPartStrings": "lib/webparts/searchBox/loc/{locale}.js"
   }
 }

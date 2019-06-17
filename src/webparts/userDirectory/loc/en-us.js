@@ -15,15 +15,16 @@ define([], function() {
     "AlternateColoursLabel": "Row colour",
     "AlternateColoursOn": "Alternating colours",
     "AlternateColoursOff": "Single colour",
+    "BtnResetText": "Reset all titles",
     // Column names
-    "ColPhotoText": "Photo",
-    "ColNameText": "Name",
-    "ColJobTitleText": "Job Title",
-    "ColDepartmentText": "Department",
-    "ColOfficeLocationText": "Office Location",
-    "ColCityText": "City",
-    "ColPhoneText": "Phone",
-    "ColMailText": "Mail",
+    "ColPhotoTitle": "Photo",
+    "ColNameTitle": "Name",
+    "ColJobTitleTitle": "Job Title",
+    "ColDepartmentTitle": "Department",
+    "ColOfficeLocationTitle": "Office Location",
+    "ColCityTitle": "City",
+    "ColPhoneTitle": "Phone",
+    "ColMailTitle": "Mail",
     // Web part contents
     "SearchBoxLabel": "Filter by name:"
   }
