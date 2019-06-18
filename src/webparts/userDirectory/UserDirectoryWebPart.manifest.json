@@ -22,7 +22,7 @@
     "description": { "default": "Display a searchable list of users from your tenant", "nb-no": "Vis en søkbar liste over brukere fra tenanten din" },
     "officeFabricIconFontName": "CompanyDirectory",
     "properties": {
-      "api": "users",
+      "api": "users?$top=999",
       "compactMode": false,
       "alternatingColours": false,
       "showPhoto": true,

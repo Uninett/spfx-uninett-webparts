@@ -17,7 +17,9 @@ import UserDirectory from './components/UserDirectory';
 import { IUserDirectoryProps } from './components/IUserDirectoryProps';
 
 export interface IUserDirectoryWebPartProps {
+  hasBeenInitialised: boolean;
   api: string;
+  isApiChanged: boolean;
   compactMode: boolean;
   alternatingColours: boolean;
   showPhoto: boolean;
@@ -37,14 +39,21 @@ export interface IUserDirectoryWebPartProps {
 }
 
 export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDirectoryWebPartProps> {
-  private _hasBeenInitialised: boolean = false;
-
+  
 
   public render(): void {
-
-    if (!this._hasBeenInitialised) {
-      this.resetPropertyStrings();
-      this._hasBeenInitialised = true;
+    
+    // Sets default column title properties on first render
+    // Workaround because cannot set localized strings as default props in manifest
+    if(!this.properties.hasBeenInitialised) {
+      this.setDefaultColumnTitles();
+      this.properties.hasBeenInitialised = true;
+    }
+    
+    // Reloads entire compononent if data source API is updated
+    if (this.properties.isApiChanged) {
+      ReactDom.unmountComponentAtNode(this.domElement);
+      this.properties.isApiChanged = false;
     }
 
     const element: React.ReactElement<IUserDirectoryProps > = React.createElement(
@@ -52,6 +61,7 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
       {
         context: this.context,
         api: this.properties.api,
+        isApiChanged: this.properties.isApiChanged,
         compactMode: this.properties.compactMode,
         alternatingColours: this.properties.alternatingColours,
         showPhoto: this.properties.showPhoto,
@@ -83,12 +93,12 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
   }
 
   private resetColumnTitles() {
-    this.resetPropertyStrings();
+    this.setDefaultColumnTitles();
     this.context.propertyPane.refresh();
     this.render();
   }
 
-  private resetPropertyStrings() {
+  private setDefaultColumnTitles() {
     this.properties.colNameTitle = strings.ColNameTitle;
     this.properties.colJobTitleTitle = strings.ColJobTitleTitle;
     this.properties.colDepartmentTitle = strings.ColDepartmentTitle;
@@ -96,6 +106,10 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
     this.properties.colCityTitle = strings.ColCityTitle;
     this.properties.colPhoneTitle = strings.ColPhoneTitle;
     this.properties.colMailTitle = strings.ColMailTitle;
+  }
+
+  private updateApi() {
+    this.properties.isApiChanged = true;
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
@@ -111,8 +125,12 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
               groupName: strings.GroupDataSource,
               groupFields: [
                 PropertyPaneTextField('api', {
-                  label: strings.ApiLabel,
-                  value: "users"
+                  label: strings.ApiLabel
+                }),
+                PropertyPaneButton('btnApplyApi', {
+                  text: "Apply",
+                  buttonType: PropertyPaneButtonType.Normal,
+                  onClick: this.updateApi.bind(this)
                 })
               ]
             },

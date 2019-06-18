@@ -13,10 +13,10 @@ import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import { Fabric } from 'office-ui-fabric-react/lib/Fabric';
 import { DetailsList, DetailsListLayoutMode, Selection, SelectionMode, IColumn, ConstrainMode, buildColumns, IDetailsRowProps, IDetailsRowStyles, DetailsRow } from 'office-ui-fabric-react/lib/DetailsList';
-import { MarqueeSelection } from 'office-ui-fabric-react/lib/MarqueeSelection';
+import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList';
 import { mergeStyleSets, mergeStyles } from 'office-ui-fabric-react/lib/Styling';
 import { Link } from 'office-ui-fabric-react/lib/Link';
-import { Image, ImageFit } from 'office-ui-fabric-react/lib/Image';
+import { Image, ImageFit, IImageStyles } from 'office-ui-fabric-react/lib/Image';
 import { autobind, IconBase } from 'office-ui-fabric-react';
 
 import { getTheme } from 'office-ui-fabric-react/lib/Styling';
@@ -53,13 +53,13 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     super(props);
     this._search();
     this._showSorted = false;
-    
+
     this.state = {
       users: []
     };
-  }
+  } 
 
-  public render(): React.ReactElement<IUserDirectoryProps> {       
+  public render(): React.ReactElement<IUserDirectoryProps> {
 
     const { users } = this.state;
 
@@ -70,13 +70,21 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
 
     this._showSorted = false;
 
+    if (this.state.users === []) {
+      // Render loading state ...
+
+    } else {
+      // Render real UI ...
+
+    }
+
     return (
       <Fabric>
         <div className={classNames.controlWrapper}>
           <TextField label={strings.SearchBoxLabel} onChange={this._onChangeText} styles={controlStyles} />
         </div>
 
-        <DetailsList
+        <ShimmeredDetailsList
           items={users}
           compact={this.props.compactMode}
           columns={this._visibleColumns}
@@ -86,7 +94,8 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
           isHeaderVisible={true}
           constrainMode={ConstrainMode.horizontalConstrained}
           onRenderItemColumn={_renderItemColumn}
-          onRenderRow={this._onRenderRow}
+          onRenderRow={this._onRenderRow}          
+          enableShimmer={users.length == 0}
         />
       </Fabric>
     );
@@ -219,9 +228,10 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     ev: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
     text: string
   ): void => {
+    // Filter by name or department (if not null)
     this.setState({
       users: text
-        ? this._allUsers.filter(i => i.displayName.toLowerCase().indexOf(text) > -1)
+        ? this._allUsers.filter(i => (i.displayName.toLowerCase().indexOf(text) > -1) || (i.department != null && i.department.toLowerCase().indexOf(text) > -1))
         : this._allUsers
     });
   }
@@ -261,7 +271,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
           .api(this.props.api)
           .version("v1.0")
           .select("userPrincipalName,displayName,jobTitle,department,officeLocation,city,mobilePhone,mail")
-          .get((err, res) => {  
+          .get((err, res) => {
   
             if (err) {
               console.error(err);
@@ -284,7 +294,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
                 mail: item.mail
               });
             });
-            
+                        
             // Update user array and component state
             this._allUsers = users;
             this.setState(
@@ -292,8 +302,11 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
                 users: users,
               }
             );
+            console.log("Search completed");
           });
-      });    
+      });
+
+      
   }  
 }
 
@@ -309,7 +322,11 @@ function _renderItemColumn(item: IUserItem, index: number, column: IColumn) {
 
   switch (column.key) {
     case 'colPhoto':
-      return <Image src={"/_layouts/15/userphoto.aspx?size=L&username=" + fieldContent} width={30} height={30} imageFit={ImageFit.cover} />;
+      const customStyles: Partial<IImageStyles> = {};
+      customStyles.image = {      
+        borderRadius: 30/2
+      };
+      return <Image src={"/_layouts/15/userphoto.aspx?size=L&username=" + fieldContent} width={30} height={30} imageFit={ImageFit.cover} shouldFadeIn={true} styles={customStyles}/>;
 
     case 'colMail':
       return <Link href={"mailto:" + fieldContent}>{fieldContent}</Link>;

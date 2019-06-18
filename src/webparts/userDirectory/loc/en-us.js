@@ -26,6 +26,6 @@ define([], function() {
     "ColPhoneTitle": "Phone",
     "ColMailTitle": "Mail",
     // Web part contents
-    "SearchBoxLabel": "Filter by name:"
+    "SearchBoxLabel": "Filter by name or department:"
   }
 });

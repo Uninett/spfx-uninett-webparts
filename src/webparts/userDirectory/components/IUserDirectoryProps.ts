@@ -1,8 +1,10 @@
 import { WebPartContext } from '@microsoft/sp-webpart-base';
+import { IUserItem } from './IUserItem';
 
 export interface IUserDirectoryProps {
   context: WebPartContext;
   api: string;
+  isApiChanged: boolean;
   compactMode: boolean;
   alternatingColours: boolean;
   showPhoto: boolean;
