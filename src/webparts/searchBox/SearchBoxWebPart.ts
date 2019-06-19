@@ -12,7 +12,7 @@ import SearchBox from './components/SearchBox';
 import { ISearchBoxProps } from './components/ISearchBoxProps';
 
 export interface ISearchBoxWebPartProps {
-  description: string;
+  searchBoxLabel: string;
 }
 
 export default class SearchBoxWebPart extends BaseClientSideWebPart<ISearchBoxWebPartProps> {
@@ -21,7 +21,7 @@ export default class SearchBoxWebPart extends BaseClientSideWebPart<ISearchBoxWe
     const element: React.ReactElement<ISearchBoxProps > = React.createElement(
       SearchBox,
       {
-        description: this.properties.description
+        searchBoxLabel: this.properties.searchBoxLabel
       }
     );
 
@@ -47,8 +47,8 @@ export default class SearchBoxWebPart extends BaseClientSideWebPart<ISearchBoxWe
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneTextField('searchBoxLabel', {
+                  label: strings.SearchBoxPropLabel
                 })
               ]
             }

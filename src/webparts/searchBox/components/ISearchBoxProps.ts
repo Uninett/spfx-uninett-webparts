@@ -1,3 +1,3 @@
 export interface ISearchBoxProps {
-  description: string;
+  searchBoxLabel: string;
 }

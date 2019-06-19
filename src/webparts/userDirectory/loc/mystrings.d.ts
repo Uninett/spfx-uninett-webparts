@@ -15,6 +15,7 @@ declare interface IUserDirectoryWebPartStrings {
   AlternateColoursLabel: string;
   AlternateColoursOn: string;
   AlternateColoursOff: string;
+  CustomTitlePlaceholder: string;
   BtnResetText: string;
   // Column names
   ColPhoto: string;

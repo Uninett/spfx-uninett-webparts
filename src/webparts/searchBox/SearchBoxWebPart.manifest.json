@@ -21,7 +21,7 @@
     "description": { "default": "SearchBox description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "SearchBox"
+      "searchBoxLabel": "Search (name or department):"
     }
   }]
 }

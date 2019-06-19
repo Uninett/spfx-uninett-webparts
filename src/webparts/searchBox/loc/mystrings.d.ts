@@ -1,7 +1,7 @@
 declare interface ISearchBoxWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
-  DescriptionFieldLabel: string;
+  SearchBoxPropLabel: string;
 }
 
 declare module 'SearchBoxWebPartStrings' {

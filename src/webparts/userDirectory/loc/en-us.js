@@ -15,6 +15,7 @@ define([], function() {
     "AlternateColoursLabel": "Row colour",
     "AlternateColoursOn": "Alternating colours",
     "AlternateColoursOff": "Single colour",
+    "CustomTitlePlaceholder": "Custom column title",
     "BtnResetText": "Reset all titles",
     // Column names
     "ColPhoto": "Photo",

@@ -37,6 +37,13 @@ export interface IUserDirectoryWebPartProps {
   colCity: string;
   colPhone: string;
   colMail: string;
+  customName: string;
+  customJobTitle: string;
+  customDepartment: string;
+  customOfficeLocation: string;
+  customCity: string;
+  customPhone: string;
+  customMail: string;
 }
 
 export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDirectoryWebPartProps> {
@@ -46,10 +53,12 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
     
     // Sets default column title properties on first render
     // Workaround because cannot set localized strings as default props in manifest
-    if(!this.properties.hasBeenInitialised) {
+    /*if(!this.properties.hasBeenInitialised) {
       this.setDefaultColumnTitles();
       this.properties.hasBeenInitialised = true;
     }
+*/
+    this.setColumnTitles();
     
     // Reloads entire compononent if data source API is updated
     if (this.properties.isApiChanged) {
@@ -108,6 +117,16 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
     this.properties.colCity = strings.ColCity;
     this.properties.colPhone = strings.ColPhone;
     this.properties.colMail = strings.ColMail;
+  }
+
+  private setColumnTitles() {
+    this.properties.colName = this.properties.customName || strings.ColName;
+    this.properties.colJobTitle = this.properties.customJobTitle || strings.ColJobTitle;
+    this.properties.colDepartment = this.properties.customDepartment || strings.ColDepartment;
+    this.properties.colOfficeLocation = this.properties.customOfficeLocation || strings.ColOfficeLocation;
+    this.properties.colCity = this.properties.customCity || strings.ColCity;
+    this.properties.colPhone = this.properties.customPhone || strings.ColPhone;
+    this.properties.colMail = this.properties.customMail || strings.ColMail;
   }
 
   private updateApi() {
@@ -173,8 +192,8 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                   text: strings.ColName,
                   checked: true
                 }),
-                PropertyPaneTextField('colName',{
-                  placeholder: strings.ColName,
+                PropertyPaneTextField('customName',{
+                  placeholder: strings.CustomTitlePlaceholder,
                   disabled: !this.properties.showName
                 }),
                 PropertyPaneHorizontalRule(),
@@ -182,8 +201,8 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                   text: strings.ColJobTitle,
                   checked: true
                 }),
-                PropertyPaneTextField('colJobTitle',{
-                  placeholder: strings.ColJobTitle,
+                PropertyPaneTextField('customJobTitle',{
+                  placeholder: strings.CustomTitlePlaceholder,
                   disabled: !this.properties.showJobTitle
                 }),
                 PropertyPaneHorizontalRule(),     
@@ -191,8 +210,8 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                   text: strings.ColDepartment,
                   checked: true
                 }),
-                PropertyPaneTextField('colDepartment',{
-                  placeholder: strings.ColDepartment,
+                PropertyPaneTextField('customDepartment',{
+                  placeholder: strings.CustomTitlePlaceholder,
                   disabled: !this.properties.showDepartment
                 }),
                 PropertyPaneHorizontalRule(),
@@ -200,8 +219,8 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                   text: strings.ColOfficeLocation,
                   checked: false
                 }),
-                PropertyPaneTextField('colOfficeLocation',{
-                  placeholder: strings.ColOfficeLocation,
+                PropertyPaneTextField('customOfficeLocation',{
+                  placeholder: strings.CustomTitlePlaceholder,
                   disabled: !this.properties.showOfficeLocation
                 }),
                 PropertyPaneHorizontalRule(),
@@ -209,8 +228,8 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                   text: strings.ColCity,
                   checked: false
                 }),      
-                PropertyPaneTextField('colCity',{
-                  placeholder: strings.ColCity,
+                PropertyPaneTextField('customCity',{
+                  placeholder: strings.CustomTitlePlaceholder,
                   disabled: !this.properties.showCity
                 }),
                 PropertyPaneHorizontalRule(),
@@ -218,8 +237,8 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                   text: strings.ColPhone,
                   checked: true
                 }),
-                PropertyPaneTextField('colPhone',{
-                  placeholder: strings.ColPhone,
+                PropertyPaneTextField('customPhone',{
+                  placeholder: strings.CustomTitlePlaceholder,
                   disabled: !this.properties.showPhone
                 }),
                 PropertyPaneHorizontalRule(),
@@ -227,8 +246,8 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                   text: strings.ColMail,
                   checked: true
                 }),
-                PropertyPaneTextField('colMail',{
-                  placeholder: strings.ColMail,
+                PropertyPaneTextField('customMail',{
+                  placeholder: strings.CustomTitlePlaceholder,
                   disabled: !this.properties.showMail
                 }),
               ]

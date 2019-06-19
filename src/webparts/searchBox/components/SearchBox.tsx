@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styles from './SearchBox.module.scss';
+import * as strings from 'UserDirectoryWebPartStrings';
 import { ISearchBoxProps } from './ISearchBoxProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { Fabric, TextField, ShimmeredDetailsList, SelectionMode, DetailsListLayoutMode, ConstrainMode } from 'office-ui-fabric-react';
@@ -28,7 +29,7 @@ export default class SearchBox extends React.Component<ISearchBoxProps, {}> {
     return (
       <Fabric>
         <div>
-          <TextField label={"Filter by name or department:"} onChange={this._onChangeText} styles={controlStyles} />
+          <TextField label={this.props.searchBoxLabel} onChange={this._onChangeText} styles={controlStyles} />
         </div>
       </Fabric>
     );

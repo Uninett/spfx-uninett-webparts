@@ -15,6 +15,7 @@ define([], function() {
     "AlternateColoursLabel": "Radfarge",
     "AlternateColoursOn": "Alternerende farger",
     "AlternateColoursOff": "Ensfarget",
+    "CustomTitlePlaceholder": "Egendefinert kolonnenavn",
     "BtnResetText": "Tilbakestill alle overskrifter",
     // Column names
     "ColPhoto": "Bilde",
