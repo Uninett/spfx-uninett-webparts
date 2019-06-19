@@ -18,30 +18,33 @@ import { mergeStyleSets, mergeStyles } from 'office-ui-fabric-react/lib/Styling'
 import { Link } from 'office-ui-fabric-react/lib/Link';
 import { Image, ImageFit, IImageStyles } from 'office-ui-fabric-react/lib/Image';
 import { autobind, IconBase } from 'office-ui-fabric-react';
-
 import { getTheme } from 'office-ui-fabric-react/lib/Styling';
+
+import { RxJsEventEmitter } from '../../../RxJsEventEmitter/RxJsEventEmitter';
+import IEventData from '../../../RxJsEventEmitter/IEventData';
+
 
 const theme = getTheme();
 
-const classNames = mergeStyleSets({
-  controlWrapper: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  row: {
-    
-  }
-});
 const controlStyles = {
   root: {
     margin: '0 30px 20px 0',
-    maxWidth: '300px'
+    maxWidth: '400px'
+  }
+};
+
+const photoSize = 30;
+
+const imageStyle = {
+  image: {
+    borderRadius: photoSize/2
   }
 };
 
 
 export default class UserDirectory extends React.Component<IUserDirectoryProps, IUserDirectoryState> {
- 
+  private readonly eventEmitter: RxJsEventEmitter = RxJsEventEmitter.getInstance();
+  
   private _allUsers: IUserItem[];
   private _visibleColumns: IColumn[];
   private _showSorted: boolean;
@@ -51,6 +54,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
   
   constructor(props: IUserDirectoryProps, state: IUserDirectoryState) {
     super(props);
+    this.eventEmitter.on("filterTerms", this._onReceiveData.bind(this));
     this._search();
     this._showSorted = false;
 
@@ -79,11 +83,12 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     }
 
     return (
-      <Fabric>
-        <div className={classNames.controlWrapper}>
+      /*
+        <div>
           <TextField label={strings.SearchBoxLabel} onChange={this._onChangeText} styles={controlStyles} />
         </div>
-
+        */
+      <Fabric>
         <ShimmeredDetailsList
           items={users}
           compact={this.props.compactMode}
@@ -118,6 +123,29 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       }
     }
     return <DetailsRow {...props} styles={customStyles} />;
+  }
+
+  private _onReceiveData = (
+    data: IEventData
+  ): void => {
+    // Filter by name or department (if not null)
+    let text: string = data.sharedData;
+    this.setState({
+      users: text
+        ? this._allUsers.filter(i => (i.displayName.toLowerCase().indexOf(text) > -1) || (i.department != null && i.department.toLowerCase().indexOf(text) > -1))
+        : this._allUsers
+    });
+  }
+
+  private _onChangeText = (
+    text: string
+  ): void => {
+    // Filter by name or department (if not null)
+    this.setState({
+      users: text
+        ? this._allUsers.filter(i => (i.displayName.toLowerCase().indexOf(text) > -1) || (i.department != null && i.department.toLowerCase().indexOf(text) > -1))
+        : this._allUsers
+    });
   }
 
   private _getCheckedColumns(): IColumn[] {
@@ -224,17 +252,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     return cols;
   }
 
-  private _onChangeText = (
-    ev: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
-    text: string
-  ): void => {
-    // Filter by name or department (if not null)
-    this.setState({
-      users: text
-        ? this._allUsers.filter(i => (i.displayName.toLowerCase().indexOf(text) > -1) || (i.department != null && i.department.toLowerCase().indexOf(text) > -1))
-        : this._allUsers
-    });
-  }
+  
 
   private _onColumnClick = (ev: React.MouseEvent<HTMLElement>, column: IColumn): void => {
 
@@ -321,12 +339,8 @@ function _renderItemColumn(item: IUserItem, index: number, column: IColumn) {
   const fieldContent = item[column.fieldName as keyof IUserItem] as string;
 
   switch (column.key) {
-    case 'colPhoto':
-      const customStyles: Partial<IImageStyles> = {};
-      customStyles.image = {      
-        borderRadius: 30/2
-      };
-      return <Image src={"/_layouts/15/userphoto.aspx?size=L&username=" + fieldContent} width={30} height={30} imageFit={ImageFit.cover} shouldFadeIn={true} styles={customStyles}/>;
+    case 'colPhoto':      
+      return <Image src={"/_layouts/15/userphoto.aspx?size=L&username=" + fieldContent} width={photoSize} height={photoSize} imageFit={ImageFit.cover} shouldFadeIn={false} styles={imageStyle}/>;
 
     case 'colMail':
       return <Link href={"mailto:" + fieldContent}>{fieldContent}</Link>;
