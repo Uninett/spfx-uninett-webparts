@@ -17,14 +17,14 @@ define([], function() {
     "AlternateColoursOff": "Single colour",
     "BtnResetText": "Reset all titles",
     // Column names
-    "ColPhotoTitle": "Photo",
-    "ColNameTitle": "Name",
-    "ColJobTitleTitle": "Job Title",
-    "ColDepartmentTitle": "Department",
-    "ColOfficeLocationTitle": "Office Location",
-    "ColCityTitle": "City",
-    "ColPhoneTitle": "Phone",
-    "ColMailTitle": "Mail",
+    "ColPhoto": "Photo",
+    "ColName": "Name",
+    "ColJobTitle": "Job Title",
+    "ColDepartment": "Department",
+    "ColOfficeLocation": "Office Location",
+    "ColCity": "City",
+    "ColPhone": "Phone",
+    "ColMail": "Mail",
     // Web part contents
     "SearchBoxLabel": "Filter by name or department:"
   }

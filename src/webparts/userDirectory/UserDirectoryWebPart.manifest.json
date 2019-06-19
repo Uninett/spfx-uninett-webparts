@@ -23,9 +23,11 @@
     "officeFabricIconFontName": "CompanyDirectory",
     "properties": {
       "api": "users?$top=999",
+      "isApiChanged": true,
       "compactMode": false,
       "alternatingColours": false,
       "showPhoto": true,
+      "showName": true,
       "showJobTitle": true,
       "showDepartment": true,
       "showOfficeLocation": false,

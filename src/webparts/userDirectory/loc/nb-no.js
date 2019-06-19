@@ -17,14 +17,14 @@ define([], function() {
     "AlternateColoursOff": "Ensfarget",
     "BtnResetText": "Tilbakestill alle overskrifter",
     // Column names
-    "ColPhotoTitle": "Bilde",
-    "ColNameTitle": "Navn",
-    "ColJobTitleTitle": "Stilling",
-    "ColDepartmentTitle": "Avdeling",
-    "ColOfficeLocationTitle": "Kontor",
-    "ColCityTitle": "By",
-    "ColPhoneTitle": "Telefon",
-    "ColMailTitle": "Epost",
+    "ColPhoto": "Bilde",
+    "ColName": "Navn",
+    "ColJobTitle": "Stilling",
+    "ColDepartment": "Avdeling",
+    "ColOfficeLocation": "Kontor",
+    "ColCity": "By",
+    "ColPhone": "Telefon",
+    "ColMail": "Epost",
     // Web part contents
     "SearchBoxLabel": "Filtrer etter navn eller avdeling:"
   }

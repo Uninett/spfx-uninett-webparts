@@ -14,10 +14,10 @@ import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import { Fabric } from 'office-ui-fabric-react/lib/Fabric';
 import { DetailsList, DetailsListLayoutMode, Selection, SelectionMode, IColumn, ConstrainMode, buildColumns, IDetailsRowProps, IDetailsRowStyles, DetailsRow } from 'office-ui-fabric-react/lib/DetailsList';
 import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList';
-import { mergeStyleSets, mergeStyles } from 'office-ui-fabric-react/lib/Styling';
+import { Text } from 'office-ui-fabric-react/lib/Text';
 import { Link } from 'office-ui-fabric-react/lib/Link';
 import { Image, ImageFit, IImageStyles } from 'office-ui-fabric-react/lib/Image';
-import { autobind, IconBase } from 'office-ui-fabric-react';
+import { autobind, IconBase, Stack } from 'office-ui-fabric-react';
 import { getTheme } from 'office-ui-fabric-react/lib/Styling';
 
 import { RxJsEventEmitter } from '../../../RxJsEventEmitter/RxJsEventEmitter';
@@ -48,13 +48,14 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
   private _allUsers: IUserItem[];
   private _visibleColumns: IColumn[];
   private _showSorted: boolean;
-
+  private _isApiCorrect: boolean;
   private _showSearchBox: boolean;
   private _searchBox: any;
   
   constructor(props: IUserDirectoryProps, state: IUserDirectoryState) {
     super(props);
-    this.eventEmitter.on("filterTerms", this._onReceiveData.bind(this));
+    this.eventEmitter.on("filterTerms", this._onReceiveData.bind(this));    
+    this._isApiCorrect = true;
     this._search();
     this._showSorted = false;
 
@@ -74,36 +75,49 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
 
     this._showSorted = false;
 
-    if (this.state.users === []) {
-      // Render loading state ...
-
-    } else {
-      // Render real UI ...
-
-    }
-
-    return (
-      /*
-        <div>
-          <TextField label={strings.SearchBoxLabel} onChange={this._onChangeText} styles={controlStyles} />
-        </div>
-        */
-      <Fabric>
-        <ShimmeredDetailsList
-          items={users}
-          compact={this.props.compactMode}
-          columns={this._visibleColumns}
-          selectionMode={SelectionMode.none}
-          setKey="set"
-          layoutMode={DetailsListLayoutMode.justified}
-          isHeaderVisible={true}
-          constrainMode={ConstrainMode.horizontalConstrained}
-          onRenderItemColumn={_renderItemColumn}
-          onRenderRow={this._onRenderRow}          
-          enableShimmer={users.length == 0}
-        />
+    if (this._isApiCorrect) {
+      return (
+        /*
+          <div>
+            <TextField label={strings.SearchBoxLabel} onChange={this._onChangeText} styles={controlStyles} />
+          </div>
+          */
+        <Fabric>
+          <ShimmeredDetailsList
+            items={users}
+            compact={this.props.compactMode}
+            columns={this._visibleColumns}
+            selectionMode={SelectionMode.none}
+            setKey="set"
+            layoutMode={DetailsListLayoutMode.justified}
+            isHeaderVisible={true}
+            constrainMode={ConstrainMode.horizontalConstrained}
+            onRenderItemColumn={_renderItemColumn}
+            onRenderRow={this._onRenderRow}          
+            enableShimmer={users.length == 0}
+            shimmerLines={30}
+          />
+        </Fabric>
+      );
+    } 
+    else {
+      return (
+        <Fabric>
+          <ShimmeredDetailsList
+            items={users}
+            columns={this._visibleColumns}
+          />
+          {
+            !this._isApiCorrect && (
+              <Stack horizontalAlign='center'>
+                <Text block>Could not get users from data source.</Text>
+                <Text block>Make sure that the API is correct.</Text>
+              </Stack>
+            )
+          }
       </Fabric>
-    );
+      );
+    }    
   }
   
   private _onRenderRow = (props: IDetailsRowProps): JSX.Element => {
@@ -161,9 +175,10 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       maxWidth: 30,
     });
 
+    if (this.props.showName)
     cols.push({
       key: 'colName',
-      name: this.props.colNameTitle,
+      name: this.props.colName,
       fieldName: 'displayName',
       minWidth: 180,
       maxWidth: 200,
@@ -180,7 +195,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     if (this.props.showJobTitle)
     cols.push({
       key: 'colTitle',
-      name: this.props.colJobTitleTitle,
+      name: this.props.colJobTitle,
       fieldName: 'jobTitle',
       minWidth: 80,
       maxWidth: 90,
@@ -192,7 +207,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     if (this.props.showDepartment)
     cols.push({
       key: 'colDepartment',
-      name: this.props.colDepartmentTitle,
+      name: this.props.colDepartment,
       fieldName: 'department',
       minWidth: 100,
       maxWidth: 110,
@@ -204,7 +219,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     if (this.props.showOfficeLocation)
     cols.push({
       key: 'colOfficeLocation',
-      name: this.props.colOfficeLocationTitle,
+      name: this.props.colOfficeLocation,
       fieldName: 'officeLocation',
       minWidth: 80,
       maxWidth: 90,
@@ -216,7 +231,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     if (this.props.showCity)
     cols.push({
       key: 'colCity',
-      name: this.props.colCityTitle,
+      name: this.props.colCity,
       fieldName: 'city',
       minWidth: 80,
       maxWidth: 90,
@@ -228,7 +243,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     if (this.props.showPhone)
     cols.push({
       key: 'colPhone',
-      name: this.props.colPhoneTitle,
+      name: this.props.colPhone,
       fieldName: 'mobilePhone',
       minWidth: 90,
       maxWidth: 100,        
@@ -239,7 +254,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     if (this.props.showMail)
     cols.push({
       key: 'colMail',
-      name: this.props.colMailTitle,
+      name: this.props.colMail,
       fieldName: 'mail',
       minWidth: 240,
       maxWidth: 260,
@@ -293,6 +308,9 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
   
             if (err) {
               console.error(err);
+              // Re-renders component with error message
+              this._isApiCorrect = false;
+              this.forceUpdate();
               return;
             }            
             
