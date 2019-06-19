@@ -61,7 +61,6 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
       {
         context: this.context,
         api: this.properties.api,
-        isApiChanged: this.properties.isApiChanged,
         compactMode: this.properties.compactMode,
         alternatingColours: this.properties.alternatingColours,
         showPhoto: this.properties.showPhoto,
