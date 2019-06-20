@@ -1,9 +1,8 @@
 import * as React from 'react';
-import styles from './SearchBox.module.scss';
-import * as strings from 'UserDirectoryWebPartStrings';
-import { ISearchBoxProps } from './ISearchBoxProps';
-import { escape } from '@microsoft/sp-lodash-subset';
-import { Fabric, TextField, ShimmeredDetailsList, SelectionMode, DetailsListLayoutMode, ConstrainMode } from 'office-ui-fabric-react';
+import styles from './DirectorySearchBox.module.scss';
+import { IDirectorySearchBoxProps } from './IDirectorySearchBoxProps';
+
+import { Fabric, TextField, SearchBox } from 'office-ui-fabric-react';
 import { RxJsEventEmitter } from '../../../RxJsEventEmitter/RxJsEventEmitter';
 import IEventData from '../../../RxJsEventEmitter/IEventData';
 
@@ -14,36 +13,46 @@ const controlStyles = {
   }
 };
 
-export default class SearchBox extends React.Component<ISearchBoxProps, {}> {
-
+export default class DirectorySearchBox extends React.Component<IDirectorySearchBoxProps, {}> {
   private readonly eventEmitter: RxJsEventEmitter = RxJsEventEmitter.getInstance();
 
-  constructor(props: ISearchBoxProps) {
+  constructor(props: IDirectorySearchBoxProps) {
     super(props);
     this.state = {
       text: null,
     };
   }
 
-  public render(): React.ReactElement<ISearchBoxProps> {
+  public render(): React.ReactElement<IDirectorySearchBoxProps> {
     return (
+      <SearchBox
+        styles={{ root: { width: 300 } }}
+        placeholder={this.props.searchBoxPlaceholder}
+        onChange={newValue => this._onChangeText(newValue)}
+      />
+      /*
       <Fabric>
         <div>
           <TextField label={this.props.searchBoxLabel} onChange={this._onChangeText} styles={controlStyles} />
         </div>
       </Fabric>
+      */
     );
   }
 
 
   private _onChangeText = (
-    ev: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
     text: string
   ): void => {
     var eventBody = {
       sharedData: text
     } as IEventData;
 
-    this.eventEmitter.emit("filterTerms", eventBody);
+    try {
+      this.eventEmitter.emit("filterTerms", eventBody);
+    } catch (error) {
+      console.error("API not valid.");
+    }
+    
   }
 }

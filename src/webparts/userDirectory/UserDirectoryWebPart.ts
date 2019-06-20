@@ -51,13 +51,7 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
 
   public render(): void {
     
-    // Sets default column title properties on first render
-    // Workaround because cannot set localized strings as default props in manifest
-    /*if(!this.properties.hasBeenInitialised) {
-      this.setDefaultColumnTitles();
-      this.properties.hasBeenInitialised = true;
-    }
-*/
+    // Sets column titles
     this.setColumnTitles();
     
     // Reloads entire compononent if data source API is updated
@@ -104,7 +98,9 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
   }
 
   private resetColumnTitles() {
-    this.setDefaultColumnTitles();
+    this.clearCustomTitles();
+    this.setColumnTitles();
+    //this.setDefaultColumnTitles();
     this.context.propertyPane.refresh();
     this.render();
   }
@@ -119,7 +115,18 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
     this.properties.colMail = strings.ColMail;
   }
 
+  private clearCustomTitles() {
+    this.properties.customName = "";
+    this.properties.customJobTitle = "";
+    this.properties.customDepartment = "";
+    this.properties.customOfficeLocation = "";
+    this.properties.customCity = "";
+    this.properties.customPhone = "";
+    this.properties.customMail = "";
+  }
+
   private setColumnTitles() {
+    // Sets custom column titles, or default titles if custom is empty
     this.properties.colName = this.properties.customName || strings.ColName;
     this.properties.colJobTitle = this.properties.customJobTitle || strings.ColJobTitle;
     this.properties.colDepartment = this.properties.customDepartment || strings.ColDepartment;
@@ -250,6 +257,11 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                   placeholder: strings.CustomTitlePlaceholder,
                   disabled: !this.properties.showMail
                 }),
+                PropertyPaneButton('btnReset', {
+                  text: strings.BtnResetText,
+                  buttonType: PropertyPaneButtonType.Normal,
+                  onClick: this.resetColumnTitles.bind(this)
+                 })
               ]
             }/*,
             {

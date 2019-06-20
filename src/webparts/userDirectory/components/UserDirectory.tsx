@@ -72,57 +72,54 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     if (!this._showSorted) {
       this._visibleColumns = this._getCheckedColumns();
     }
-
     this._showSorted = false;
-
-    if (this._isApiCorrect) {
+    
+    if (!this._isApiCorrect) {
       return (
-        /*
-          <div>
-            <TextField label={strings.SearchBoxLabel} onChange={this._onChangeText} styles={controlStyles} />
-          </div>
-          */
+        // Display error message if API not valid
         <Fabric>
           <ShimmeredDetailsList
             items={users}
-            compact={this.props.compactMode}
             columns={this._visibleColumns}
             selectionMode={SelectionMode.none}
-            setKey="set"
-            layoutMode={DetailsListLayoutMode.justified}
-            isHeaderVisible={true}
-            constrainMode={ConstrainMode.horizontalConstrained}
-            onRenderItemColumn={_renderItemColumn}
-            onRenderRow={this._onRenderRow}          
-            enableShimmer={users.length == 0}
-            shimmerLines={30}
           />
-        </Fabric>
-      );
-    } 
-    else {
-      return (
-        <Fabric>
-          <ShimmeredDetailsList
-            items={users}
-            columns={this._visibleColumns}
-          />
-          {
-            !this._isApiCorrect && (
-              <Stack horizontalAlign='center'>
-                <Text block>Could not get users from data source.</Text>
-                <Text block>Make sure that the API is correct.</Text>
-              </Stack>
-            )
-          }
+          <Stack horizontalAlign='center'>
+            <Text block>{strings.BadApi1}</Text>
+            <Text block>{strings.BadApi2}</Text>
+          </Stack>
       </Fabric>
       );
-    }    
+    }
+
+    return (
+      <Fabric>
+        <ShimmeredDetailsList
+          items={users}
+          compact={this.props.compactMode}
+          columns={this._visibleColumns}
+          selectionMode={SelectionMode.none}
+          setKey="set"
+          layoutMode={DetailsListLayoutMode.justified}
+          isHeaderVisible={true}
+          constrainMode={ConstrainMode.horizontalConstrained}
+          onRenderItemColumn={_renderItemColumn}
+          onRenderRow={this._onRenderRow}          
+          enableShimmer={this._allUsers == undefined}
+          shimmerLines={30}
+        />
+        { users.length == 0 && (
+         <Stack horizontalAlign='center'>
+          <Text>{strings.NoUsers}</Text>
+         </Stack>
+        )}
+      </Fabric>
+    );
   }
   
   private _onRenderRow = (props: IDetailsRowProps): JSX.Element => {
     const customStyles: Partial<IDetailsRowStyles> = {};
 
+    // Vertically center content of each row
     customStyles.fields = {      
       alignItems: "center"
     };
@@ -142,13 +139,15 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
   private _onReceiveData = (
     data: IEventData
   ): void => {
-    // Filter by name or department (if not null)
-    let text: string = data.sharedData;
-    this.setState({
-      users: text
-        ? this._allUsers.filter(i => (i.displayName.toLowerCase().indexOf(text) > -1) || (i.department != null && i.department.toLowerCase().indexOf(text) > -1))
-        : this._allUsers
-    });
+    if (this._allUsers != undefined) {
+      // Filter by name or department (if not null)
+      let text: string = data.sharedData;
+      this.setState({
+        users: text
+          ? this._allUsers.filter(i => (i.displayName.toLowerCase().indexOf(text) > -1) || (i.department != null && i.department.toLowerCase().indexOf(text) > -1))
+          : this._allUsers
+      });
+    }
   }
 
   private _onChangeText = (

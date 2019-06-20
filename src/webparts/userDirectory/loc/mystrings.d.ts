@@ -28,6 +28,9 @@ declare interface IUserDirectoryWebPartStrings {
   ColMail: string;
   // Web part contents
   SearchBoxLabel: string;
+  BadApi1: string;
+  BadApi2: string;
+  NoUsers: string;
 }
 
 declare module 'UserDirectoryWebPartStrings' {

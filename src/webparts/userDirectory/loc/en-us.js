@@ -16,7 +16,7 @@ define([], function() {
     "AlternateColoursOn": "Alternating colours",
     "AlternateColoursOff": "Single colour",
     "CustomTitlePlaceholder": "Custom column title",
-    "BtnResetText": "Reset all titles",
+    "BtnResetText": "Reset all column titles",
     // Column names
     "ColPhoto": "Photo",
     "ColName": "Name",
@@ -27,6 +27,9 @@ define([], function() {
     "ColPhone": "Phone",
     "ColMail": "Mail",
     // Web part contents
-    "SearchBoxLabel": "Filter by name or department:"
+    "SearchBoxLabel": "Filter by name or department:",
+    "BadApi1": "Could not get users from data source.",
+    "BadApi2": "Make sure that the API is valid.",
+    "NoUsers": "No users were found."
   }
 });

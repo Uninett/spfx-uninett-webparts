@@ -16,7 +16,7 @@ define([], function() {
     "AlternateColoursOn": "Alternerende farger",
     "AlternateColoursOff": "Ensfarget",
     "CustomTitlePlaceholder": "Egendefinert kolonnenavn",
-    "BtnResetText": "Tilbakestill alle overskrifter",
+    "BtnResetText": "Tilbakestill alle kolonnenavn",
     // Column names
     "ColPhoto": "Bilde",
     "ColName": "Navn",
@@ -27,6 +27,9 @@ define([], function() {
     "ColPhone": "Telefon",
     "ColMail": "Epost",
     // Web part contents
-    "SearchBoxLabel": "Filtrer etter navn eller avdeling:"
+    "SearchBoxLabel": "Filtrer etter navn eller avdeling:",
+    "BadApi1": "Kunne ikke hente brukere fra datakilden.",
+    "BadApi2": "Forsikre deg om at oppgitt API er korrekt.",
+    "NoUsers": "Ingen brukere ble funnet."
   }
 });
