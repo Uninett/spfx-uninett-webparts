@@ -17,7 +17,7 @@ import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetail
 import { Text } from 'office-ui-fabric-react/lib/Text';
 import { Link } from 'office-ui-fabric-react/lib/Link';
 import { Image, ImageFit, IImageStyles } from 'office-ui-fabric-react/lib/Image';
-import { autobind, IconBase, Stack } from 'office-ui-fabric-react';
+import { autobind, IconBase, Stack, SearchBox } from 'office-ui-fabric-react';
 import { getTheme } from 'office-ui-fabric-react/lib/Styling';
 
 import { RxJsEventEmitter } from '../../../RxJsEventEmitter/RxJsEventEmitter';
@@ -29,7 +29,7 @@ const theme = getTheme();
 const controlStyles = {
   root: {
     margin: '0 30px 20px 0',
-    maxWidth: '400px'
+    width: 300 
   }
 };
 
@@ -74,10 +74,17 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     }
     this._showSorted = false;
     
+    // Display error message if API not valid
     if (!this._isApiCorrect) {
-      return (
-        // Display error message if API not valid
+      return (        
         <Fabric>
+          { this.props.useBuiltInSearch && (
+            <SearchBox
+              styles={controlStyles}
+              placeholder={this.props.searchBoxPlaceholder}
+              onChange={newValue => this._onChangeText(newValue)}       
+            />
+          )}          
           <ShimmeredDetailsList
             items={users}
             columns={this._visibleColumns}
@@ -93,6 +100,13 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
 
     return (
       <Fabric>
+        { this.props.useBuiltInSearch && (
+            <SearchBox
+              styles={controlStyles}
+              placeholder={this.props.searchBoxPlaceholder}
+              onChange={newValue => this._onChangeText(newValue)}       
+            />
+          )}
         <ShimmeredDetailsList
           items={users}
           compact={this.props.compactMode}
@@ -153,12 +167,14 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
   private _onChangeText = (
     text: string
   ): void => {
-    // Filter by name or department (if not null)
-    this.setState({
-      users: text
-        ? this._allUsers.filter(i => (i.displayName.toLowerCase().indexOf(text) > -1) || (i.department != null && i.department.toLowerCase().indexOf(text) > -1))
-        : this._allUsers
-    });
+    if (this._allUsers != undefined) {
+      // Filter by name or department (if not null)
+      this.setState({
+        users: text
+          ? this._allUsers.filter(i => (i.displayName.toLowerCase().indexOf(text) > -1) || (i.department != null && i.department.toLowerCase().indexOf(text) > -1))
+          : this._allUsers
+      });
+    }
   }
 
   private _getCheckedColumns(): IColumn[] {

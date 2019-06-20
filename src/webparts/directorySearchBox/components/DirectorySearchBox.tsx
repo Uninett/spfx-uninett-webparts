@@ -30,16 +30,8 @@ export default class DirectorySearchBox extends React.Component<IDirectorySearch
         placeholder={this.props.searchBoxPlaceholder}
         onChange={newValue => this._onChangeText(newValue)}
       />
-      /*
-      <Fabric>
-        <div>
-          <TextField label={this.props.searchBoxLabel} onChange={this._onChangeText} styles={controlStyles} />
-        </div>
-      </Fabric>
-      */
     );
   }
-
 
   private _onChangeText = (
     text: string
@@ -48,11 +40,6 @@ export default class DirectorySearchBox extends React.Component<IDirectorySearch
       sharedData: text
     } as IEventData;
 
-    try {
-      this.eventEmitter.emit("filterTerms", eventBody);
-    } catch (error) {
-      console.error("API not valid.");
-    }
-    
+    this.eventEmitter.emit("filterTerms", eventBody);    
   }
 }

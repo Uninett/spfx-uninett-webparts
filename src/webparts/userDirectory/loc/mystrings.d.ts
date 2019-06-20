@@ -6,15 +6,22 @@ declare interface IUserDirectoryWebPartStrings {
   GroupDataSource: string;
   GroupAppearance: string;
   GroupColumns: string;
-  GroupColumnTitles: string;
+  GroupSearchBox: string;
   // Labels
   ApiLabel: string;
+  ApplyApiButton: string;
   CompactModeLabel: string;
   CompactModeOn: string;
   CompactModeOff: string;
   AlternateColoursLabel: string;
   AlternateColoursOn: string;
   AlternateColoursOff: string;
+  UseBuiltInSearchLabel: string;
+  UseBuiltInSearchOn: string;
+  UseBuiltInSearchOff: string;
+  SearchBoxPlaceholderLabel: string;
+  DefaultSearchPlaceholder: string;
+  SearchBoxHelpLabel: string;
   CustomTitlePlaceholder: string;
   BtnResetText: string;
   // Column names

@@ -17,9 +17,9 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
     "group": { "default": "Other" },
-    "title": { "default": "DirectorySearchBox" },
-    "description": { "default": "DirectorySearchBox description" },
-    "officeFabricIconFontName": "Page",
+    "title": { "default": "Search Box", "nb-no": "Søkefelt" },
+    "description": { "default": "Lets you search for users in a User Directory web part", "nb-no": "Lar deg søke etter brukere i en Brukerkatalog-web part." },
+    "officeFabricIconFontName": "Search",
     "properties": {
       "hasBeenInitialised": false
     }

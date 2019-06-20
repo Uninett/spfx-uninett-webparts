@@ -7,6 +7,8 @@ export interface IUserDirectoryProps {
   isApiChanged: boolean;
   compactMode: boolean;
   alternatingColours: boolean;
+  useBuiltInSearch: boolean;
+  searchBoxPlaceholder: string;
   showPhoto: boolean;
   showName: boolean;
   showJobTitle: boolean;

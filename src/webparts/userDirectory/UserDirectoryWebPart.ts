@@ -9,7 +9,9 @@ import {
   PropertyPaneCheckbox,
   PropertyPaneHorizontalRule,
   PropertyPaneButton,
-  PropertyPaneButtonType
+  PropertyPaneButtonType,
+  PropertyPaneChoiceGroup,
+  PropertyPaneLabel
 } from '@microsoft/sp-property-pane';
 
 import * as strings from 'UserDirectoryWebPartStrings';
@@ -22,6 +24,8 @@ export interface IUserDirectoryWebPartProps {
   isApiChanged: boolean;
   compactMode: boolean;
   alternatingColours: boolean;
+  useBuiltInSearch: boolean;
+  searchBoxPlaceholder: string;
   showPhoto: boolean;
   showName: boolean;
   showJobTitle: boolean;
@@ -46,14 +50,15 @@ export interface IUserDirectoryWebPartProps {
   customMail: string;
 }
 
-export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDirectoryWebPartProps> {
-  
+export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDirectoryWebPartProps> {  
 
   public render(): void {
     
     // Sets column titles
     this.setColumnTitles();
     
+    if (!this.properties.hasBeenInitialised) this.setDefaultPlaceholder();
+
     // Reloads entire compononent if data source API is updated
     if (this.properties.isApiChanged) {
       ReactDom.unmountComponentAtNode(this.domElement);
@@ -68,6 +73,8 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
         isApiChanged: this.properties.isApiChanged,
         compactMode: this.properties.compactMode,
         alternatingColours: this.properties.alternatingColours,
+        useBuiltInSearch: this.properties.useBuiltInSearch,
+        searchBoxPlaceholder: this.properties.searchBoxPlaceholder,
         showPhoto: this.properties.showPhoto,
         showName: this.properties.showName,
         showJobTitle: this.properties.showJobTitle,
@@ -105,16 +112,6 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
     this.render();
   }
 
-  private setDefaultColumnTitles() {
-    this.properties.colName = strings.ColName;
-    this.properties.colJobTitle = strings.ColJobTitle;
-    this.properties.colDepartment = strings.ColDepartment;
-    this.properties.colOfficeLocation = strings.ColOfficeLocation;
-    this.properties.colCity = strings.ColCity;
-    this.properties.colPhone = strings.ColPhone;
-    this.properties.colMail = strings.ColMail;
-  }
-
   private clearCustomTitles() {
     this.properties.customName = "";
     this.properties.customJobTitle = "";
@@ -140,7 +137,26 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
     this.properties.isApiChanged = true;
   }
 
+  private setDefaultPlaceholder() {
+    this.properties.searchBoxPlaceholder = strings.DefaultSearchPlaceholder;
+    this.properties.hasBeenInitialised = true;
+    this.context.propertyPane.refresh();
+  }
+
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
+
+    let searchBoxProps: any;
+
+    if (this.properties.useBuiltInSearch) {
+      searchBoxProps = PropertyPaneTextField('searchBoxPlaceholder', {
+        label: strings.SearchBoxPlaceholderLabel
+      });
+    }
+    else {
+      searchBoxProps = PropertyPaneLabel('lblSearchHelp',{
+        text: strings.SearchBoxHelpLabel
+      });
+    }
 
     return {
       pages: [
@@ -156,7 +172,7 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                   label: strings.ApiLabel
                 }),
                 PropertyPaneButton('btnApplyApi', {
-                  text: "Apply",
+                  text: strings.ApplyApiButton,
                   buttonType: PropertyPaneButtonType.Normal,
                   onClick: this.updateApi.bind(this)
                 })
@@ -179,7 +195,19 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                 })
               ]
             },
-            
+            {
+              groupName: strings.GroupSearchBox,
+              groupFields: [
+                PropertyPaneToggle('useBuiltInSearch', {
+                  label: strings.UseBuiltInSearchLabel,
+                  checked: true,
+                  onText: strings.UseBuiltInSearchOn,
+                  offText: strings.UseBuiltInSearchOff
+                }),
+                // Property dependent on toggle choice
+                searchBoxProps
+              ]
+            }                   
           ]
         },
         {
@@ -263,46 +291,8 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                   onClick: this.resetColumnTitles.bind(this)
                  })
               ]
-            }/*,
-            {
-              groupName: strings.GroupColumnTitles,
-              groupFields: [
-                PropertyPaneTextField('colNameTitle',{
-                  placeholder: strings.ColNameTitle,
-                }),
-                PropertyPaneTextField('colJobTitleTitle',{
-                  placeholder: strings.ColJobTitleTitle,
-                  disabled: !this.properties.showJobTitle
-                }),
-                PropertyPaneTextField('colDepartmentTitle',{
-                  placeholder: strings.ColDepartmentTitle,
-                  disabled: !this.properties.showDepartment
-                }),
-                PropertyPaneTextField('colOfficeLocationTitle',{
-                  placeholder: strings.ColOfficeLocationTitle,
-                  disabled: !this.properties.showOfficeLocation
-                }),
-                PropertyPaneTextField('colCityTitle',{
-                  placeholder: strings.ColCityTitle,
-                  disabled: !this.properties.showCity
-                }),
-                PropertyPaneTextField('colPhoneTitle',{
-                  placeholder: strings.ColPhoneTitle,
-                  disabled: !this.properties.showPhone
-                }),
-                PropertyPaneTextField('colMailTitle',{
-                  placeholder: strings.ColMailTitle,
-                  disabled: !this.properties.showMail
-                }),
-                PropertyPaneButton('btnReset', {
-                  text: strings.BtnResetText,
-                  buttonType: PropertyPaneButtonType.Normal,
-                  onClick: this.resetColumnTitles.bind(this)
-                 })
-              ]
-            }*/
-          ]
-            
+            }
+          ]            
         }
       ]
     };
