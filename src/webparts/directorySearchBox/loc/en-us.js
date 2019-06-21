@@ -2,7 +2,7 @@ define([], function() {
   return {
     "PropertyPaneDescription": "Description",
     "BasicGroupName": "Group Name",
-    "PlaceholderLabel": "Label",
+    "PlaceholderLabel": "Placeholder text",
     "DefaultPlaceholder": "Filter by name or department"
   }
 });
