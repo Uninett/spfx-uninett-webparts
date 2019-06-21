@@ -12,12 +12,12 @@ import { MSGraphClient } from "@microsoft/sp-http";
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import { Fabric } from 'office-ui-fabric-react/lib/Fabric';
-import { DetailsList, DetailsListLayoutMode, Selection, SelectionMode, IColumn, ConstrainMode, buildColumns, IDetailsRowProps, IDetailsRowStyles, DetailsRow } from 'office-ui-fabric-react/lib/DetailsList';
+import { DetailsList, DetailsListLayoutMode, Selection, SelectionMode, IColumn, ConstrainMode, buildColumns, IDetailsRowProps, IDetailsRowStyles, DetailsRow, IDetailsHeaderProps, DetailsHeader, IDetailsHeaderStyles } from 'office-ui-fabric-react/lib/DetailsList';
 import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList';
 import { Text } from 'office-ui-fabric-react/lib/Text';
 import { Link } from 'office-ui-fabric-react/lib/Link';
 import { Image, ImageFit, IImageStyles } from 'office-ui-fabric-react/lib/Image';
-import { autobind, IconBase, Stack, SearchBox } from 'office-ui-fabric-react';
+import { autobind, IconBase, Stack, SearchBox, ITooltipHostProps } from 'office-ui-fabric-react';
 import { getTheme } from 'office-ui-fabric-react/lib/Styling';
 
 import { RxJsEventEmitter } from '../../../RxJsEventEmitter/RxJsEventEmitter';
@@ -26,7 +26,7 @@ import IEventData from '../../../RxJsEventEmitter/IEventData';
 
 const theme = getTheme();
 
-const controlStyles = {
+const searchBoxStyle = {
   root: {
     margin: '0 30px 20px 0',
     width: 300 
@@ -49,8 +49,6 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
   private _visibleColumns: IColumn[];
   private _showSorted: boolean;
   private _isApiCorrect: boolean;
-  private _showSearchBox: boolean;
-  private _searchBox: any;
   
   constructor(props: IUserDirectoryProps, state: IUserDirectoryState) {
     super(props);
@@ -80,7 +78,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
         <Fabric>
           { this.props.useBuiltInSearch && (
             <SearchBox
-              styles={controlStyles}
+              styles={searchBoxStyle}
               placeholder={this.props.searchBoxPlaceholder}
               onChange={newValue => this._onChangeText(newValue)}       
             />
@@ -102,7 +100,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       <Fabric>
         { this.props.useBuiltInSearch && (
             <SearchBox
-              styles={controlStyles}
+              styles={searchBoxStyle}
               placeholder={this.props.searchBoxPlaceholder}
               onChange={newValue => this._onChangeText(newValue)}       
             />
@@ -116,6 +114,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
           layoutMode={DetailsListLayoutMode.justified}
           isHeaderVisible={true}
           constrainMode={ConstrainMode.horizontalConstrained}
+          //onRenderDetailsHeader={this._onRenderDetailsHeader}
           onRenderItemColumn={_renderItemColumn}
           onRenderRow={this._onRenderRow}          
           enableShimmer={this._allUsers == undefined}
@@ -129,7 +128,26 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       </Fabric>
     );
   }
-  
+
+  // Attempt to make column headers bold
+  /*
+  private _onRenderDetailsHeader(detailsHeaderProps: IDetailsHeaderProps) {
+    const customStyles: Partial<IDetailsHeaderStyles> = {};
+
+    customStyles.root = {
+      //fontSize: "14px",
+      fontWeight: 600
+    };
+    console.log("style set");
+    return (
+      <DetailsHeader
+        {...detailsHeaderProps}
+        styles={customStyles}
+      />
+    );
+  }
+  */
+
   private _onRenderRow = (props: IDetailsRowProps): JSX.Element => {
     const customStyles: Partial<IDetailsRowStyles> = {};
 
@@ -155,7 +173,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
   ): void => {
     if (this._allUsers != undefined) {
       // Filter by name or department (if not null)
-      let text: string = data.sharedData;
+      let text: string = data.sharedData.toLowerCase();
       this.setState({
         users: text
           ? this._allUsers.filter(i => (i.displayName.toLowerCase().indexOf(text) > -1) || (i.department != null && i.department.toLowerCase().indexOf(text) > -1))
@@ -169,6 +187,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
   ): void => {
     if (this._allUsers != undefined) {
       // Filter by name or department (if not null)
+      text = text.toLowerCase();
       this.setState({
         users: text
           ? this._allUsers.filter(i => (i.displayName.toLowerCase().indexOf(text) > -1) || (i.department != null && i.department.toLowerCase().indexOf(text) > -1))
@@ -197,9 +216,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       fieldName: 'displayName',
       minWidth: 180,
       maxWidth: 200,
-      //isRowHeader: true,
-      //isSorted: true,
-      //isSortedDescending: false,
+      isResizable: true,
       sortAscendingAriaLabel: 'Sorted A to Z',
       sortDescendingAriaLabel: 'Sorted Z to A',
       onColumnClick: this._onColumnClick,
@@ -209,11 +226,12 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
 
     if (this.props.showJobTitle)
     cols.push({
-      key: 'colTitle',
+      key: 'colJobTitle',
       name: this.props.colJobTitle,
       fieldName: 'jobTitle',
-      minWidth: 80,
-      maxWidth: 90,
+      minWidth: 120,
+      maxWidth: 140,
+      isResizable: true,
       onColumnClick: this._onColumnClick,
       data: 'string',
       isPadded: true
@@ -224,8 +242,9 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       key: 'colDepartment',
       name: this.props.colDepartment,
       fieldName: 'department',
-      minWidth: 100,
-      maxWidth: 110,
+      minWidth: 120,
+      maxWidth: 140,
+      isResizable: true,
       onColumnClick: this._onColumnClick,
       data: 'string',
       isPadded: true
@@ -237,7 +256,8 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       name: this.props.colOfficeLocation,
       fieldName: 'officeLocation',
       minWidth: 80,
-      maxWidth: 90,
+      maxWidth: 120,
+      isResizable: true,
       onColumnClick: this._onColumnClick,
       data: 'string',
       isPadded: true
@@ -249,7 +269,8 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       name: this.props.colCity,
       fieldName: 'city',
       minWidth: 80,
-      maxWidth: 90,
+      maxWidth: 120,
+      isResizable: true,
       onColumnClick: this._onColumnClick,
       data: 'string',
       isPadded: true
@@ -261,7 +282,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       name: this.props.colPhone,
       fieldName: 'mobilePhone',
       minWidth: 90,
-      maxWidth: 100,        
+      maxWidth: 100,       
       data: 'string',      
       isPadded: true
     });
@@ -271,8 +292,9 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       key: 'colMail',
       name: this.props.colMail,
       fieldName: 'mail',
-      minWidth: 240,
-      maxWidth: 260,
+      minWidth: 170,
+      maxWidth: 250,
+      isResizable: true,
       isCollapsible: false,
       data: 'string',
       onColumnClick: this._onColumnClick,

@@ -54,8 +54,8 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
 
   public render(): void {
     
-    // Sets column titles
-    this.setColumnTitles();
+    // Sets column headers
+    this.setColumnHeaders();
     
     if (!this.properties.hasBeenInitialised) this.setDefaultPlaceholder();
 
@@ -104,15 +104,14 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
     return Version.parse('1.0');
   }
 
-  private resetColumnTitles() {
-    this.clearCustomTitles();
-    this.setColumnTitles();
-    //this.setDefaultColumnTitles();
+  private resetColumnHeaders() {
+    this.clearCustomHeaders();
+    this.setColumnHeaders();
     this.context.propertyPane.refresh();
     this.render();
   }
 
-  private clearCustomTitles() {
+  private clearCustomHeaders() {
     this.properties.customName = "";
     this.properties.customJobTitle = "";
     this.properties.customDepartment = "";
@@ -122,8 +121,8 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
     this.properties.customMail = "";
   }
 
-  private setColumnTitles() {
-    // Sets custom column titles, or default titles if custom is empty
+  private setColumnHeaders() {
+    // Sets custom column headers, or default headers if custom is empty
     this.properties.colName = this.properties.customName || strings.ColName;
     this.properties.colJobTitle = this.properties.customJobTitle || strings.ColJobTitle;
     this.properties.colDepartment = this.properties.customDepartment || strings.ColDepartment;
@@ -228,7 +227,7 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                   checked: true
                 }),
                 PropertyPaneTextField('customName',{
-                  placeholder: strings.CustomTitlePlaceholder,
+                  placeholder: strings.CustomHeaderPlaceholder,
                   disabled: !this.properties.showName
                 }),
                 PropertyPaneHorizontalRule(),
@@ -237,7 +236,7 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                   checked: true
                 }),
                 PropertyPaneTextField('customJobTitle',{
-                  placeholder: strings.CustomTitlePlaceholder,
+                  placeholder: strings.CustomHeaderPlaceholder,
                   disabled: !this.properties.showJobTitle
                 }),
                 PropertyPaneHorizontalRule(),     
@@ -246,7 +245,7 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                   checked: true
                 }),
                 PropertyPaneTextField('customDepartment',{
-                  placeholder: strings.CustomTitlePlaceholder,
+                  placeholder: strings.CustomHeaderPlaceholder,
                   disabled: !this.properties.showDepartment
                 }),
                 PropertyPaneHorizontalRule(),
@@ -255,7 +254,7 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                   checked: false
                 }),
                 PropertyPaneTextField('customOfficeLocation',{
-                  placeholder: strings.CustomTitlePlaceholder,
+                  placeholder: strings.CustomHeaderPlaceholder,
                   disabled: !this.properties.showOfficeLocation
                 }),
                 PropertyPaneHorizontalRule(),
@@ -264,7 +263,7 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                   checked: false
                 }),      
                 PropertyPaneTextField('customCity',{
-                  placeholder: strings.CustomTitlePlaceholder,
+                  placeholder: strings.CustomHeaderPlaceholder,
                   disabled: !this.properties.showCity
                 }),
                 PropertyPaneHorizontalRule(),
@@ -273,7 +272,7 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                   checked: true
                 }),
                 PropertyPaneTextField('customPhone',{
-                  placeholder: strings.CustomTitlePlaceholder,
+                  placeholder: strings.CustomHeaderPlaceholder,
                   disabled: !this.properties.showPhone
                 }),
                 PropertyPaneHorizontalRule(),
@@ -282,13 +281,13 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                   checked: true
                 }),
                 PropertyPaneTextField('customMail',{
-                  placeholder: strings.CustomTitlePlaceholder,
+                  placeholder: strings.CustomHeaderPlaceholder,
                   disabled: !this.properties.showMail
                 }),
                 PropertyPaneButton('btnReset', {
                   text: strings.BtnResetText,
                   buttonType: PropertyPaneButtonType.Normal,
-                  onClick: this.resetColumnTitles.bind(this)
+                  onClick: this.resetColumnHeaders.bind(this)
                  })
               ]
             }

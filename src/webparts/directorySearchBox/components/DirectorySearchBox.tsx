@@ -6,13 +6,6 @@ import { Fabric, TextField, SearchBox } from 'office-ui-fabric-react';
 import { RxJsEventEmitter } from '../../../RxJsEventEmitter/RxJsEventEmitter';
 import IEventData from '../../../RxJsEventEmitter/IEventData';
 
-const controlStyles = {
-  root: {
-    margin: '0 30px 20px 0',
-    maxWidth: '400px'
-  }
-};
-
 export default class DirectorySearchBox extends React.Component<IDirectorySearchBoxProps, {}> {
   private readonly eventEmitter: RxJsEventEmitter = RxJsEventEmitter.getInstance();
 

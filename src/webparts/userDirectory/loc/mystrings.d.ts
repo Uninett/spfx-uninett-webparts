@@ -22,9 +22,9 @@ declare interface IUserDirectoryWebPartStrings {
   SearchBoxPlaceholderLabel: string;
   DefaultSearchPlaceholder: string;
   SearchBoxHelpLabel: string;
-  CustomTitlePlaceholder: string;
+  CustomHeaderPlaceholder: string;
   BtnResetText: string;
-  // Column names
+  // Column headers
   ColPhoto: string;
   ColName: string;
   ColJobTitle: string;

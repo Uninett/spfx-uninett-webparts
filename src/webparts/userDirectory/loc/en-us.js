@@ -22,8 +22,8 @@ define([], function() {
     "SearchBoxPlaceholderLabel": "Placeholder text",
     "DefaultSearchPlaceholder": "Filter by name or department",
     "SearchBoxHelpLabel": "Add the Search Box web part to this page. It will automatically connect to this User Directory web part, and you will be able to search for users.",
-    "CustomTitlePlaceholder": "Custom column title",
-    "BtnResetText": "Reset all column titles",
+    "CustomHeaderPlaceholder": "Custom column header",
+    "BtnResetText": "Reset all column headers",
     // Column names
     "ColPhoto": "Photo",
     "ColName": "Name",

@@ -22,8 +22,8 @@ define([], function() {
     "SearchBoxPlaceholderLabel": "Etikett",
     "DefaultSearchPlaceholder": "Filtrer etter navn eller avdeling",
     "SearchBoxHelpLabel": "Legg til Søkefelt-web parten på denne siden. Den vil automatisk koble seg opp mot denne Brukerkatalog-web parten, og du vil kunne søke etter brukere.",
-    "CustomTitlePlaceholder": "Egendefinert kolonnenavn",
-    "BtnResetText": "Tilbakestill alle kolonnenavn",
+    "CustomHeaderPlaceholder": "Egendefinert kolonneoverskrift",
+    "BtnResetText": "Tilbakestill kolonneoverskrifter",
     // Column names
     "ColPhoto": "Bilde",
     "ColName": "Navn",

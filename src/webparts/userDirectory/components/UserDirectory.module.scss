@@ -27,9 +27,9 @@
     @include ms-fontColor-white;
   }
 
-  .form {
-    @include ms-font-l;
-    @include ms-fontColor-white;
+  .columnTitle {
+    font-size: 14px;
+    font-weight: 600;
   }
   
   label {
