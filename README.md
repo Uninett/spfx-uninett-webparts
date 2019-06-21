@@ -1,35 +1,6 @@
 # Uninett SPFx SharePoint Web Parts
 
-Currently contains two web parts.
-
-## Social Links
-
-Web part that contains icons, with links, to social media. Property to change background color and toggle icon color between black and white. If URL to a social media is empty then the icon is removed. Supports:
-- Facebook
-- Twitter
-- LinkedIn
-- YouTube
-
-<p align="center">
-  <img src="/readme-images/social-links-demo.JPG" alt="Social links demo"/>
-</p>
-
-## FlipClock
-
-Flip clock that lets you toggle between two modes:
-
-- **Time**
-  - Simply displays the current time.
-  - Properties let you select time format (24h/12h) and wether to show seconds or not.
-- **Weekly countdown**
-  - Counts down days, hours, minutes and seconds until a specified day and time in the upcoming week.
-  - Properties let you select the day of week and time of day, as well as optional text to include under the clock.
-
-General properties let you switch between the modes, change clock size and toggle between black and white text color.
-
-<p align="center">
-  <img src="/readme-images/flip-clock-demo.JPG" alt="FlipClock demo"/>
-</p>
+A collection of web parts developed by Uninett.
 
 ## User Directory
 
@@ -73,6 +44,35 @@ Its functions are identical to the built-in search box of User Directory.
 
 <p align="center">
   <img src="/readme-images/search-box-demo.JPG" alt="Search Box demo"/>
+</p>
+
+## Social Links
+
+Web part that contains icons, with links, to social media. Property to change background color and toggle icon color between black and white. If URL to a social media is empty then the icon is removed. Supports:
+- Facebook
+- Twitter
+- LinkedIn
+- YouTube
+
+<p align="center">
+  <img src="/readme-images/social-links-demo.JPG" alt="Social links demo"/>
+</p>
+
+## FlipClock
+
+Flip clock that lets you toggle between two modes:
+
+- **Time**
+  - Simply displays the current time.
+  - Properties let you select time format (24h/12h) and wether to show seconds or not.
+- **Weekly countdown**
+  - Counts down days, hours, minutes and seconds until a specified day and time in the upcoming week.
+  - Properties let you select the day of week and time of day, as well as optional text to include under the clock.
+
+General properties let you switch between the modes, change clock size and toggle between black and white text color.
+
+<p align="center">
+  <img src="/readme-images/flip-clock-demo.JPG" alt="FlipClock demo"/>
 </p>
 
 ___
