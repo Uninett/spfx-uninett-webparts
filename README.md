@@ -10,7 +10,9 @@ Web part that contains icons, with links, to social media. Property to change ba
 - LinkedIn
 - YouTube
 
-![social-links-demo](/readme-images/social-links-demo.JPG)
+<p align="center">
+  <img src="/readme-images/social-links-demo.JPG" alt="Social links demo"/>
+</p>
 
 ## FlipClock
 
@@ -25,7 +27,9 @@ Flip clock that lets you toggle between two modes:
 
 General properties let you switch between the modes, change clock size and toggle between black and white text color.
 
-![flip-clock-demo](/readme-images/flip-clock-demo.JPG)
+<p align="center">
+  <img src="/readme-images/flip-clock-demo.JPG" alt="FlipClock demo"/>
+</p>
 
 ## User Directory
 
@@ -52,8 +56,9 @@ Using either the built-in search box or the Search Box web part, you can then fi
 - **Select columns:** Use the checkboxes to select the columns you want to display in the User Directory.
 - **Custom column headers:** Lets you create custom column headers. Leave the fields blank to use the default column headers.
 
-
-![user-directory-demo](/readme-images/user-directory-demo.JPG)
+<p align="center">
+  <img src="/readme-images/user-directory-demo.JPG" alt="User Directory demo"/>
+</p>
 
 ## Search Box
 
@@ -66,7 +71,9 @@ Its functions are identical to the built-in search box of User Directory.
 
 - **Placeholder text:** Specify the placeholder text that is shown when the search box is empty.
 
-![search-box-demo](/readme-images/search-box-demo.JPG)
+<p align="center">
+  <img src="/readme-images/search-box-demo.JPG" alt="Search Box demo"/>
+</p>
 
 ___
 
