@@ -10,6 +10,8 @@ declare interface IUserDirectoryWebPartStrings {
   // Labels
   ApiLabel: string;
   ApplyApiButton: string;
+  ApiHelp1: string;
+  ApiHelp2: string;
   CompactModeLabel: string;
   CompactModeOn: string;
   CompactModeOff: string;

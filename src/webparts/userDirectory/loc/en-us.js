@@ -1,6 +1,6 @@
 define([], function() {
   return {
-    "PageGeneralDescription": "General properties",
+    "PageGeneralDescription": "Displays a searchable and sortable list of users from your Office 365 tenant.",
     "PageColumnsDescription": "Column properties",
     // Groups
     "GroupDataSource": "Data source",
@@ -10,6 +10,8 @@ define([], function() {
     // Labels
     "ApiLabel": "API",
     "ApplyApiButton": "Apply",
+    "ApiHelp1": "Specify the group of users you want to display: \"users\" for all users, or \"groups/{group_ID}/members\" for users in a specific group.",
+    "ApiHelp2": "If you want to display more than 100 users, add \"?$top=999\" at the end of the query.",
     "CompactModeLabel": "Compact mode",
     "CompactModeOn": "Compact",
     "CompactModeOff": "Normal",

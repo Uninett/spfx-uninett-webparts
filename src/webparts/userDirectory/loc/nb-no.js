@@ -1,6 +1,6 @@
 define([], function() {
   return {
-    "PageGeneralDescription": "Generelle instillinger",
+    "PageGeneralDescription": "Viser en søkbar og sorterbar liste over brukere fra ditt Office 365-område.",
     "PageColumnsDescription": "Kolonneinnstillinger",
     // Groups
     "GroupDataSource": "Datakilde",
@@ -10,6 +10,8 @@ define([], function() {
     // Labels
     "ApiLabel": "API",
     "ApplyApiButton": "Bruk",
+    "ApiHelp1": "Spesifiser gruppen brukere du ønske å vise: \"users\" for alle brukere, eller \"groups/{group_ID}/members\" for brukere i en spesifikk gruppe.",
+    "ApiHelp2": "Hvis du ønsker å vise flere enn 100 brukere må du legge til \"?$top=999\" i slutten av spørringen.",
     "CompactModeLabel": "Kompakte rader",
     "CompactModeOn": "Kompakt",
     "CompactModeOff": "Normal",

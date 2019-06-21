@@ -19,7 +19,7 @@
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
     "group": { "default": "Other" },
     "title": { "default": "User Directory", "nb-no": "Brukerkatalog" },
-    "description": { "default": "Display a sortable list of users from your tenant", "nb-no": "Vis en sorterbar liste over brukere fra området ditt" },
+    "description": { "default": "Display a sortable list of users from your Office 365 tenant", "nb-no": "Vis en sorterbar liste over brukere fra ditt Office 365-område" },
     "officeFabricIconFontName": "CompanyDirectory",
     "properties": {
       "hasBeenInitialised": false,

@@ -174,6 +174,12 @@ export default class UserDirectoryWebPart extends BaseClientSideWebPart<IUserDir
                   text: strings.ApplyApiButton,
                   buttonType: PropertyPaneButtonType.Normal,
                   onClick: this.updateApi.bind(this)
+                }),
+                PropertyPaneLabel('apiHelp', {
+                  text: strings.ApiHelp1
+                }),
+                PropertyPaneLabel('apiHelp2', {
+                  text: strings.ApiHelp2
                 })
               ]
             },

@@ -7,7 +7,7 @@ A collection of web parts developed by Uninett.
 Displays users from your Office 365 tenant in a customised [DetailsList](https://developer.microsoft.com/en-us/fabric#/controls/web/detailslist) component.  
 
 The web part uses MS Graph REST API to retrieve Office 365 users from Azure AD.  
-Using either the built-in search box or the Search Box web part, you can then filter users by name or department.
+Using either the built-in search box or the Search Box web part, you can filter users by name or department.
 
 ### Features
 
@@ -19,7 +19,7 @@ Using either the built-in search box or the Search Box web part, you can then fi
 
 ### Properties
 
-- **API:** The MS Graph query for the group of users you want to display (e.g. *users* for all users, or *groups/{group_ID}/members* for users in a specific group).
+- **API:** The MS Graph query for the group of users you want to display (e.g. *users* for all users, or *groups/{group_ID}/members* for users in a specific group). If you want to retrieve more than 100 users, add *?$top=999* at the end of the query.
 - **Compact mode:** Toggle between compact and normal row spacing.
 - **Row colour:** Toggle between single row colour (white) and alternating row colours (blue and white).
 - **Search box source:** Toggle between using the built-in search box and the Search Box web part. If you want to use the Search Box web part, simply add it to the page and it will automatically connect to the User Directory.
