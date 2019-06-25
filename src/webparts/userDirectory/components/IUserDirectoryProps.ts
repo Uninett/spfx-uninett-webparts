@@ -1,5 +1,4 @@
 import { WebPartContext } from '@microsoft/sp-webpart-base';
-import { IUserItem } from './IUserItem';
 
 export interface IUserDirectoryProps {
   context: WebPartContext;
