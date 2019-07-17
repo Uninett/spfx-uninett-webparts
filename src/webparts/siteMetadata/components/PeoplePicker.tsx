@@ -11,10 +11,14 @@ import {
   autobind
 } from 'office-ui-fabric-react/lib/Utilities';
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
+
+// BETA_sp-http contains everything from @microsoft/sp-http + beta classes and code snippets (eg. SPHttpClientBatch which is required by Inmeta code)
+// This is a workaround until the necessary code comes out of beta
 import {
   SPHttpClient,
   SPHttpClientBatch,
-  SPHttpClientResponse } from '@microsoft/sp-http';
+  SPHttpClientResponse } from './BETA_sp-http';
+  
 import {
   Environment,
   EnvironmentType
