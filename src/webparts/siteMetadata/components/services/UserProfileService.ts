@@ -1,7 +1,7 @@
 import { IUserProfile } from '../interfaces/IUserProfile'
 import { WebPartContext } from '@microsoft/sp-webpart-base';
 //import { IUserProfileProps } from './UserProfile';
-import { SPHttpClient, HttpClientResponse, IGraphHttpClientOptions } from '@microsoft/sp-http';
+import { SPHttpClient, HttpClientResponse, IAadHttpClientOptions } from '@microsoft/sp-http';
  
 interface IUserProfileService {
   getUserProfileProperties: Promise<IUserProfile>;

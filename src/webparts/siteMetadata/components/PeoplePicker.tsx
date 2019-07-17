@@ -66,8 +66,8 @@ export class PeoplePicker extends React.Component<IPeoplePickerProps, IPeoplePic
       disabled: true
     }
   ];
-  constructor() {
-    super();
+  constructor(props: IPeoplePickerProps) {
+    super(props);
     this._peopleList = [];
 
     this.state = {

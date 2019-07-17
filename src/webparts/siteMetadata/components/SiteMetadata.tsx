@@ -8,7 +8,7 @@ import { Project } from './Project';
 import { Group } from './Group';
 import * as strings from 'SiteMetadataWebPartStrings';
 import { UserProfileService } from './services/UserProfileService';
-import { GraphHttpClient, HttpClientResponse, IGraphHttpClientOptions } from '@microsoft/sp-http';
+import { AadHttpClient, HttpClientResponse, IAadHttpClientOptions } from '@microsoft/sp-http';
 
 export default class SiteMetadata extends React.Component<ISiteMetadataProps, ISiteMetadataState> {
 
@@ -153,29 +153,39 @@ export default class SiteMetadata extends React.Component<ISiteMetadataProps, IS
       return;
     }
 
-    this.props.context.graphHttpClient.get(`v1.0/groups/${groupId}?$select=displayName,id,extvcs569it_InmetaGenericSchema`, GraphHttpClient.configurations.v1).then((response: HttpClientResponse) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        console.warn(response.statusText);
-      }
-    }).then((result: any) => {
-      let personObject;
-      let userProfileService: UserProfileService;
-      let siteType = this.getSiteType(result['extvcs569it_InmetaGenericSchema']['ValueString00']);
-      userProfileService = new UserProfileService(this.props.context, result.extvcs569it_InmetaGenericSchema.ValueString03);
-      userProfileService.getUserProfileProperties().then((userResult) => {
-        personObject = { imageShouldFadeIn: true, imageUrl: "/_layouts/15/userphoto.aspx?size=S&accountname=" + userResult.Email, primaryText: userResult.DisplayName, secondaryText: "", selected: true, tertiaryText: "" }
-        this.setState({
-          listData: result,
-          personObject: personObject,
-          displayNameField: result['extvcs569it_InmetaGenericSchema']['ValueString01'],
-          parentDepartmentField: result['extvcs569it_InmetaGenericSchema']['ValueString04'],
-          groupType: result['extvcs569it_InmetaGenericSchema']['ValueString00'],
-          siteType: siteType
+    this.props.context.aadHttpClientFactory
+      .getClient('https://graph.microsoft.com')
+      .then((client: AadHttpClient) => {
+        return client
+          .get(
+            `https://graph.microsoft.com/v1.0/groups/${groupId}?$select=displayName,id,extvcs569it_InmetaGenericSchema`,
+            AadHttpClient.configurations.v1
+          );
+      })
+      .then((response: HttpClientResponse) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          console.warn(response.statusText);
+        }
+      })
+      .then((result: any) => {
+        let personObject;
+        let userProfileService: UserProfileService;
+        let siteType = this.getSiteType(result['extvcs569it_InmetaGenericSchema']['ValueString00']);
+        userProfileService = new UserProfileService(this.props.context, result.extvcs569it_InmetaGenericSchema.ValueString03);
+        userProfileService.getUserProfileProperties().then((userResult) => {
+          personObject = { imageShouldFadeIn: true, imageUrl: "/_layouts/15/userphoto.aspx?size=S&accountname=" + userResult.Email, primaryText: userResult.DisplayName, secondaryText: "", selected: true, tertiaryText: "" }
+          this.setState({
+            listData: result,
+            personObject: personObject,
+            displayNameField: result['extvcs569it_InmetaGenericSchema']['ValueString01'],
+            parentDepartmentField: result['extvcs569it_InmetaGenericSchema']['ValueString04'],
+            groupType: result['extvcs569it_InmetaGenericSchema']['ValueString00'],
+            siteType: siteType
+          });
         });
       });
-    });
   }
 
 }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styles from './SiteMetadata.module.scss';
 import { IGroupState } from './IGroupState';
-import { GraphHttpClient, HttpClientResponse, IGraphHttpClientOptions } from '@microsoft/sp-http';
+import { AadHttpClient, HttpClientResponse, IAadHttpClientOptions } from '@microsoft/sp-http';
 import { DisplayMode } from "@microsoft/sp-core-library";
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { DefaultButton, IButtonProps } from 'office-ui-fabric-react/lib/Button';
@@ -125,24 +125,34 @@ class Group extends React.Component<IGroupProps, IGroupState> {
       return;
     }
 
-    this.props.context.graphHttpClient.get(`v1.0/groups/${groupId}?$select=displayName,id,extvcs569it_InmetaGenericSchema`, GraphHttpClient.configurations.v1).then((response: HttpClientResponse) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        console.warn(response.statusText);
-      }
-    }).then((result: any) => {
-      let personObject;
-      let userProfileService: UserProfileService;
-      userProfileService = new UserProfileService(this.props.context, result.extvcs569it_InmetaGenericSchema.ValueString03);
-      userProfileService.getUserProfileProperties().then((userResult) => {
-        personObject = { imageShouldFadeIn: true, imageUrl: "/_layouts/15/userphoto.aspx?size=S&accountname=" + userResult.Email, primaryText: userResult.DisplayName, secondaryText: "", selected: true, tertiaryText: "" }
-        this.setState({
-          listData: result,
-          displayNameField: result['extvcs569it_InmetaGenericSchema']['ValueString01'],
-        })
+    this.props.context.aadHttpClientFactory
+      .getClient('https://graph.microsoft.com')
+      .then((client: AadHttpClient) => {
+        return client
+          .get(
+            `https://graph.microsoft.com/v1.0/groups/${groupId}?$select=displayName,id,extvcs569it_InmetaGenericSchema`,
+            AadHttpClient.configurations.v1
+          );
+      })
+      .then((response: HttpClientResponse) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          console.warn(response.statusText);
+        }
+      })
+      .then((result: any) => {
+        let personObject;
+        let userProfileService: UserProfileService;
+        userProfileService = new UserProfileService(this.props.context, result.extvcs569it_InmetaGenericSchema.ValueString03);
+        userProfileService.getUserProfileProperties().then((userResult) => {
+          personObject = { imageShouldFadeIn: true, imageUrl: "/_layouts/15/userphoto.aspx?size=S&accountname=" + userResult.Email, primaryText: userResult.DisplayName, secondaryText: "", selected: true, tertiaryText: "" }
+          this.setState({
+            listData: result,
+            displayNameField: result['extvcs569it_InmetaGenericSchema']['ValueString01'],
+          })
+        });
       });
-    });
   }
 
   saveSiteList = () => {
@@ -150,18 +160,28 @@ class Group extends React.Component<IGroupProps, IGroupState> {
     let data = this.buildMetaData();
     // Query for all groupos on the tenant using Microsoft Graph.
     let groupId = this.props.context.pageContext.legacyPageContext.groupId;
-    this.props.context.graphHttpClient.fetch(`v1.0/groups/${groupId}`, GraphHttpClient.configurations.v1, {
-      method: "PATCH",
-      body: JSON.stringify(data)
-    }).then((response: HttpClientResponse) => {
-      if (response.ok) {
-        // Success!
-        handler.setState({ hideDialog: false })
-        handler.loadSiteList();
-      } else {
-        console.warn(response.statusText);
-      }
-    })
+    this.props.context.aadHttpClientFactory
+      .getClient('https://graph.microsoft.com')
+      .then((client: AadHttpClient) => {
+        return client
+          .fetch(
+            `https://graph.microsoft.com/v1.0/groups/${groupId}`,
+            AadHttpClient.configurations.v1, 
+            {
+              method: "PATCH",
+              body: JSON.stringify(data)
+            }
+          );
+      })
+      .then((response: HttpClientResponse) => {
+        if (response.ok) {
+          // Success!
+          handler.setState({ hideDialog: false })
+          handler.loadSiteList();
+        } else {
+          console.warn(response.statusText);
+        }
+      })
   }
 
   buildMetaData = () => {
