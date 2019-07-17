@@ -21,6 +21,9 @@
     "@types/es6-promise": "0.0.33",
     "@types/jquery": "^3.3.29",
     "@types/react": "16.4.2",
+    "@types/react-addons-shallow-compare": "^0.14.22",
+    "@types/react-addons-test-utils": "^0.14.24",
+    "@types/react-addons-update": "^0.14.20",
     "@types/react-dom": "16.0.5",
     "@types/rx-lite": "^4.0.6",
     "@types/webpack-env": "1.13.1",
@@ -29,6 +32,7 @@
     "office-ui-fabric-react": "^6.189.3",
     "react": "16.7.0",
     "react-dom": "16.7.0",
+    "react-taxonomypicker": "0.0.42",
     "rx-lite": "^4.0.8"
   },
   "devDependencies": {

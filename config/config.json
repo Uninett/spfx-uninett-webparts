@@ -33,6 +33,14 @@
           "manifest": "./src/webparts/directorySearchBox/DirectorySearchBoxWebPart.manifest.json"
         }
       ]
+    },
+    "site-metadata-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/siteMetadata/SiteMetadataWebPart.js",
+          "manifest": "./src/webparts/siteMetadata/SiteMetadataWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -42,6 +50,7 @@
     "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
     "UserDirectoryWebPartStrings": "lib/webparts/userDirectory/loc/{locale}.js",
     "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
-    "DirectorySearchBoxWebPartStrings": "lib/webparts/directorySearchBox/loc/{locale}.js"
+    "DirectorySearchBoxWebPartStrings": "lib/webparts/directorySearchBox/loc/{locale}.js",
+    "SiteMetadataWebPartStrings": "lib/webparts/siteMetadata/loc/{locale}.js"
   }
 }
