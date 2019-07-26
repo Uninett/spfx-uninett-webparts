@@ -8,7 +8,6 @@ import {
 import { IPersonaProps } from 'office-ui-fabric-react/lib/Persona';
 import {
   assign,
-  autobind
 } from 'office-ui-fabric-react/lib/Utilities';
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import {
@@ -117,8 +116,7 @@ export class PeoplePicker extends React.Component<IPeoplePickerProps, IPeoplePic
     }
   }
 
-  @autobind
-  private _onFilterChanged(filterText: string, currentPersonas: IPersonaProps[], limitResults?: number) {
+  private _onFilterChanged = (filterText: string, currentPersonas: IPersonaProps[], limitResults?: number) => {
     if (filterText) {
       if (filterText.length > 2) {
         return this._searchPeople(filterText, this._peopleList);

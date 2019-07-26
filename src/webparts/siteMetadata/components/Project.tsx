@@ -9,7 +9,6 @@ import { Dialog, DialogType, DialogFooter } from 'office-ui-fabric-react/lib/Dia
 import { IWebPartContext, WebPartContext } from '@microsoft/sp-webpart-base';
 import { DatePicker, DayOfWeek, IDatePickerStrings } from 'office-ui-fabric-react/lib/DatePicker';
 import * as strings from 'SiteMetadataWebPartStrings';
-import { autobind } from 'office-ui-fabric-react';
 import { PeoplePicker } from './PeoplePicker';
 import { ParentDepartment } from './ParentDepartment';
 import {
@@ -212,7 +211,7 @@ class Project extends React.Component<IProjectProps, IProjectState> {
         <div className="ms-Grid-row">
           <div className="ms-Grid-col ms-sm12 ms-md12 ms-lg12">
             {this.props.editName ?
-              <TextField maxLength={255} label={strings.ProjectName} defaultValue={this.state.listData.extvcs569it_InmetaGenericSchema.ValueString01} onChanged={(value: string) => { this.setState({ displayNameField: value }); }} />
+              <TextField maxLength={255} label={strings.ProjectName} defaultValue={this.state.listData.extvcs569it_InmetaGenericSchema.ValueString01} onChange={(_, value: string) => { this.setState({ displayNameField: value }); }} />
               : ''}
           </div>
         </div>
@@ -220,7 +219,7 @@ class Project extends React.Component<IProjectProps, IProjectState> {
         <div className="ms-Grid-row">
           <div className="ms-Grid-col ms-sm12 ms-md12 ms-lg12">
             {this.props.editProjectGoal ?
-              <TextField maxLength={255} multiline rows={4} label={strings.ProjectGoal} defaultValue={this.state.listData.extvcs569it_InmetaGenericSchema.ValueString08} onChanged={(value: string) => { this.setState({ projectGoalField: value }); }} />
+              <TextField maxLength={255} multiline rows={4} label={strings.ProjectGoal} defaultValue={this.state.listData.extvcs569it_InmetaGenericSchema.ValueString08} onChange={(_, value: string) => { this.setState({ projectGoalField: value }); }} />
               : ''}
           </div>
         </div>
@@ -228,7 +227,7 @@ class Project extends React.Component<IProjectProps, IProjectState> {
         <div className="ms-Grid-row">
           <div className="ms-Grid-col ms-sm12 ms-md12 ms-lg12">
             {this.props.editProjectPurpose ?
-              <TextField maxLength={500} multiline rows={4} label={strings.ProjectPurpose} defaultValue={this.state.listData.extvcs569it_InmetaGenericSchema.ValueString09} onChanged={(value: string) => { this.setState({ projectPurposeField: value }); }} />
+              <TextField maxLength={500} multiline rows={4} label={strings.ProjectPurpose} defaultValue={this.state.listData.extvcs569it_InmetaGenericSchema.ValueString09} onChange={(_, value: string) => { this.setState({ projectPurposeField: value }); }} />
               : ''}
           </div>
         </div>
@@ -300,7 +299,7 @@ class Project extends React.Component<IProjectProps, IProjectState> {
         <div className="ms-Grid-row">
           <div className="ms-Grid-col ms-sm12 ms-md12 ms-lg12">
             {this.props.editProjectNumber ?
-              <TextField maxLength={20} label={strings.ProjectNumber} defaultValue={this.state.listData.extvcs569it_InmetaGenericSchema.ValueString06} onChanged={(value: string) => { this.setState({ projectNumberField: value }); }} />
+              <TextField maxLength={20} label={strings.ProjectNumber} defaultValue={this.state.listData.extvcs569it_InmetaGenericSchema.ValueString06} onChange={(_, value: string) => { this.setState({ projectNumberField: value }); }} />
               : ''}
           </div>
         </div>

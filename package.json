@@ -30,24 +30,26 @@
     "@types/webpack-env": "1.13.1",
     "flipclock": "^0.10.8",
     "jquery": "^3.4.1",
-    "office-ui-fabric-react": "^6.189.3",
+    "office-ui-fabric-react": "^7.16.0",
     "react": "16.7.0",
     "react-dom": "16.7.0",
     "react-taxonomypicker": "0.0.42",
     "rx-lite": "^4.0.8"
   },
   "devDependencies": {
-    "@microsoft/sp-build-web": "1.8.2-plusbeta",
-    "@microsoft/sp-tslint-rules": "1.8.2-plusbeta",
-    "@microsoft/sp-module-interfaces": "1.8.2-plusbeta",
-    "@microsoft/sp-webpart-workbench": "1.8.2-plusbeta",
     "@microsoft/loader-set-webpack-public-path": "^3.2.153",
+    "@microsoft/rush-stack-compiler-2.7": "0.4.0",
     "@microsoft/rush-stack-compiler-3.3": "0.1.7",
+    "@microsoft/sp-build-web": "1.8.2-plusbeta",
+    "@microsoft/sp-module-interfaces": "1.8.2-plusbeta",
+    "@microsoft/sp-tslint-rules": "1.8.2-plusbeta",
+    "@microsoft/sp-webpart-workbench": "1.8.2-plusbeta",
     "@types/chai": "3.4.34",
     "@types/mocha": "2.2.38",
     "ajv": "~5.2.2",
+    "core-js": "^3.1.4",
     "gulp": "~3.9.1",
-    "@microsoft/rush-stack-compiler-2.7": "0.4.0"
+    "@microsoft/rush-stack-compiler-2.9": "0.7.7"
   },
   "resolutions": {
     "@types/react": "16.7.22"

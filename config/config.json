@@ -41,6 +41,14 @@
           "manifest": "./src/webparts/siteMetadata/SiteMetadataWebPart.manifest.json"
         }
       ]
+    },
+    "site-catalog-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/siteCatalog/SiteCatalogWebPart.js",
+          "manifest": "./src/webparts/siteCatalog/SiteCatalogWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -51,6 +59,7 @@
     "UserDirectoryWebPartStrings": "lib/webparts/userDirectory/loc/{locale}.js",
     "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
     "DirectorySearchBoxWebPartStrings": "lib/webparts/directorySearchBox/loc/{locale}.js",
-    "SiteMetadataWebPartStrings": "lib/webparts/siteMetadata/loc/{locale}.js"
+    "SiteMetadataWebPartStrings": "lib/webparts/siteMetadata/loc/{locale}.js",
+    "SiteCatalogWebPartStrings": "lib/webparts/siteCatalog/loc/{locale}.js"
   }
 }

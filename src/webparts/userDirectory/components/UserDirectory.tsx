@@ -12,12 +12,12 @@ import { MSGraphClient } from "@microsoft/sp-http";
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import { Fabric } from 'office-ui-fabric-react/lib/Fabric';
-import { DetailsList, DetailsListLayoutMode, Selection, SelectionMode, IColumn, ConstrainMode, buildColumns, IDetailsRowProps, IDetailsRowStyles, DetailsRow, IDetailsHeaderProps, DetailsHeader, IDetailsHeaderStyles } from 'office-ui-fabric-react/lib/DetailsList';
+import { DetailsList, DetailsListLayoutMode, Selection, SelectionMode, IColumn, ConstrainMode, buildColumns, IDetailsRowProps, IDetailsRowStyles, DetailsRow} from 'office-ui-fabric-react/lib/DetailsList';
 import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList';
 import { Text } from 'office-ui-fabric-react/lib/Text';
 import { Link } from 'office-ui-fabric-react/lib/Link';
 import { Image, ImageFit, IImageStyles } from 'office-ui-fabric-react/lib/Image';
-import { autobind, IconBase, Stack, SearchBox, ITooltipHostProps } from 'office-ui-fabric-react';
+import { IconBase, Stack, SearchBox, ITooltipHostProps } from 'office-ui-fabric-react';
 import { getTheme } from 'office-ui-fabric-react/lib/Styling';
 
 import { RxJsEventEmitter } from '../../../RxJsEventEmitter/RxJsEventEmitter';
@@ -80,7 +80,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
             <SearchBox
               styles={searchBoxStyle}
               placeholder={this.props.searchBoxPlaceholder}
-              onChange={newValue => this._onChangeText(newValue)}       
+              onChange={(_, newValue) => this._onChangeText(newValue)}       
             />
           )}          
           <ShimmeredDetailsList
@@ -102,7 +102,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
             <SearchBox
               styles={searchBoxStyle}
               placeholder={this.props.searchBoxPlaceholder}
-              onChange={newValue => this._onChangeText(newValue)}       
+              onChange={(_, newValue) => this._onChangeText(newValue)}
             />
           )}
         <ShimmeredDetailsList
@@ -330,9 +330,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     });
   }
 
-  @autobind
-  private _search(): void {
-
+  private _search = (): void => {
     this.props.context.msGraphClientFactory
       .getClient()
       .then((client: MSGraphClient): void => {

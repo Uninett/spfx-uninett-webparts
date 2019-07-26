@@ -1,8 +1,7 @@
 {
   "@microsoft/generator-sharepoint": {
-    //original project still
     "plusBeta": true,
-    "isCreatingSolution": true,
+    "isCreatingSolution": false,
     "environment": "spo",
     "version": "1.8.2",
     "libraryName": "spfx-uninett-webparts",

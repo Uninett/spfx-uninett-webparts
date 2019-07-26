@@ -21,7 +21,7 @@ export default class DirectorySearchBox extends React.Component<IDirectorySearch
       <SearchBox
         styles={{ root: { width: 300 } }}
         placeholder={this.props.searchBoxPlaceholder}
-        onChange={newValue => this._onChangeText(newValue)}
+        onChange={(_, newValue) => this._onChangeText(newValue)}
       />
     );
   }

@@ -73,7 +73,7 @@ class Group extends React.Component<IGroupProps, IGroupState> {
         <div className="ms-Grid-row">
           <div className="ms-Grid-col ms-sm12 ms-md12 ms-lg12">
             {this.props.editName ?
-              <TextField maxLength={255} label={strings.DepartmentName} defaultValue={this.state.listData.extvcs569it_InmetaGenericSchema.ValueString01} onChanged={(value: string) => { this.setState({ displayNameField: value }); }} />
+              <TextField maxLength={255} label={strings.DepartmentName} defaultValue={this.state.listData.extvcs569it_InmetaGenericSchema.ValueString01} onChange={(_, value: string) => { this.setState({ displayNameField: value }); }} />
               : ''}
           </div>
         </div>
