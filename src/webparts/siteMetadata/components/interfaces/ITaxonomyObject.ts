@@ -1,4 +1,4 @@
 export interface ITaxonomyObject {
-    label: string,
-    id: string
+    label: string;
+    id: string;
 }

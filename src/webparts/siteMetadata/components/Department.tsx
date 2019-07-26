@@ -50,19 +50,19 @@ class Department extends React.Component<IDepartmentProps, IDepartmentState> {
     };
   }
 
-  componentWillMount() {
+  public componentWillMount() {
     // Fetch data from graph
     this.loadSiteList();
   }
 
-  render() {
+  public render() {
     return (<div>
       {this.state.listData ?
         this.props.displayMode === DisplayMode.Read
           ? this.renderDisplayMetadata()
           : this.renderEditMetadata()
         : ''}
-    </div>)
+    </div>);
   }
 
   private renderDisplayMetadata = () => {
@@ -88,7 +88,7 @@ class Department extends React.Component<IDepartmentProps, IDepartmentState> {
         ) : ''}
 
       </div>
-    ) : ''
+    ) : '';
   }
 
   private renderEditMetadata = () => {
@@ -135,10 +135,10 @@ class Department extends React.Component<IDepartmentProps, IDepartmentState> {
                 numberOfItems={10}
                 defaultSelectedItems={[this.state.personObject]}
                 onChange={(people: SharePointUserPersona[]) => {
-                  this.setState({ people })
+                  this.setState({ people });
                   var emails = people.map(spPersona => {
-                    return spPersona.User.Email
-                  })
+                    return spPersona.User.Email;
+                  });
                 }}
               />
               : ''}
@@ -159,7 +159,7 @@ class Department extends React.Component<IDepartmentProps, IDepartmentState> {
               <ParentDepartment
                 context={this.props.context}
                 onChanged={(option) => {
-                  this.setState({ parentDepartmentField: option.text })
+                  this.setState({ parentDepartmentField: option.text });
                 }}
                 defaultSelectedKey={this.state.listData.extvcs569it_InmetaGenericSchema.ValueString04}
                 orderSiteURL={this.props.orderSiteURL}
@@ -203,7 +203,7 @@ class Department extends React.Component<IDepartmentProps, IDepartmentState> {
     ) : '';
   }
 
-  loadSiteList = () => {
+  public loadSiteList = () => {
     let handler = this;
     // Query for all groupos on the tenant using Microsoft Graph.
     let groupId = this.props.context.pageContext.legacyPageContext.groupId;
@@ -237,18 +237,18 @@ class Department extends React.Component<IDepartmentProps, IDepartmentState> {
         userProfileService = new UserProfileService(this.props.context, result.extvcs569it_InmetaGenericSchema.ValueString03);
         userProfileService.getUserProfileProperties().then((userResult) => {
           
-          personObject = { imageShouldFadeIn: true, imageUrl: "/_layouts/15/userphoto.aspx?size=S&accountname=" + userResult.Email, primaryText: userResult.DisplayName, secondaryText: "", selected: true, tertiaryText: "" }
+          personObject = { imageShouldFadeIn: true, imageUrl: "/_layouts/15/userphoto.aspx?size=S&accountname=" + userResult.Email, primaryText: userResult.DisplayName, secondaryText: "", selected: true, tertiaryText: "" };
           this.setState({
             listData: result,
             personObject: personObject,
             displayNameField: result['extvcs569it_InmetaGenericSchema']['ValueString01'],
             parentDepartmentField: result['extvcs569it_InmetaGenericSchema']['ValueString04']
-          })
+          });
         });
       });
   }
 
-  saveSiteList = () => {
+  public saveSiteList = () => {
     let handler = this;
     let data = this.buildMetaData();
     // Query for all groupos on the tenant using Microsoft Graph.
@@ -269,15 +269,15 @@ class Department extends React.Component<IDepartmentProps, IDepartmentState> {
     .then((response: HttpClientResponse) => {
       if (response.ok) {
         // Success!
-        handler.setState({ hideDialog: false })
+        handler.setState({ hideDialog: false });
         handler.loadSiteList();
       } else {
         console.warn(response.statusText);
       }
-    })
+    });
   }
 
-  buildMetaData = () => {
+  public buildMetaData = () => {
     if (this.state.personObject != [] && this.state.displayNameField != "") {
 
       if (this.state.listData.extvcs569it_InmetaGenericSchema.ValueString04 && this.state.parentDepartmentField == "") {
@@ -309,7 +309,7 @@ class Department extends React.Component<IDepartmentProps, IDepartmentState> {
     }
   }
 
-  buildDisplayNameLabel = (displayName:string):string => {
+  public buildDisplayNameLabel = (displayName:string):string => {
     let prefix = 'Avdeling: ';
     let prefix2 = 'Seksjon: ';
 
@@ -329,4 +329,4 @@ class Department extends React.Component<IDepartmentProps, IDepartmentState> {
 
 }
 
-export { Department }
+export { Department };

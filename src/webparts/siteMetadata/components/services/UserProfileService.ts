@@ -1,4 +1,4 @@
-import { IUserProfile } from '../interfaces/IUserProfile'
+import { IUserProfile } from '../interfaces/IUserProfile';
 import { WebPartContext } from '@microsoft/sp-webpart-base';
 //import { IUserProfileProps } from './UserProfile';
 import { SPHttpClient, HttpClientResponse, IAadHttpClientOptions } from '@microsoft/sp-http';

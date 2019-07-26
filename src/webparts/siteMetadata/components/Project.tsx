@@ -23,7 +23,7 @@ import {
 import { IPersonaProps, Label } from 'office-ui-fabric-react';
 import { UserProfileService } from './services/UserProfileService';
 import { ITaxonomyObject } from './interfaces/ITaxonomyObject';
-import TaxonomyPickerLoader from './TaxonomyPicker/TaxonomyPickerLoader'
+import TaxonomyPickerLoader from './TaxonomyPicker/TaxonomyPickerLoader';
 import "react-taxonomypicker/dist/React.TaxonomyPicker.css";
 
 
@@ -119,23 +119,23 @@ class Project extends React.Component<IProjectProps, IProjectState> {
     };
   }
 
-  componentWillMount() {
+  public componentWillMount() {
     // Fetch data from graph
     this.loadSiteList();
   }
 
-  render() {
+  public render() {
     return (<div>
       {this.state.listData ?
         this.props.displayMode === DisplayMode.Read
           ? this.renderDisplayMetadata()
           : this.renderEditMetadata()
         : ''}
-    </div>)
+    </div>);
   }
 
   private renderDisplayMetadata = () => {
-    let taxonomyStringLabel
+    let taxonomyStringLabel;
     if (this.state.listData.extvcs569it_InmetaGenericSchema.ValueString05) {
       let taxonomyString = this.state.listData.extvcs569it_InmetaGenericSchema.ValueString05;
       let taxonomyArray = taxonomyString.split("|");
@@ -186,7 +186,7 @@ class Project extends React.Component<IProjectProps, IProjectState> {
           <div className="ms-Grid-col ms-sm12 ms-md12 ms-lg12"><span className={styles.span}>{strings.EndDate}:</span> {endDateFormated}</div>
         </div>
       </div>
-    ) : ''
+    ) : '';
   }
 
   private renderEditMetadata = () => {
@@ -256,10 +256,10 @@ class Project extends React.Component<IProjectProps, IProjectState> {
                 numberOfItems={10}
                 defaultSelectedItems={[this.state.personObject]}
                 onChange={(people: SharePointUserPersona[]) => {
-                  this.setState({ people })
+                  this.setState({ people });
                   var emails = people.map(spPersona => {
-                    return spPersona.User.Email
-                  })
+                    return spPersona.User.Email;
+                  });
                 }}
               />
               : ''}
@@ -272,7 +272,7 @@ class Project extends React.Component<IProjectProps, IProjectState> {
               <ParentDepartment
                 context={this.props.context}
                 onChanged={(option) => {
-                  this.setState({ parentDepartmentField: option.text })
+                  this.setState({ parentDepartmentField: option.text });
                 }}
                 defaultSelectedKey={this.state.listData.extvcs569it_InmetaGenericSchema.ValueString04}
                 orderSiteURL={this.props.orderSiteURL}
@@ -309,7 +309,7 @@ class Project extends React.Component<IProjectProps, IProjectState> {
           <div className="ms-Grid-col ms-sm12 ms-md12 ms-lg12">
             {this.props.editStartDate ?
               <DatePicker label={strings.StartDate} strings={DayPickerStrings} showWeekNumbers={true} firstWeekOfYear={1} showMonthPickerAsOverlay={true} placeholder='Select a date...'
-                value={startDate} onSelectDate={newDate => { this.setState({ startDateField: newDate }) }}
+                value={startDate} onSelectDate={newDate => { this.setState({ startDateField: newDate }); }}
               />
               : ''}
           </div>
@@ -319,7 +319,7 @@ class Project extends React.Component<IProjectProps, IProjectState> {
           <div className="ms-Grid-col ms-sm12 ms-md12 ms-lg12">
             {this.props.editEndDate ?
               <DatePicker label={strings.EndDate} strings={DayPickerStrings} showWeekNumbers={true} firstWeekOfYear={1} showMonthPickerAsOverlay={true} placeholder='Select a date...'
-                value={endDate} minDate={startDate} onSelectDate={newDate => { this.setState({ endDateField: newDate }) }}
+                value={endDate} minDate={startDate} onSelectDate={newDate => { this.setState({ endDateField: newDate }); }}
               />
               : ''}
           </div>
@@ -361,7 +361,7 @@ class Project extends React.Component<IProjectProps, IProjectState> {
 
   }
 
-  loadSiteList = () => {
+  public loadSiteList = () => {
     let handler = this;
     // Query for all groupos on the tenant using Microsoft Graph.
     let groupId = this.props.context.pageContext.legacyPageContext.groupId;
@@ -394,18 +394,18 @@ class Project extends React.Component<IProjectProps, IProjectState> {
         let userProfileService: UserProfileService;
         userProfileService = new UserProfileService(this.props.context, result.extvcs569it_InmetaGenericSchema.ValueString03);
         userProfileService.getUserProfileProperties().then((userResult) => {
-          personObject = { imageShouldFadeIn: true, imageUrl: "/_layouts/15/userphoto.aspx?size=S&accountname=" + userResult.Email, primaryText: userResult.DisplayName, secondaryText: "", selected: true, tertiaryText: "" }
+          personObject = { imageShouldFadeIn: true, imageUrl: "/_layouts/15/userphoto.aspx?size=S&accountname=" + userResult.Email, primaryText: userResult.DisplayName, secondaryText: "", selected: true, tertiaryText: "" };
           this.setState({
             listData: result,
             personObject: personObject,
             displayNameField: result['extvcs569it_InmetaGenericSchema']['ValueString01'],
             parentDepartmentField: result['extvcs569it_InmetaGenericSchema']['ValueString04']
-          })
+          });
         });
       });
   }
 
-  saveSiteList = () => {
+  public saveSiteList = () => {
     let handler = this;
     let data = this.buildMetaData();
     // Query for all groupos on the tenant using Microsoft Graph.
@@ -426,15 +426,15 @@ class Project extends React.Component<IProjectProps, IProjectState> {
       .then((response: HttpClientResponse) => {
         if (response.ok) {
           // Success!
-          handler.setState({ hideDialog: false })
+          handler.setState({ hideDialog: false });
           handler.loadSiteList();
         } else {
           console.warn(response.statusText);
         }
-      })
+      });
   }
 
-  buildMetaData = () => {
+  public buildMetaData = () => {
     if (this.state.personObject != [] && this.state.displayNameField != "") {
 
       if (this.state.listData.extvcs569it_InmetaGenericSchema.ValueString04 && this.state.parentDepartmentField == "") {
@@ -483,7 +483,7 @@ class Project extends React.Component<IProjectProps, IProjectState> {
     }
   }
 
-  buildDisplayNameLabel = (displayName:string):string => {
+  public buildDisplayNameLabel = (displayName:string):string => {
     let prefix = 'Prosjekt: ';
 
     if (!displayName.includes(prefix)) {
@@ -510,4 +510,4 @@ class Project extends React.Component<IProjectProps, IProjectState> {
 
 }
 
-export { Project }
+export { Project };

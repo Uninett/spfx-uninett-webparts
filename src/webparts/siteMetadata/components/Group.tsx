@@ -41,19 +41,19 @@ class Group extends React.Component<IGroupProps, IGroupState> {
     };
   }
 
-  componentWillMount() {
+  public componentWillMount() {
     // Fetch data from graph
     this.loadSiteList();
   }
 
-  render() {
+  public render() {
     return (<div>
       {this.state.listData ?
         this.props.displayMode === DisplayMode.Read
           ? this.renderDisplayMetadata()
           : this.renderEditMetadata()
         : ''}
-    </div>)
+    </div>);
   }
 
   private renderDisplayMetadata = () => {
@@ -63,7 +63,7 @@ class Group extends React.Component<IGroupProps, IGroupState> {
           <div className="ms-Grid-col ms-sm12 ms-md12 ms-lg12"><span className={styles.span}>{strings.DepartmentName}:</span> {this.state.listData.extvcs569it_InmetaGenericSchema.ValueString01}</div>
         </div>
       </div>
-    ) : ''
+    ) : '';
   }
 
   private renderEditMetadata = () => {
@@ -113,7 +113,7 @@ class Group extends React.Component<IGroupProps, IGroupState> {
     ) : '';
   }
 
-  loadSiteList = () => {
+  public loadSiteList = () => {
     let handler = this;
     // Query for all groupos on the tenant using Microsoft Graph.
     let groupId = this.props.context.pageContext.legacyPageContext.groupId;
@@ -146,16 +146,16 @@ class Group extends React.Component<IGroupProps, IGroupState> {
         let userProfileService: UserProfileService;
         userProfileService = new UserProfileService(this.props.context, result.extvcs569it_InmetaGenericSchema.ValueString03);
         userProfileService.getUserProfileProperties().then((userResult) => {
-          personObject = { imageShouldFadeIn: true, imageUrl: "/_layouts/15/userphoto.aspx?size=S&accountname=" + userResult.Email, primaryText: userResult.DisplayName, secondaryText: "", selected: true, tertiaryText: "" }
+          personObject = { imageShouldFadeIn: true, imageUrl: "/_layouts/15/userphoto.aspx?size=S&accountname=" + userResult.Email, primaryText: userResult.DisplayName, secondaryText: "", selected: true, tertiaryText: "" };
           this.setState({
             listData: result,
             displayNameField: result['extvcs569it_InmetaGenericSchema']['ValueString01'],
-          })
+          });
         });
       });
   }
 
-  saveSiteList = () => {
+  public saveSiteList = () => {
     let handler = this;
     let data = this.buildMetaData();
     // Query for all groupos on the tenant using Microsoft Graph.
@@ -176,15 +176,15 @@ class Group extends React.Component<IGroupProps, IGroupState> {
       .then((response: HttpClientResponse) => {
         if (response.ok) {
           // Success!
-          handler.setState({ hideDialog: false })
+          handler.setState({ hideDialog: false });
           handler.loadSiteList();
         } else {
           console.warn(response.statusText);
         }
-      })
+      });
   }
 
-  buildMetaData = () => {
+  public buildMetaData = () => {
     if (this.state.displayNameField != "") {
 
       if (this.state.listData.extvcs569it_InmetaGenericSchema.ValueString04 == "") {
@@ -207,7 +207,7 @@ class Group extends React.Component<IGroupProps, IGroupState> {
     }
   }
 
-  buildDisplayNameLabel = (displayName:string):string => {
+  public buildDisplayNameLabel = (displayName:string):string => {
     let prefix = 'Avdeling: ';
     let prefix2 = 'Seksjon: ';
 
@@ -227,4 +227,4 @@ class Group extends React.Component<IGroupProps, IGroupState> {
 
 }
 
-export { Group }
+export { Group };

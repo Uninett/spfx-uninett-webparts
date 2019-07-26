@@ -27,7 +27,7 @@ export default class SiteMetadata extends React.Component<ISiteMetadataProps, IS
     };
   }
 
-  componentWillMount() {
+  public componentWillMount() {
     // Fetch data from graph
     this.loadSiteList();
   }
@@ -133,15 +133,15 @@ export default class SiteMetadata extends React.Component<ISiteMetadataProps, IS
   private getSiteType = (groupType: string) => {
     let siteType: SiteType = { type: 'gruppe', label: 'gruppen' };
 
-    groupType.startsWith('Aktivitet') ? siteType = { type: 'aktivitet', label: 'aktiviteten' } : '';
-    groupType.startsWith('Seksjon') ? siteType = { type: 'seksjon', label: 'seksjonen' } : '';
-    groupType.startsWith('Avdeling') ? siteType = { type: 'avdeling', label: 'avdelingen' } : '';
-    groupType.startsWith('Prosjekt') ? siteType = { type: 'prosjekt', label: 'prosjektet' } : '';
+    if (groupType.startsWith('Aktivitet')) siteType = { type: 'aktivitet', label: 'aktiviteten' };
+    else if (groupType.startsWith('Seksjon')) siteType = { type: 'seksjon', label: 'seksjonen' };
+    else if (groupType.startsWith('Avdeling')) siteType = { type: 'avdeling', label: 'avdelingen' };
+    else if (groupType.startsWith('Prosjekt')) siteType = { type: 'prosjekt', label: 'prosjektet' };
 
     return siteType;
   }
 
-  loadSiteList = () => {
+  public loadSiteList = () => {
     let handler = this;
     // Query for all groups on the tenant using Microsoft Graph.
     let groupId = this.props.context.pageContext.legacyPageContext.groupId;
@@ -175,7 +175,7 @@ export default class SiteMetadata extends React.Component<ISiteMetadataProps, IS
         let siteType = this.getSiteType(result['extvcs569it_InmetaGenericSchema']['ValueString00']);
         userProfileService = new UserProfileService(this.props.context, result.extvcs569it_InmetaGenericSchema.ValueString03);
         userProfileService.getUserProfileProperties().then((userResult) => {
-          personObject = { imageShouldFadeIn: true, imageUrl: "/_layouts/15/userphoto.aspx?size=S&accountname=" + userResult.Email, primaryText: userResult.DisplayName, secondaryText: "", selected: true, tertiaryText: "" }
+          personObject = { imageShouldFadeIn: true, imageUrl: "/_layouts/15/userphoto.aspx?size=S&accountname=" + userResult.Email, primaryText: userResult.DisplayName, secondaryText: "", selected: true, tertiaryText: "" };
           this.setState({
             listData: result,
             personObject: personObject,
