@@ -1,40 +1,42 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
+@mixin ms-fontColor-black {
+  color: $ms-color-black;
+}
+
 .siteCatalog {
   .container {
-    max-width: 700px;
+    /*max-width: 700px;*/
     margin: 0px auto;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+    /*box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);*/
   }
 
   .row {
     @include ms-Grid-row;
-    @include ms-fontColor-white;
-    background-color: $ms-color-themeDark;
-    padding: 20px;
+    @include ms-fontColor-black;
+    //background-color: $ms-color-themeDark;
+    //padding: 20px;
   }
 
   .column {
     @include ms-Grid-col;
-    @include ms-lg10;
-    @include ms-xl8;
-    @include ms-xlPush2;
-    @include ms-lgPush1;
+    @include ms-lg12;
+    @include ms-xl12;
   }
 
   .title {
     @include ms-font-xl;
-    @include ms-fontColor-white;
+    @include ms-fontColor-black;
   }
 
   .subTitle {
     @include ms-font-l;
-    @include ms-fontColor-white;
+    @include ms-fontColor-black;
   }
 
   .description {
     @include ms-font-l;
-    @include ms-fontColor-white;
+    @include ms-fontColor-black;
   }
 
   .button {
@@ -70,5 +72,63 @@
       vertical-align: top;
       display: inline-block;
     }
+  }  
+
+  .floatRight {
+    // list of styles
+    float: right
   }
+
+  .msSearchBoxContainer {
+    -webkit-margin-before: 1.55em;
+    -webkit-margin-after: 1.55em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+  }
+
+  .floatIconRight {
+
+    i {
+      float: right;
+    }
+  }
+
+  .alignCenter {
+    text-align: center;
+  }
+
+  .moreButton {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  .groupIcons {
+    color: #767676;
+    margin-left: 4px;
+  }
+
+  /*.toolbarProgressIndicator {
+    margin: 1px;
+
+    .ms-ProgressIndicator-progressBar {
+      height: 2px;
+      position: absolute;
+      width: 0px;
+      min-width: 33%;
+      transition: width 0.3s ease;
+      background: linear-gradient(to right, transparent 0%, rgb(0, 120, 212) 50%, transparent 100%);
+      animation: css-40 3s infinite;
+      animation-name: css-40;
+      animation-duration: 3s;
+      animation-timing-function: initial;
+      animation-delay: initial;
+      animation-iteration-count: infinite;
+      animation-direction: initial;
+      animation-fill-mode: initial;
+      animation-play-state: initial;
+    }
+
+    
+  }*/
 }

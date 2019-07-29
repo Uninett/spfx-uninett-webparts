@@ -1,0 +1,59 @@
+@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+
+.floatRight {
+    float: right
+}
+
+div[class^="siteCatalog"] {
+    a {
+        font-family: inherit;
+        text-transform: none;
+        border: none;
+        text-decoration: none;
+        color: $ms-color-themePrimary;
+    }
+}
+
+
+@keyframes css40 {
+    0% {
+        left: -30%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.toolbarProgressIndicator {
+    overflow: hidden;
+
+    .msProgressIndicatorProgressBar {
+        height: 2px;
+        position: absolute;
+        width: 0px;
+        min-width: 33%;
+        transition: width 0.3s ease;
+        background: linear-gradient(to right, transparent 0%, rgb(0, 120, 212) 50%, transparent 100%);
+        animation: css40 3s infinite;
+        animation-name: css40;
+        animation-duration: 3s;
+        animation-timing-function: initial;
+        animation-delay: initial;
+        animation-iteration-count: infinite;
+        animation-direction: initial;
+        animation-fill-mode: initial;
+        animation-play-state: initial;
+    }
+
+    .msProgressIndicatorItemProgress {
+        padding: 0;
+    }
+
+    .msProgressIndicatorItemName {
+        padding-top: 0;
+    }
+}
+
+.msDetailsHeader {
+    border-bottom: 1px solid #c8c8c8;
+}

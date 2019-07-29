@@ -1,18 +1,24 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import {
+  BaseClientSideWebPart,
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
-} from '@microsoft/sp-property-pane';
+  PropertyPaneTextField,
+  PropertyPaneCheckbox,
+  PropertyPaneChoiceGroup
+} from '@microsoft/sp-webpart-base';
 
 import * as strings from 'SiteCatalogWebPartStrings';
-import SiteCatalog from './components/SiteCatalog';
-import { ISiteCatalogProps } from './components/ISiteCatalogProps';
+import SiteCatalog from './components/siteCatalog/SiteCatalog';
+import { ISiteCatalogProps } from './components/siteCatalog/ISiteCatalogProps';
 
 export interface ISiteCatalogWebPartProps {
-  description: string;
+  listRows: string;
+  showNewButton: boolean;
+  siteTypes: string;
+  hideParentDepartment: boolean;
+  searchSetting: SearchType;
 }
 
 export default class SiteCatalogWebPart extends BaseClientSideWebPart<ISiteCatalogWebPartProps> {
@@ -21,15 +27,16 @@ export default class SiteCatalogWebPart extends BaseClientSideWebPart<ISiteCatal
     const element: React.ReactElement<ISiteCatalogProps > = React.createElement(
       SiteCatalog,
       {
-        description: this.properties.description
+        listRows: this.properties.listRows,
+        showNewButton: this.properties.showNewButton,
+        context: this.context,
+        siteTypes: this.properties.siteTypes,
+        hideParentDepartment: this.properties.hideParentDepartment,
+        searchType: this.properties.searchSetting
       }
     );
 
     ReactDom.render(element, this.domElement);
-  }
-
-  protected onDispose(): void {
-    ReactDom.unmountComponentAtNode(this.domElement);
   }
 
   protected get dataVersion(): Version {
@@ -47,8 +54,38 @@ export default class SiteCatalogWebPart extends BaseClientSideWebPart<ISiteCatal
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
+                PropertyPaneTextField('listRows', {
                   label: strings.DescriptionFieldLabel
+                }),
+                PropertyPaneCheckbox('showNewButton', {
+                  text: strings.ShowNewButtonLabel,
+                  checked: true
+                }),
+                PropertyPaneCheckbox('hideParentDepartment', {
+                  text: strings.PropertyPaneHideParentDepartment,
+                  checked: false
+                }),
+                PropertyPaneTextField('siteTypes', {
+                  label: strings.PropertyPaneSiteTypes
+                })
+              ]
+            },
+            {
+              groupName: strings.PropertyPaneSearchSetting,
+              groupFields: [
+                PropertyPaneChoiceGroup('searchSetting', {
+                  label: strings.PropertyPaneSearchType,
+                  options: [
+                    {
+                      key: 'graph',
+                      text: strings.PropertyPaneSearchTypeGraph
+                    },
+                    {
+                      key: 'javascript',
+                      text: strings.PropertyPaneSearchTypeJavascript,
+                      checked: true
+                    }
+                  ]
                 })
               ]
             }

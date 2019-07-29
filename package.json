@@ -19,6 +19,7 @@
     "@microsoft/sp-webpart-base": "1.8.2-plusbeta",
     "@pnp/spfx-controls-react": "1.13.2",
     "@pnp/spfx-property-controls": "1.15.0",
+    "@types/core-js": "^2.5.2",
     "@types/es6-promise": "0.0.33",
     "@types/jquery": "^3.3.29",
     "@types/react": "16.7.22",
@@ -39,6 +40,7 @@
   "devDependencies": {
     "@microsoft/loader-set-webpack-public-path": "^3.2.153",
     "@microsoft/rush-stack-compiler-2.7": "0.4.0",
+    "@microsoft/rush-stack-compiler-2.9": "0.7.7",
     "@microsoft/rush-stack-compiler-3.3": "0.1.7",
     "@microsoft/sp-build-web": "1.8.2-plusbeta",
     "@microsoft/sp-module-interfaces": "1.8.2-plusbeta",
@@ -47,9 +49,8 @@
     "@types/chai": "3.4.34",
     "@types/mocha": "2.2.38",
     "ajv": "~5.2.2",
-    "core-js": "^3.1.4",
-    "gulp": "~3.9.1",
-    "@microsoft/rush-stack-compiler-2.9": "0.7.7"
+    "core-js": "^2.6.9",
+    "gulp": "~3.9.1"
   },
   "resolutions": {
     "@types/react": "16.7.22"

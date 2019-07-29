@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
-  "id": "5346e849-122f-4886-99a0-01f67f569f87",
+  "$schema": "https://dev.office.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "68be36b0-bc24-42df-bb13-bdd510a84943",
   "alias": "SiteCatalogWebPart",
   "componentType": "WebPart",
 
@@ -12,16 +12,19 @@
   // Components that allow authors to embed arbitrary script code should set this to true.
   // https://support.office.com/en-us/article/Turn-scripting-capabilities-on-or-off-1f2c515f-5d7e-448a-9fd7-835da935584f
   "requiresCustomScript": false,
-  "supportedHosts": ["SharePointWebPart"],
 
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
     "group": { "default": "Other" },
-    "title": { "default": "SiteCatalog" },
+    "title": { "default": "Site catalog" },
     "description": { "default": "SiteCatalog description" },
-    "officeFabricIconFontName": "Page",
+    "officeFabricIconFontName": "SiteScan",
     "properties": {
-      "description": "SiteCatalog"
+      "listRows": "15",
+      "showNewButton": true,
+      "siteTypes": "Avdeling,Aktivitet og Tjeneste,Prosjekt",
+      "hideParentDepartment": false,
+      "searchSetting": "javascript"
     }
   }]
 }
