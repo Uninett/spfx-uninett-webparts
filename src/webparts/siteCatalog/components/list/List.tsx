@@ -92,11 +92,11 @@ export default class List extends React.Component<IListProps, IListState> {
 
     return (
         <div>
-            <DetailsList 
+            <DetailsList
               items={this.filterItems()}
               checkboxVisibility={CheckboxVisibility.hidden}
               onItemInvoked={(item, i, ev) => ev && (ev.preventDefault(), ev.stopPropagation())}
-              onRenderRow={props => {props.key = props.item.Title + props.item.itemIndex; return <DetailsRow {...props} />;}}
+              onRenderRow={props => {props.getCellValueKey = props.item.Title + props.item.itemIndex; return <DetailsRow {...props} />;}}
               layoutMode={DetailsListLayoutMode.justified}
               onRenderItemColumn={this.renderListItemColumn}
               columns={this.buildDetailsListColumns()}
