@@ -9,8 +9,8 @@ function objectKeys(obj) {
 }
 
 // node-deep-equal/lib/is_arguments.js
-var supportsArgumentsClass = (function(){
-  return Object.prototype.toString.call(arguments);
+var supportsArgumentsClass = ((...args) => {
+  return Object.prototype.toString.call(args);
 })() == '[object Arguments]';
 
 var isArguments = supportsArgumentsClass ? supported : unsupported;

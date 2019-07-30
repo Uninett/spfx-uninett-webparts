@@ -17,7 +17,7 @@ import { IContextFilter } from '../interfaces/iContextFilter';
 import { IFavoriteSites } from '../interfaces/IFavoriteSites';
 import { NavigationBar } from '../navigationBar/NavigationBar';
 import { ToolBar } from '../toolbar/Toolbar';
-require('../scss/custom.scss');
+require('../scss/custom.module.scss');
 import { getUserProfileProperty } from '../helpers/userProfile';
 import { FavoriteSitesService } from '../helpers/FavoriteSitesService';
 import { IGroupSiteUrl } from '../interfaces/IGroupSiteUrl';

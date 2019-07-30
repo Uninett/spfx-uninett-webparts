@@ -1,6 +1,6 @@
 {
   "$schema": "https://dev.office.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
-  "id": "68be36b0-bc24-42df-bb13-bdd510a84943",
+  "id": "68be36b0-bc24-42df-bb13-bdd510a84940",
   "alias": "SiteCatalogWebPart",
   "componentType": "WebPart",
 
@@ -16,7 +16,7 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
     "group": { "default": "Other" },
-    "title": { "default": "Site catalog" },
+    "title": { "default": "Site catalog 2" },
     "description": { "default": "SiteCatalog description" },
     "officeFabricIconFontName": "SiteScan",
     "properties": {

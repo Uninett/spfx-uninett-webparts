@@ -40,7 +40,9 @@ export class ToolBar extends React.Component<IToolBarProps, IToolBarState> {
       items = [{
         name: strings.New,
         key: "New",
-        icon: "Add",
+        iconProps: { 
+          iconName: "Add" 
+        },
         onClick: this.props.handleNewClick
       }];
     }
@@ -50,7 +52,9 @@ export class ToolBar extends React.Component<IToolBarProps, IToolBarState> {
     farItems.push({
       name: strings.Back,
       key: "Back",
-      icon: "NavigateBack",
+      iconProps: { 
+        iconName: "NavigateBack" 
+      },
       onClick: this.backNavHandler,
       disabled: !this.props.enablePrev
     });
@@ -63,7 +67,9 @@ export class ToolBar extends React.Component<IToolBarProps, IToolBarState> {
     farItems.push({
       name: strings.Next,
       key: "Next",
-      icon: "NavigateBackMirrored",
+      iconProps: { 
+        iconName: "NavigateBackMirrored" 
+      },
       onClick: this.nextNavHandler,
       className: styles.floatIconRight,
       disabled: !this.props.enableNext

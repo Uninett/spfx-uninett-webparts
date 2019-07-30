@@ -196,7 +196,7 @@ export class ListItemContext extends React.Component<IProps, IState> {
     if(contextFilter[0].fieldName === 'more') {
       let moreItems: IContextualMenuItem[] = [
         {
-          key: 'SharepointSite', name: strings.Sharepoint, icon: 'SharepointLogo',
+          key: 'SharepointSite', text: strings.Sharepoint, iconProps: { iconName: 'SharepointLogo' },
           canCheck: true, isChecked: false,
           onClick: (ev) => { 
             this.props.handleDismiss();
@@ -204,7 +204,7 @@ export class ListItemContext extends React.Component<IProps, IState> {
           }
         },
         {
-          key: 'PlannerSite', name: strings.Planner, icon: 'PlannerLogo',
+          key: 'PlannerSite', text: strings.Planner, iconProps: { iconName: 'PlannerLogo' },
           canCheck: true, isChecked: false,
           onClick: (ev) => { 
             this.props.handleDismiss();
@@ -213,7 +213,7 @@ export class ListItemContext extends React.Component<IProps, IState> {
         }
         ,
         {
-          key: 'EmailSite', name: strings.Email, icon: 'OutlookLogo',
+          key: 'EmailSite', text: strings.Email, iconProps: { iconName: 'OutlookLogo' },
           canCheck: true, isChecked: false,
           onClick: (ev) => { 
             this.props.handleDismiss();
@@ -221,7 +221,7 @@ export class ListItemContext extends React.Component<IProps, IState> {
           }
         },
         {
-          key: 'CalendarSite', name: strings.Calendar, icon: 'Calendar',
+          key: 'CalendarSite', text: strings.Calendar, iconProps: { iconName: 'Calendar' },
           canCheck: true, isChecked: false,
           onClick: (ev) => { 
             this.props.handleDismiss();
