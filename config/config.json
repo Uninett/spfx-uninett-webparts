@@ -49,6 +49,14 @@
           "manifest": "./src/webparts/siteCatalog/SiteCatalogWebPart.manifest.json"
         }
       ]
+    },
+    "order-group-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/orderGroup/OrderGroupWebPart.js",
+          "manifest": "./src/webparts/orderGroup/OrderGroupWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -60,6 +68,7 @@
     "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
     "DirectorySearchBoxWebPartStrings": "lib/webparts/directorySearchBox/loc/{locale}.js",
     "SiteMetadataWebPartStrings": "lib/webparts/siteMetadata/loc/{locale}.js",
-    "SiteCatalogWebPartStrings": "lib/webparts/siteCatalog/loc/{locale}.js"
+    "SiteCatalogWebPartStrings": "lib/webparts/siteCatalog/loc/{locale}.js",
+    "OrderGroupWebPartStrings": "lib/webparts/orderGroup/loc/{locale}.js"
   }
 }
