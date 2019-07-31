@@ -10,7 +10,7 @@ export interface IPrivacySettingProps {
 
 class PrivacySetting extends React.Component<IPrivacySettingProps, IPrivacySettingState> {
 
-    render() {
+    public render() {
         return (
             <div>
                 <Dropdown
@@ -25,9 +25,9 @@ class PrivacySetting extends React.Component<IPrivacySettingProps, IPrivacySetti
                     onChange={() => this.props.onChange}
                     required={true}
                 />
-            </div>)
+            </div>);
     }
 
 }
 
-export { PrivacySetting }
+export { PrivacySetting };

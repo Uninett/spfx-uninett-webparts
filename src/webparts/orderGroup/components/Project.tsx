@@ -12,7 +12,7 @@ import { ParentDepartment } from './ParentDepartment';
 import { SharePointUserPersona } from '../models/PeoplePicker';
 import TaxonomyPicker from "react-taxonomypicker";
 import "react-taxonomypicker/dist/React.TaxonomyPicker.css";
-import TaxonomyPickerLoader from '../components/TaxonomyPicker/TaxonomyPickerLoader'
+import TaxonomyPickerLoader from '../components/TaxonomyPicker/TaxonomyPickerLoader';
 import { ITaxonomyObject } from './../interfaces/ITaxonomyObject';
 import * as strings from 'OrderGroupWebPartStrings';
 import styles from './OrderGroup.module.scss';
@@ -104,7 +104,7 @@ class Project extends React.Component<IProjectProps, any> {
         };
     }
 
-    render() {
+    public render() {
         return (<div>
             <div className="ms-Grid-row">
                 <div className={styles.positioning}>
@@ -137,7 +137,7 @@ class Project extends React.Component<IProjectProps, any> {
                         principalTypeDistributionList={false}
                         numberOfItems={10}
                         onChange={(people: SharePointUserPersona[]) => {
-                            this.setState({ people })
+                            this.setState({ people });
                         }}
                     />
                 </div>
@@ -207,7 +207,7 @@ class Project extends React.Component<IProjectProps, any> {
             <div className="ms-Grid-row">
                 <div className={styles.positioning}>
                     <DatePicker label={strings.StartDate} strings={DayPickerStrings} showWeekNumbers={true} firstWeekOfYear={1} showMonthPickerAsOverlay={true} placeholder='Select a date...'
-                        value={this.state.startDate} onSelectDate={newDate => { this.setState({ startDate: newDate }) }}
+                        value={this.state.startDate} onSelectDate={newDate => { this.setState({ startDate: newDate }); }}
                     />
                 </div>
             </div>
@@ -215,7 +215,7 @@ class Project extends React.Component<IProjectProps, any> {
             <div className="ms-Grid-row">
                 <div className={styles.positioning}>
                     <DatePicker label={strings.EndDate} strings={DayPickerStrings} showWeekNumbers={true} firstWeekOfYear={1} showMonthPickerAsOverlay={true} placeholder='Select a date...'
-                        value={this.state.endDate} onSelectDate={newDate => { this.setState({ endDate: newDate }) }}
+                        value={this.state.endDate} onSelectDate={newDate => { this.setState({ endDate: newDate }); }}
                     />
                 </div>
             </div>
@@ -226,7 +226,7 @@ class Project extends React.Component<IProjectProps, any> {
                         <ParentDepartment
                             context={this.props.context}
                             onChange={(option) => {
-                                this.setState({ parentDepartment: option.text })
+                                this.setState({ parentDepartment: option.text });
                             }}
                         />
                     </div>
@@ -250,7 +250,7 @@ class Project extends React.Component<IProjectProps, any> {
                 <div className={styles.positioning}>
                     <PrivacySetting
                     onChange={(option) => {
-                        this.setState({ privacySetting: option.key })
+                        this.setState({ privacySetting: option.key });
                     }}
                     />
                 </div>
@@ -282,7 +282,7 @@ class Project extends React.Component<IProjectProps, any> {
                 </div>
             </div>
 
-        </div>)
+        </div>);
     }
 
     private _onSharingCheckboxChange = (ev: React.FormEvent<HTMLElement>, isChecked: boolean) => {
@@ -298,7 +298,7 @@ class Project extends React.Component<IProjectProps, any> {
         var TaxValue: ITaxonomyObject = { label: "", id: "" };
         TaxValue.label = Option.label;
         TaxValue.id = Option.value;
-        this.setState({ owningDepartment: TaxValue })
+        this.setState({ owningDepartment: TaxValue });
         console.log(Option);
     }
 
@@ -376,4 +376,4 @@ class Project extends React.Component<IProjectProps, any> {
 
 }
 
-export { Project }
+export { Project };

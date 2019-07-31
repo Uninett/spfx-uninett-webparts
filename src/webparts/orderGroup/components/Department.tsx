@@ -35,7 +35,7 @@ class Department extends React.Component<IDepartmentProps, any> {
         };
     }
 
-    render() {
+    public render() {
         let newDeparmentLabel = this.props.departmentSiteTypeName === 0 ? strings.NewDepartment : strings.NewSection;
 
         return (<div>
@@ -59,7 +59,7 @@ class Department extends React.Component<IDepartmentProps, any> {
                         principalTypeDistributionList={false}
                         numberOfItems={10}
                         onChange={(people: SharePointUserPersona[]) => {
-                            this.setState({ people })
+                            this.setState({ people });
                         }}
                     />
                 </div>
@@ -102,7 +102,7 @@ class Department extends React.Component<IDepartmentProps, any> {
                         <ParentDepartment
                             context={this.props.context}
                             onChange={(option) => {
-                                this.setState({ parentDepartment: option.text })
+                                this.setState({ parentDepartment: option.text });
                             }}
                         />
                     </div>
@@ -113,7 +113,7 @@ class Department extends React.Component<IDepartmentProps, any> {
                 <div className={styles.positioning}>
                     <PrivacySetting
                     onChange={(option) => {
-                        this.setState({ privacySetting: option.key })
+                        this.setState({ privacySetting: option.key });
                     }}
                     />
                 </div>
@@ -134,7 +134,7 @@ class Department extends React.Component<IDepartmentProps, any> {
                 </div>
             </div>
 
-        </div>)
+        </div>);
     }
 
     private _onFinishClick = () => {
@@ -164,4 +164,4 @@ class Department extends React.Component<IDepartmentProps, any> {
     }
 }
 
-export { Department }
+export { Department };

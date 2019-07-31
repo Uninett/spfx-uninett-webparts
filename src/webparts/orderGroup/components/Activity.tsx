@@ -35,7 +35,7 @@ class Activity extends React.Component<IActivityProps, IActivityState> {
         };
     }
 
-    render() {
+    public render() {
         return (<div>
             <div className="ms-Grid-row">
                 <div className={styles.positioning}>
@@ -58,10 +58,10 @@ class Activity extends React.Component<IActivityProps, IActivityState> {
                         principalTypeDistributionList={false}
                         numberOfItems={10}
                         onChange={(people: SharePointUserPersona[]) => {
-                            this.setState({ people })
+                            this.setState({ people });
                             var emails = people.map(spPersona => {
-                                return spPersona.User.Email
-                            })
+                                return spPersona.User.Email;
+                            });
                         }}
                     />
                 </div>
@@ -94,7 +94,7 @@ class Activity extends React.Component<IActivityProps, IActivityState> {
                         <ParentDepartment
                             context={this.props.context}
                             onChange={(option) => {
-                                this.setState({ parentDepartment: option.text })
+                                this.setState({ parentDepartment: option.text });
                             }}
                         />
                     </div>
@@ -106,7 +106,7 @@ class Activity extends React.Component<IActivityProps, IActivityState> {
                 <div className={styles.positioning}>
                     <PrivacySetting
                     onChange={(option) => {
-                        this.setState({ privacySetting: option.key })
+                        this.setState({ privacySetting: option.key });
                     }}
                     />
                 </div>
@@ -139,7 +139,7 @@ class Activity extends React.Component<IActivityProps, IActivityState> {
                 </div>
             </div>
 
-        </div>)
+        </div>);
     }
 
     private _onCheckboxChange = (ev: React.FormEvent<HTMLElement>, isChecked: boolean) => {
@@ -176,4 +176,4 @@ class Activity extends React.Component<IActivityProps, IActivityState> {
 
 }
 
-export { Activity }
+export { Activity };

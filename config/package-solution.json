@@ -3,7 +3,7 @@
   "solution": {
     "name": "spfx-uninett-webparts-client-side-solution",
     "id": "e7b6dc50-727d-44fa-95ff-23d5d97d6163",
-    "version": "1.2.0.0",
+    "version": "1.2.0.3",
     "includeClientSideAssets": true,
     "isDomainIsolated": false,
     "webApiPermissionRequests": [
@@ -18,6 +18,18 @@
       {
         "resource": "Microsoft Graph",
         "scope": "Group.Read.All"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Sites.ReadWrite.All"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Sites.Read.All"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Files.Read.All"
       }
     ]
   },

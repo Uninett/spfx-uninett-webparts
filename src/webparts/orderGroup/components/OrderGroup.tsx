@@ -5,7 +5,7 @@ import { IOrderGroupProps } from './IOrderGroupProps';
 import { IOrderGroupState } from './IOrderGroupState';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { Panel, PanelType } from 'office-ui-fabric-react/lib/Panel';
-import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
+import { Pivot, PivotItem, IPivotStyles } from 'office-ui-fabric-react/lib/Pivot';
 import { GroupTypeChoice } from './GroupTypeChoice';
 import { Activity } from './Activity';
 import { Department } from './Department';
@@ -13,8 +13,12 @@ import { Project } from './Project';
 import { Dialog, DialogType, DialogFooter } from 'office-ui-fabric-react/lib/Dialog';
 import { IDigestCache, DigestCache } from '@microsoft/sp-http';
 import * as strings from 'OrderGroupWebPartStrings';
-require('./CustomStyles.module.scss')
+import { IStyleSet } from '@uifabric/styling';
+require('./CustomStyles.module.scss');
 
+const pivotStyles: Partial<IPivotStyles> = {
+  root: { display: "none" }
+};
 
 export default class OrderGroup extends React.Component<IOrderGroupProps, IOrderGroupState> {
 
@@ -31,7 +35,7 @@ export default class OrderGroup extends React.Component<IOrderGroupProps, IOrder
     this.loadProjectPivot = this.loadProjectPivot.bind(this);
   }
 
-  handleGroupTypeChoice(groupType: string) {
+  public handleGroupTypeChoice(groupType: string) {
     this.setState({ groupType: groupType });
     if (groupType == "Activity") {
       this.loadDepartmentPivot();
@@ -44,7 +48,7 @@ export default class OrderGroup extends React.Component<IOrderGroupProps, IOrder
     }
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     let  handler  =  this;
     (window  as  any).addEventListener('createSiteButtonClicked', (e)  =>  {
 
@@ -78,7 +82,7 @@ export default class OrderGroup extends React.Component<IOrderGroupProps, IOrder
 
           <div className={styles.orderGroup}>
             <div>
-              <Pivot selectedKey={`${this.state.selectedKey}`} >
+              <Pivot styles={ pivotStyles } selectedKey={`${this.state.selectedKey}`} >
 
                 <PivotItem headerText='Pivot 0' itemKey='0' >
                   <GroupTypeChoice
@@ -203,13 +207,15 @@ export default class OrderGroup extends React.Component<IOrderGroupProps, IOrder
       //   return digest;
       // })
     }
-  };
+  }
 
   public _updateList = (data: any): void => {
     var relativeSiteUrl = this.props.context.pageContext.web.serverRelativeUrl;
     var listName = "Bestillinger";
     var restEndPointUrl = relativeSiteUrl + "/_api/web/lists/getbytitle('" + listName + "')/items";
     var itemType = this._getItemTypeForListName(listName);
+    console.log(restEndPointUrl);
+    console.log(itemType);
     data['__metadata'] = { 'type': itemType };
     this.ensureRequestDigest().then(requestDigest => {
       $.ajax({
@@ -222,16 +228,17 @@ export default class OrderGroup extends React.Component<IOrderGroupProps, IOrder
           "content-type": "application/json;odata=verbose",
           "X-RequestDigest": requestDigest
         },
-        success: (data) => {
+        success: (_data) => {
           this.setState({ updateListCallResult: "success" });
           this._showDialog();
         },
         error: (err) => {
           this.setState({ updateListCallResult: "error" });
           alert(strings.SomethingWentWrong);
+          console.log(err);
         }
-      })
-    })
+      });
+    });
   }
 
   private _getItemTypeForListName = (name) => {

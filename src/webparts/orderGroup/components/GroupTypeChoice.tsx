@@ -3,7 +3,7 @@ import { DefaultButton, CompoundButton, IButtonProps } from 'office-ui-fabric-re
 import * as strings from 'OrderGroupWebPartStrings';
 import styles from './OrderGroup.module.scss';
 import ActivityImage from './assets/ActivityImage';
-import DepartmentImage from './assets/DepartmentImage'
+import DepartmentImage from './assets/DepartmentImage';
 import ProjectImage from './assets/ProjectImage';
 import { SiteType } from '../interfaces/SiteType';
 
@@ -13,7 +13,7 @@ export interface IGroupTypeChoiceProps {
 }
 
 class GroupTypeChoice extends React.Component<IGroupTypeChoiceProps, any> {
-    render() {
+    public render() {
         let deparmentName = this.props.departmentSiteTypeName === 0 ? strings.Department : strings.Section;
 
         return (
@@ -59,4 +59,4 @@ class GroupTypeChoice extends React.Component<IGroupTypeChoiceProps, any> {
 }
 
 
-export { GroupTypeChoice }
+export { GroupTypeChoice };

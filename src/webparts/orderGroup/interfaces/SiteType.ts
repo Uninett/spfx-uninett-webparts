@@ -1,4 +1,4 @@
 export enum SiteType {
     department,
-    section,
+    section
 }

@@ -22,11 +22,11 @@ class ParentDepartment extends React.Component<IParentDepartmentProps, IParentDe
     };
   }
 
-  componentWillMount() {
+  public componentWillMount() {
     this._getChoiceFields();
   }
 
-    render() {
+    public render() {
         return (
         <div>
             <Dropdown
@@ -40,7 +40,7 @@ class ParentDepartment extends React.Component<IParentDepartmentProps, IParentDe
 
 
         
-        </div>)
+        </div>);
     }
 
     private ensureRequestDigest = (): Promise<string> => {
@@ -73,7 +73,7 @@ class ParentDepartment extends React.Component<IParentDepartmentProps, IParentDe
           //   return digest;
           // })
         }
-      };
+      }
 
     private _getChoiceFields = (): void => {
         var relativeSiteUrl = this.props.context.pageContext.web.serverRelativeUrl;
@@ -104,10 +104,10 @@ class ParentDepartment extends React.Component<IParentDepartmentProps, IParentDe
               error: (err) => {
                 console.log("Error fetching parent departments");
               }
-            })
-        })
+            });
+        });
     }
 
 }
 
-export { ParentDepartment }
+export { ParentDepartment };
