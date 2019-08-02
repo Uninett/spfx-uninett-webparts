@@ -3,14 +3,14 @@
 Før vi oppretter listen må vi definere noen nye Site Content Types: en for Avdeling, en for Aktivitet og Tjeneste, og en for Prosjekt.
 
  1. Gå til **Site Contents > Site settings > Site content types** og trykk på **Create**.  
-![1](img\bestillinger\1.png)
+![1](img/bestillinger/1.png)
  
  2. Skriv "Avdeling" under **Name**, og velg "List Content Types" og "Item" under **Parent Content Type**. Pass på at *Custom Content Types* er valgt som **Group**.  
 Avslutt med å trykke **OK**.  
-![2](img\bestillinger\2.png)
+![2](img/bestillinger/2.png)
 
  3.  Gjenta forrige steg to ganger, bare med "Aktivitet" og deretter "Prosjekt" som **Name**.  
- ![3](img\bestillinger\3.png)
+ ![3](img/bestillinger/3.png)
 
 Du vil nå kunne se at Content Types'ene ligger under **Custom Content Types** på Site Content Types-siden.
 
@@ -19,21 +19,21 @@ Du vil nå kunne se at Content Types'ene ligger under **Custom Content Types** p
  1.  Gå til **Site Contents** og naviger til den mappen du ønsker å opprette listen i, og trykk deretter på **+ New > List**.
  
  2.  Skriv "Bestillinger" under **Name**. Du kan selv velge om du vil legge til en beskrivelse, og om listen skal vises i navigasjonspanelet. Opprett listen ved å trykke på **Create**.  
- ![4](img\bestillinger\4.png)
+ ![4](img/bestillinger/4.png)
  
  3.  Nå som listen er opprettet, kan du begynne å tilpasse den.
 Trykk på tannhjulet øverst til høyre, og velg deretter **List settings**.  
-![5](img\bestillinger\5.png)
+![5](img/bestillinger/5.png)
 
  4. Gå inn på **Advanced settings** på innstillingssiden.  
- ![6](img\bestillinger\6.png)
+ ![6](img/bestillinger/6.png)
  
 <ol start=5>
 	<li>Endre på følgende innstillinger:</li>
 	<ol type="a">
-		<li><img src="img\bestillinger\7.png" alt="7"></li>
-		<li><img src="img\bestillinger\8.png" alt="8"></li>
-		<li><img src="img\bestillinger\9.png" alt="9"></li>
+		<li><img src="img/bestillinger/7.png" alt="7"></li>
+		<li><img src="img/bestillinger/8.png" alt="8"></li>
+		<li><img src="img/bestillinger/9.png" alt="9"></li>
 	</ol>
 	Bekreft med <b>OK</b>.	
 </ol>
@@ -62,9 +62,9 @@ Hvert steg representerer opprettelsen av én kolonne.
 **Type:** Choice (menu to choose from)  
 **Description:** "Lukkede områder er kun tilgjengelige for eiere og medlemmer av gruppen. Åpne er synlige og tilgjengelige for alle."  
 **Type each choice on a separate line:** 
-![10](img\bestillinger\10.png) 
+![10](img/bestillinger/10.png) 
 **Default value:**  
-![11](img\bestillinger\11.png)
+![11](img/bestillinger/11.png)
 
 5.  **Column name:** Owner  
 **Type:** Person or Group  
@@ -72,14 +72,14 @@ Hvert steg representerer opprettelsen av én kolonne.
 6.  **Column name:** Owning department  
 **Type:** Managed Metadata  
 **Term Set Settings:**  
-![12](img\bestillinger\12.png)
+![12](img/bestillinger/12.png)
 
 7. **Column name:** Parent department  
 **Type:** Choice (menu to choose from)  
 **Type each choice on a separate line:**  
-![13](img\bestillinger\13.png)  
+![13](img/bestillinger/13.png)  
 **Default value:**  
-![14](img\bestillinger\14.png)
+![14](img/bestillinger/14.png)
 
 8.  **Column name:** Prefered URL  
 **Type:** Single line of text  
@@ -107,9 +107,9 @@ Hvert steg representerer opprettelsen av én kolonne.
 15.  **Column name:** Status
 **Type:** Choice (menu to choose from)  
 **Type each choice on a separate line:**  
-![15](img\bestillinger\15.png)  
+![15](img/bestillinger/15.png)  
 **Default value:**  
-![16](img\bestillinger\16.png)
+![16](img/bestillinger/16.png)
 
 Nå er alle de nødvendige kolonnene opprettet. Sammenlign kolonnene på innstillingssiden din med følgende skjermbilde og forsikre deg om at du ikke har hoppet over et steg.
 
