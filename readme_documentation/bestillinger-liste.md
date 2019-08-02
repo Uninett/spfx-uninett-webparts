@@ -113,46 +113,62 @@ Hvert steg representerer opprettelsen av én kolonne.
 
 Nå er alle de nødvendige kolonnene opprettet. Sammenlign kolonnene på innstillingssiden din med følgende skjermbilde og forsikre deg om at du ikke har hoppet over et steg.
 
+![17](img/bestillinger/17.png)
+
 ## Legg til Content Types
 
 Neste steg er å legge til Content Types.
 
-1.  Trykk på **Add from existing content types** på innstillingssiden.
+1.  Trykk på **Add from existing content types** på innstillingssiden.  
 
 2.  Velg de tre Content Types'ene du har laget og trykk på **Add >**.  
-Du vil nå kunne se dem under Content Types-overskriften på innstillingssiden:
+![18](img/bestillinger/18.png)  
+Du vil nå kunne se dem under Content Types-overskriften på innstillingssiden: 
+![19](img/bestillinger/19.png)
 
-3.  Trykk på **Avdeling**, og deretter **Add from existing site or list columns** under Columns-overskriften.
+3.  Trykk på **Avdeling**, og deretter **Add from existing site or list columns** under Columns-overskriften.  
 
-4.  Velg følgende kolonner, og trykk **Add >**. Fullfør med å trykke på **OK**.
+4.  Velg følgende kolonner, og trykk **Add >**. Fullfør med å trykke på **OK**.  
+![20](img/bestillinger/20.png)
 
-5. Nå må du endre kolonnestatusen til Title- og Owner-kolonnene. Trykk på tittelen til hver av kolonnene, og sett Title til **Optional** og Owner til **Required**.
+5. Nå må du endre kolonnestatusen til Title- og Owner-kolonnene. Trykk på tittelen til hver av kolonnene, og sett Title til **Optional** og Owner til **Required**.  
+![21](img/bestillinger/21.png)
 
 6. Gå tilbake til hovedinnstillingssiden, og velg deretter **Aktivitet**.  
-    Trykk igjen på **Add from existing site or list columns** under Columns-overskriften.
+    Trykk igjen på **Add from existing site or list columns** under Columns-overskriften.  
     
-7.  Her velger du akkurat de samme kolonnene som for Avdeling, minus *Short name*. Fullfør med å trykke på **OK**.
+7.  Her velger du akkurat de samme kolonnene som for Avdeling, minus *Short name*. Fullfør med å trykke på **OK**.  
+![22](img/bestillinger/22.png)
 
-8. Endre kolonnestatusen til Owner-kolonnen til **Required**.
+8. Endre kolonnestatusen til Owner-kolonnen til **Required**.  
+![23](img/bestillinger/23.png)
 
 9.  Gå tilbake til hovedinnstillingssiden, og velg til slutt **Prosjekt**.  
-    Trykk igjen på **Add from existing site or list columns** under Columns-overskriften.
+    Trykk igjen på **Add from existing site or list columns** under Columns-overskriften.  
     
-10.  Legg til alle de tilgjengelige kolonnene, bortsett fra *Description* og *Short name*. Fullfør med å trykke på **OK**.
+10.  Legg til alle de tilgjengelige kolonnene, bortsett fra *Description* og *Short name*. Fullfør med å trykke på **OK**.  
+|![24](img/bestillinger/24.png)|![25](img/bestillinger/25.png)|
+|--|--|  
 
-11. Endre kolonnestatusen til Owner-kolonnen til **Required**.
+11. Endre kolonnestatusen til Owner-kolonnen til **Required**.  
+![26](img/bestillinger/26.png)
 
 ## Opprett View
 
-1.  Bla deg ned til bunnen av hovedinnstillingssiden, og trykk på **Create view**.
+1.  Bla deg ned til bunnen av hovedinnstillingssiden, og trykk på **Create view**.  
 
-2.  På neste side velger du **All Items** under *Start from an existing view*.
+2.  På neste side velger du **All Items** under *Start from an existing view*.  
+![27](img/bestillinger/27.png)
 
 3. Gi Viewen navnet "Alle bestillinger", og huk av for **Make this the default view**.  
-Forsikre deg om at View Audience er satt til **Create a Public View**.
+Forsikre deg om at View Audience er satt til **Create a Public View**.  
+![28](img/bestillinger/28.png)
 
-4. Huk av for kun **Title**, **Content Type**, **Status** og **Sign-off status**, og endre **Position from Left** til å være likt skjermbildet nedenfor.
+4. Huk av for kun **Title**, **Content Type**, **Status** og **Sign-off status**, og endre **Position from Left** til å være likt skjermbildet nedenfor.  
+![29](img/bestillinger/29.png)
 
-5. Endre deretter på innstillingene under **Sort** til å være likt skjermbildet nedenfor.
+5. Endre deretter på innstillingene under **Sort** til å være likt skjermbildet nedenfor.  
+![30](img/bestillinger/30.png)
 
-6. Huk til slutt av for **Enable this view for mobile access** under **Mobile**, og trykk på **OK** for å fullføre.
+6. Huk til slutt av for **Enable this view for mobile access** under **Mobile**, og trykk på **OK** for å fullføre.  
+![31](img/bestillinger/31.png)
