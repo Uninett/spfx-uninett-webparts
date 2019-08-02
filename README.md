@@ -28,7 +28,7 @@ Using either the built-in search box or the Search Box web part, you can filter 
 - **Custom column headers:** Lets you create custom column headers. Leave the fields blank to use the default column headers.
 
 <p align="center">
-  <img src="/readme-images/user-directory-demo.JPG" alt="User Directory demo"/>
+  <img src="/readme_images/user-directory-demo.JPG" alt="User Directory demo"/>
 </p>
 
 ## Search Box
@@ -43,7 +43,7 @@ Its functions are identical to the built-in search box of User Directory.
 - **Placeholder text:** Specify the placeholder text that is shown when the search box is empty.
 
 <p align="center">
-  <img src="/readme-images/search-box-demo.JPG" alt="Search Box demo"/>
+  <img src="/readme_images/search-box-demo.JPG" alt="Search Box demo"/>
 </p>
 
 ## Social Links
@@ -55,7 +55,7 @@ Web part that contains icons, with links, to social media. Property to change ba
 - YouTube
 
 <p align="center">
-  <img src="/readme-images/social-links-demo.JPG" alt="Social links demo"/>
+  <img src="/readme_images/social-links-demo.JPG" alt="Social links demo"/>
 </p>
 
 ## FlipClock
@@ -72,7 +72,7 @@ Flip clock that lets you toggle between two modes:
 General properties let you switch between the modes, change clock size and toggle between black and white text color.
 
 <p align="center">
-  <img src="/readme-images/flip-clock-demo.JPG" alt="FlipClock demo"/>
+  <img src="/readme_images/flip-clock-demo.JPG" alt="FlipClock demo"/>
 </p>
 
 ___

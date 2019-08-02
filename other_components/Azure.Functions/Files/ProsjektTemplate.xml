@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+    <pnp:Preferences Generator="OfficeDevPnP.Core, Version=2.25.1804.1, Culture=neutral, PublicKeyToken=5e633289e95c321a">
+        <pnp:Parameters>
+          <pnp:Parameter Key="SiteOrderUrl">https://iktuninett.sharepoint.com/sites/eureka</pnp:Parameter>
+        </pnp:Parameters>
+    </pnp:Preferences>
+    <pnp:Templates ID="CONTAINER-TEMPLATE-ACTIVITY-SITE">
+        <pnp:ProvisioningTemplate ID="TEMPLATE-ACTIVITY-SITE" Version="1" BaseSiteTemplate="GROUP#0" Scope="RootSite">
+			<pnp:RegionalSettings
+				  LocaleId="1044"
+				  Time24="true"
+				  TimeZone="4"
+				  Collation="9">
+			</pnp:RegionalSettings>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="objects/ProjectStartPage.xml" />
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="objects/LeftNavigation.xml" />
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="objects/TemplateHub-List.xml" />
+            <pnp:CustomActions>
+                <pnp:SiteCustomActions>
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="objects/GlobalNavigation.xml" />
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="objects/TemplateHub-Button.xml" />
+                </pnp:SiteCustomActions>
+            </pnp:CustomActions>
+        </pnp:ProvisioningTemplate>
+    </pnp:Templates>
+</pnp:Provisioning>

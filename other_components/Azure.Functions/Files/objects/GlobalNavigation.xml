@@ -1,0 +1,5 @@
+<pnp:CustomAction xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema" Title="GlobalNav"
+    Name="GlobalNav"
+    Location="ClientSideExtension.ApplicationCustomizer"
+    ClientSideComponentId="310ef592-8e46-4817-93f4-8d9d346f2414"
+    ClientSideComponentProperties="{&quot;NavigationTermSet&quot;:&quot;GlobalNavigation&quot;}" />

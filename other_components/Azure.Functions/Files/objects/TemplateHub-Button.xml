@@ -1,0 +1,7 @@
+<pnp:CustomAction xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema" Title="TemplateHub"
+    Name="templatehub.spfx"
+    RegistrationId = "101" 
+    RegistrationType = "List"
+    Location="ClientSideExtension.ListViewCommandSet"
+    ClientSideComponentId="997fe955-efac-4f36-8383-e51c3c8eed40"
+    ClientSideComponentProperties="{}" />

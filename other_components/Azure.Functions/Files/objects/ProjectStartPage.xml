@@ -1,0 +1,113 @@
+<pnp:ClientSidePages  xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+  <pnp:ClientSidePage PageName="Home.aspx" PromoteAsNewsArticle="false" Overwrite="true" Layout="Home">
+    <pnp:Sections>
+      <pnp:Section Order="1" Type="TwoColumnLeft">
+        <pnp:Controls>
+          <pnp:CanvasControl WebPartType="GroupCalendar" 
+            JsonControlData="
+            { 
+              &quot;serverProcessedContent&quot;: 
+              {
+                &quot;htmlStrings&quot;:{},
+                &quot;searchablePlainTexts&quot;:{},
+                &quot;imageSources&quot;:{},
+                &quot;links&quot;:{}
+              }, 
+              &quot;properties&quot;: 
+              {
+                &quot;selectedGroupId&quot;:&quot;{sitecollectionconnectedoffice365groupid}&quot;,
+                &quot;selectedGroupName&quot;:&quot;{sitename}&quot;,
+                &quot;selectedGroupEmail&quot;:&quot;&quot;,
+                &quot;accessType&quot;:&quot;private&quot;,
+                &quot;showPerPage&quot;:3,
+                &quot;title&quot;:&quot;Prosjektkalender&quot;,
+                &quot;timeSpanLimitInMonth&quot;:6
+              }
+            }" 
+            ControlId="6676088b-e28e-4a90-b9cb-d0d0303cd2eb" 
+            Order="2" 
+            Column="2" 
+          />
+          
+          <pnp:CanvasControl WebPartType="List" 
+            JsonControlData="
+            { 
+              &quot;serverProcessedContent&quot;: 
+              {
+                &quot;htmlStrings&quot;:{},
+                &quot;searchablePlainTexts&quot;:{},
+                &quot;imageSources&quot;:{},
+                &quot;links&quot;:{}
+              }, 
+              &quot;properties&quot;: 
+              {
+                &quot;isDocumentLibrary&quot;:true,
+                &quot;showDefaultDocumentLibrary&quot;:true,
+                &quot;webpartHeightKey&quot;:4,
+                &quot;selectedListUrl&quot;:&quot;&quot;,
+                &quot;listTitle&quot;:&quot;Dokumenter&quot;
+              }
+            }" 
+            ControlId="f92bf067-bc19-489e-a556-7fe95f508720" 
+            Order="1" 
+            Column="1" 
+          />
+
+          <pnp:CanvasControl WebPartType="SiteActivity" 
+            JsonControlData="
+            { 
+              &quot;serverProcessedContent&quot;: 
+              {
+                &quot;htmlStrings&quot;:{},
+                &quot;searchablePlainTexts&quot;:{},
+                &quot;imageSources&quot;:{},
+                &quot;links&quot;:{}
+              }, 
+              &quot;properties&quot;: 
+              {
+                &quot;maxItems&quot;:9
+              }
+            }" 
+            ControlId="eb95c819-ab8f-4689-bd03-0c2d65d47b1f" 
+            Order="2" 
+            Column="1" 
+          />
+
+          <pnp:CanvasControl WebPartType="Custom"
+            JsonControlData="
+            {
+              &quot;serverProcessedContent&quot;: 
+              {
+                &quot;htmlStrings&quot;:{},
+                &quot;searchablePlainTexts&quot;:{},
+                &quot;imageSources&quot;:{},
+                &quot;links&quot;:{}
+              }, 
+              &quot;properties&quot;: 
+              {
+                &quot;description&quot;:&quot;Siteinformation&quot;,
+                &quot;orderSiteURL&quot;:&quot;{parameter:SiteOrderUrl}&quot;,
+                &quot;editName&quot;:true,
+                &quot;editDescription&quot;:false,
+                &quot;editProjectGoal&quot;:true,
+                &quot;editProjectPurpose&quot;:true,
+                &quot;editOwner&quot;:true,
+                &quot;editShortName&quot;:false,
+                &quot;editParentDepartment&quot;:true,
+                &quot;editOwningDepartment&quot;:false,
+                &quot;editProjectNumber&quot;:true,
+                &quot;editStartDate&quot;:true,
+                &quot;editEndDate&quot;:true
+              }
+            }"
+            ControlId="6eb42102-1567-44e1-a8cc-89643bd9dfde"
+            Order="1"
+            Column="2"
+          />
+          
+          
+        </pnp:Controls>
+      </pnp:Section>
+    </pnp:Sections>
+  </pnp:ClientSidePage>
+</pnp:ClientSidePages>
