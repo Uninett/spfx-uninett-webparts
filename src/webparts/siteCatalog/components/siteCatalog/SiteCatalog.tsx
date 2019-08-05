@@ -4,7 +4,7 @@ import styles from '../SiteCatalog.module.scss';
 import { ISiteCatalogProps } from './ISiteCatalogProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { IOffice365Group } from '../interfaces/office365Group';
-import { GraphHttpClient, HttpClientResponse, IGraphHttpClientOptions } from '@microsoft/sp-http';
+import { AadHttpClientFactory, AadHttpClient, GraphHttpClient, HttpClientResponse, IGraphHttpClientOptions } from '@microsoft/sp-http';
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import List from '../list/List';
 import UserProfile from '../user/UserProfile';
@@ -131,10 +131,33 @@ export default class SiteCatalog extends React.Component<ISiteCatalogProps, ISit
   }
 
   // Fetches only groups that the user is a member of, to deal with permissions. Then we fetch all groups to get metadata.
-  public getMemberGroupsAndFetchData = () => {
+  public getMemberGroupsAndFetchData = ():void => {
 
     let handler = this;
 
+    this.props.context.aadHttpClientFactory
+      .getClient('https://graph.microsoft.com')
+      .then((client: AadHttpClient): void => {
+        client
+          .get("https://graph.microsoft.com/v1.0/users/" + this.props.context.pageContext.user.loginName + "/memberOf/$/microsoft.graph.group?$filter=groupTypes/any(a:a eq 'unified')", AadHttpClient.configurations.v1)
+          .then((response: HttpClientResponse) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              console.warn(response.statusText);
+            }
+          })
+          .then((result: any) => {
+            if (result && result.hasOwnProperty('value')) {
+              handler.setState({ memberGroups: result.value });
+      
+              // Fetch all groups
+              this.loadSiteList();
+            }
+          });
+    });
+
+/*
     // Fetch member groups
     this.props.context.graphHttpClient.get("v1.0/users/" + this.props.context.pageContext.user.loginName + "/memberOf/$/microsoft.graph.group?$filter=groupTypes/any(a:a eq 'unified')", GraphHttpClient.configurations.v1).then((response: HttpClientResponse) => {
       if (response.ok) {
@@ -150,7 +173,7 @@ export default class SiteCatalog extends React.Component<ISiteCatalogProps, ISit
         this.loadSiteList();
       }
     });
-
+*/
 
   }
 
@@ -640,7 +663,70 @@ export default class SiteCatalog extends React.Component<ISiteCatalogProps, ISit
       url = linkUrl;
     }
 
-    // Query for all groupos on the tenant using Microsoft Graph.
+    this.props.context.aadHttpClientFactory
+      .getClient('https://graph.microsoft.com')
+      .then((client: AadHttpClient): void => {
+        client
+          .get("https://graph.microsoft.com/v1.0/groups?" + url, AadHttpClient.configurations.v1)
+          .then((response: HttpClientResponse) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              console.warn(response.statusText);
+            }
+          })
+          .then((result: any) => {
+            if (result && result.value.length > 0) {
+              // Filter result
+              //let permissonTrimmedResult: Array<any> = result.value.filter(group => { return this.state.memberGroups.some(memberGroup => { return (group.id === memberGroup.id || group.visibility === 'Public') })});
+              let permissonTrimmedResult: Array<any> = [];
+              permissonTrimmedResult = this.getPermissionTrimmedResult(result.value);
+      
+              if (permissonTrimmedResult && permissonTrimmedResult.length > 0) {
+                let navPages = [];
+      
+                handler.fetchUserProfiles(permissonTrimmedResult, navPages, groupedFilters);
+              } else {
+                handler.setState({
+                  emptyResult: true,
+                  currentPage: 0,
+                  filter: groupedFilters,
+                  listData: [],
+                  unPartitionedListData: [],
+                  navPages: [],
+                  isLoading: false
+                });
+              }
+      
+      
+            } else {
+              if (result.error) {
+                console.error(result.message);
+              } else if (this.state.filter && result.value.length == 0) {
+                handler.setState({
+                  emptyResult: true,
+                  currentPage: 0,
+                  filter: groupedFilters,
+                  listData: [],
+                  unPartitionedListData: [],
+                  navPages: [],
+                  isLoading: false
+                });
+              } else {
+                handler.setState({
+                  emptyResult: true,
+                  filter: groupedFilters,
+                  currentPage: 0,
+                  navPages: [],
+                  isLoading: false
+                });
+              }
+      
+            }
+          });
+      });
+
+/*    // Query for all groupos on the tenant using Microsoft Graph.
     this.props.context.graphHttpClient.get('v1.0/groups?' + url, GraphHttpClient.configurations.v1).then((response: HttpClientResponse) => {
       if (response.ok) {
         return response.json();
@@ -697,6 +783,7 @@ export default class SiteCatalog extends React.Component<ISiteCatalogProps, ISit
       }
 
     });
+  */
   }
 
   public getPermissionTrimmedResult = (result: Array<any>) => {
