@@ -1,0 +1,18 @@
+﻿<?xml version="1.0"?>
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+  <pnp:Preferences>
+    <pnp:Parameters>
+      <pnp:Parameter Key="GenericFieldsPrefix">Områdeoppretting</pnp:Parameter>
+      <pnp:Parameter Key="GenericFieldsGroup">Områdeoppretting felter</pnp:Parameter>
+      <pnp:Parameter Key="GenericContentTypesGroup">Områdeoppretting innholdstyper</pnp:Parameter>
+    </pnp:Parameters>
+  </pnp:Preferences>
+  <pnp:Templates ID="Container-SiteCreation">
+    <pnp:ProvisioningTemplate ID="Container-SiteCreation-Prov" Version="1">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Terms.xml" />
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/SiteFields.xml" />
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/ContentTypes.Uninett.xml" />
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists.xml" />
+    </pnp:ProvisioningTemplate>
+  </pnp:Templates>
+</pnp:Provisioning>

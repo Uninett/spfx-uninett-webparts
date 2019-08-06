@@ -1,0 +1,125 @@
+﻿<pnp:SiteFields xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+  <!-- Felles felter -->
+  <Field ID="{E2A125E8-DAD5-464E-B1AA-3A8FB16CAF86}" Name="KDTOSitePrivacy" DisplayName="Open/Closed" Type="Choice" Group="{parameter:GenericFieldsGroup}" Description="Lukkede områder er kun tilgjengelige for eiere og medlemmer av gruppen. Åpne er synlige og tilgjengelige for alle.">
+    <Default>Open</Default>
+    <CHOICES>
+      <CHOICE>Open</CHOICE>
+      <CHOICE>Closed</CHOICE>
+    </CHOICES>
+  </Field>
+  <Field ID="{EAABEF6C-6E45-45BA-B532-9A52678EACE5}" Name="KDTOExternalSharing" DisplayName="External sharing" Type="Boolean" Group="{parameter:GenericFieldsGroup}">
+    <Default>0</Default>
+  </Field>
+  <Field ID="{7FB561DE-C289-4B92-A8F7-16EA3B0FF416}" Name="KDTOSiteDescription" DisplayName="Description" Type="Note" Group="{parameter:GenericFieldsGroup}" Description="" ShowInNewForm="TRUE" />
+  <Field ID="{5639FFA9-C62E-4513-B7C7-CCCA2B5E92C2}" Name="KDTOParentDepartment" DisplayName="Parent department" Type="Choice" Group="{parameter:GenericFieldsGroup}" ShowInNewForm="TRUE">
+    <Default>Ceres</Default>
+    <CHOICES>
+      <CHOICE>Ceres</CHOICE>
+      <CHOICE>BIBSYS</CHOICE>
+      <CHOICE>Uninett TO</CHOICE>
+      <CHOICE>Virksomhetsstøtte</CHOICE>
+      <CHOICE>Annet</CHOICE>
+    </CHOICES>
+  </Field>
+  <Field ID="{CE452A37-6C2E-4C1A-9370-85C3D6A32814}" Name="KDTOStatus" DisplayName="Status" Type="Choice" Group="{parameter:GenericFieldsGroup}">
+    <Default>Ordered</Default>
+    <CHOICES>
+      <CHOICE>Ordered</CHOICE>
+      <CHOICE>Create</CHOICE>
+      <CHOICE>Completed</CHOICE>
+      <CHOICE>Error</CHOICE>
+    </CHOICES>
+  </Field>
+  <Field ID="{AC00C7EB-6866-4F3D-B2DD-3F534379B144}" Name="KDTOOwner" Type="User" DisplayName="Owner" List="UserInfo" EnforceUniqueValues="FALSE" ShowField="ImnName" UserSelectionMode="PeopleOnly" UserSelectionScope="0" Group="{parameter:GenericFieldsGroup}" />
+  
+  <!-- Avdelingsområde -->  
+  <Field ID="{2C344B69-4403-468A-8877-B0A32F6F2D2F}" Name="KDTOShortName" DisplayName="Short name" Type="Text" Group="{parameter:GenericFieldsGroup}" ShowInNewForm="TRUE" Description="" />
+
+  <!-- Prosjektområde -->
+  <Field ID="{7D3E6357-AC45-4AC1-8B62-B76640B9CD73}" Name="KDTOProjectGoal" DisplayName="Project goal" Type="Text" Group="{parameter:GenericFieldsGroup}" ShowInNewForm="TRUE" Description="" />
+  <Field ID="{614348C9-7D6B-4000-8ACB-C4D6B7A08B22}" Name="KDTOProjectPurpose" DisplayName="Project purpose" Type="Note" Group="{parameter:GenericFieldsGroup}" Description="" ShowInNewForm="TRUE" />
+  <Field ID="{5398EAB4-B6E9-46BF-AC69-B932EDE8629A}" Name="KDTOProjectNumber" DisplayName="Project number" Type="Text" Group="{parameter:GenericFieldsGroup}" ShowInNewForm="TRUE" Description="" />
+  <Field ID="{2BFEEE6D-FD2B-42F8-B972-BB71725690F9}" Name="KDTOStartDate" Type="DateTime" DisplayName="Start date" EnforceUniqueValues="FALSE" Indexed="FALSE" Format="DateOnly" Group="{parameter:GenericFieldsGroup}">
+    <Default>[today]</Default>
+  </Field>
+  <Field ID="{208F4C00-900C-4A9C-9E91-EC78BCA692F5}" Name="KDTOEndDate" Type="DateTime" DisplayName="End date" EnforceUniqueValues="FALSE" Indexed="FALSE" Format="DateOnly" Group="{parameter:GenericFieldsGroup}">
+    <Default>[today]</Default>
+  </Field>
+  <!--<Field ID="{08F7AC17-7B84-4849-8428-AFF76C266966}" Name="KDTOOwnedDepartment" DisplayName="Eiende avdeling" Type="Choice" Group="{parameter:GenericFieldsGroup}" ShowInNewForm="TRUE" Description="">
+    <Default>Ceres</Default>
+    <CHOICES>
+      <CHOICE>Ceres</CHOICE>
+      <CHOICE>BIBSYS</CHOICE>
+      <CHOICE>Uninett TO</CHOICE>
+      <CHOICE>Virksomhetsstøtte</CHOICE>
+    </CHOICES>
+  </Field>-->
+  <Field ID="{741275F6-4509-46FC-9929-91D75456AEEA}" Name="KDTOPreferedUrl" DisplayName="Prefered URL" Type="Text" Group="{parameter:GenericFieldsGroup}" ShowInNewForm="TRUE" Description="" />
+  <Field ID="{6A505804-C196-4F40-9E57-ED3492A923D6}" Name="KDTOOwningDepartment" StaticName="KDTOOwningDepartment" Type="TaxonomyFieldType" DisplayName="Owning department" List="{{listid:TaxonomyHiddenList}}" ShowField="Term1033" Required="FALSE" EnforceUniqueValues="FALSE" Group="{parameter:GenericFieldsGroup}" >
+    <Default>
+    </Default>
+    <Customization>
+      <ArrayOfProperty>
+        <Property>
+          <Name>SspId</Name>
+          <Value xmlns:q1="http://www.w3.org/2001/XMLSchema" p4:type="q1:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}</Value>
+        </Property>
+        <Property>
+          <Name>GroupId</Name>
+        </Property>
+        <Property>
+          <Name>TermSetId</Name>
+          <Value xmlns:q2="http://www.w3.org/2001/XMLSchema" p4:type="q2:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{termsetid:Uninett:Department}</Value>
+        </Property>
+        <Property>
+          <Name>AnchorId</Name>
+          <Value xmlns:q3="http://www.w3.org/2001/XMLSchema" p4:type="q3:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">00000000-0000-0000-0000-000000000000</Value>
+        </Property>
+        <Property>
+          <Name>UserCreated</Name>
+          <Value xmlns:q4="http://www.w3.org/2001/XMLSchema" p4:type="q4:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+        </Property>
+        <Property>
+          <Name>Open</Name>
+          <Value xmlns:q5="http://www.w3.org/2001/XMLSchema" p4:type="q5:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+        </Property>
+        <Property>
+          <Name>TextField</Name>
+          <Value xmlns:q6="http://www.w3.org/2001/XMLSchema" p4:type="q6:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{3001dbde-6cd8-4723-8bc6-decbf6d142a7}</Value>
+        </Property>
+        <Property>
+          <Name>IsPathRendered</Name>
+          <Value xmlns:q7="http://www.w3.org/2001/XMLSchema" p4:type="q7:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+        </Property>
+        <Property>
+          <Name>IsKeyword</Name>
+          <Value xmlns:q8="http://www.w3.org/2001/XMLSchema" p4:type="q8:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+        </Property>
+        <Property>
+          <Name>TargetTemplate</Name>
+        </Property>
+        <Property>
+          <Name>CreateValuesInEditForm</Name>
+          <Value xmlns:q9="http://www.w3.org/2001/XMLSchema" p4:type="q9:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+        </Property>
+        <Property>
+          <Name>FilterAssemblyStrongName</Name>
+          <Value xmlns:q10="http://www.w3.org/2001/XMLSchema" p4:type="q10:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">Microsoft.SharePoint.Taxonomy, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c</Value>
+        </Property>
+        <Property>
+          <Name>FilterClassName</Name>
+          <Value xmlns:q11="http://www.w3.org/2001/XMLSchema" p4:type="q11:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">Microsoft.SharePoint.Taxonomy.TaxonomyField</Value>
+        </Property>
+        <Property>
+          <Name>FilterMethodName</Name>
+          <Value xmlns:q12="http://www.w3.org/2001/XMLSchema" p4:type="q12:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">GetFilteringHtml</Value>
+        </Property>
+        <Property>
+          <Name>FilterJavascriptProperty</Name>
+          <Value xmlns:q13="http://www.w3.org/2001/XMLSchema" p4:type="q13:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">FilteringJavascript</Value>
+        </Property>
+      </ArrayOfProperty>
+    </Customization>
+  </Field>
+  
+</pnp:SiteFields>

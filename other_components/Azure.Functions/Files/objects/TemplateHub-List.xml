@@ -1,0 +1,17 @@
+<pnp:Lists xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+    <pnp:ListInstance 
+        Title="TempFiles TemplateHub" 
+        Description="" 
+        TemplateType="101" 
+        Url="TempFiles TemplateHub" 
+        EnableVersioning="false" 
+        TemplateFeatureID="00bfea71-e717-4e80-aa17-d0c71b360101" 
+        EnableAttachments="false" 
+        IsApplicationList="true"
+        Hidden="true">
+        <pnp:ContentTypeBindings>
+            <pnp:ContentTypeBinding ContentTypeID="0x0101" Default="true" />
+            <pnp:ContentTypeBinding ContentTypeID="0x0120" />
+        </pnp:ContentTypeBindings>
+    </pnp:ListInstance>
+</pnp:Lists>

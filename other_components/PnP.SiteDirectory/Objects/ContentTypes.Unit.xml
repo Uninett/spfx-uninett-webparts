@@ -1,0 +1,44 @@
+﻿<pnp:ContentTypes xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+  <pnp:ContentType ID="0x01006723DC5874B448DBA9EB9966245656FA" Name="Seksjon" Group="{parameter:GenericContentTypesGroup}" Description="Contenttype for Site Creation list" Inherits="false">
+    <pnp:FieldRefs>
+      <pnp:FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" Required="true" />
+      <pnp:FieldRef ID="{AC00C7EB-6866-4F3D-B2DD-3F534379B144}" Name="KDTOOwner" Required="true" />
+      <pnp:FieldRef ID="{7FB561DE-C289-4B92-A8F7-16EA3B0FF416}" Name="KDTOSiteDescription" />
+      <pnp:FieldRef ID="{2C344B69-4403-468A-8877-B0A32F6F2D2F}" Name="KDTOShortName" />
+      <pnp:FieldRef ID="{5639FFA9-C62E-4513-B7C7-CCCA2B5E92C2}" Name="KDTOParentDepartment" />
+      <pnp:FieldRef ID="{E2A125E8-DAD5-464E-B1AA-3A8FB16CAF86}" Name="KDTOSitePrivacy" />
+      <pnp:FieldRef ID="{EAABEF6C-6E45-45BA-B532-9A52678EACE5}" Name="KDTOExternalSharing" />
+      <pnp:FieldRef ID="{CE452A37-6C2E-4C1A-9370-85C3D6A32814}" Name="KDTOStatus" />
+    </pnp:FieldRefs>
+  </pnp:ContentType>
+  <pnp:ContentType ID="0x0100DB027F48E8544E67AE646920383C7DC6" Name="Aktivitet" Group="{parameter:GenericContentTypesGroup}" Description="Contenttype for Site Creation list" Inherits="false">
+    <pnp:FieldRefs>
+      <pnp:FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" Required="true" />
+      <pnp:FieldRef ID="{AC00C7EB-6866-4F3D-B2DD-3F534379B144}" Name="KDTOOwner" Required="true" />
+      <pnp:FieldRef ID="{7FB561DE-C289-4B92-A8F7-16EA3B0FF416}" Name="KDTOSiteDescription" />
+      <pnp:FieldRef ID="{5639FFA9-C62E-4513-B7C7-CCCA2B5E92C2}" Name="KDTOParentDepartment" />
+      <pnp:FieldRef ID="{E2A125E8-DAD5-464E-B1AA-3A8FB16CAF86}" Name="KDTOSitePrivacy" />
+      <pnp:FieldRef ID="{EAABEF6C-6E45-45BA-B532-9A52678EACE5}" Name="KDTOExternalSharing" />
+      <pnp:FieldRef ID="{CE452A37-6C2E-4C1A-9370-85C3D6A32814}" Name="KDTOStatus" />
+    </pnp:FieldRefs>
+  </pnp:ContentType>
+  <pnp:ContentType ID="0x0100DC8802B232844410BC4B3339D325E8DD" Name="Prosjekt" Group="{parameter:GenericContentTypesGroup}" Description="Contenttype for Site Creation list" Inherits="false">
+    <pnp:FieldRefs>
+      <pnp:FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" Required="true" />
+      <pnp:FieldRef ID="{AC00C7EB-6866-4F3D-B2DD-3F534379B144}" Name="KDTOOwner" Required="true" />
+      <pnp:FieldRef ID="{7D3E6357-AC45-4AC1-8B62-B76640B9CD73}" Name="KDTOProjectGoal" />
+      <pnp:FieldRef ID="{614348C9-7D6B-4000-8ACB-C4D6B7A08B22}" Name="KDTOProjectPurpose" />
+      <pnp:FieldRef ID="{5398EAB4-B6E9-46BF-AC69-B932EDE8629A}" Name="KDTOProjectNumber" />
+      <pnp:FieldRef ID="{2BFEEE6D-FD2B-42F8-B972-BB71725690F9}" Name="KDTOStartDate" />
+      <pnp:FieldRef ID="{208F4C00-900C-4A9C-9E91-EC78BCA692F5}" Name="KDTOEndDate" />
+      <pnp:FieldRef ID="{5639FFA9-C62E-4513-B7C7-CCCA2B5E92C2}" Name="KDTOParentDepartment" />
+      <pnp:FieldRef ID="{6A505804-C196-4F40-9E57-ED3492A923D6}" Name="KDTOOwningDepartment" />
+      <pnp:FieldRef ID="{E2A125E8-DAD5-464E-B1AA-3A8FB16CAF86}" Name="KDTOSitePrivacy" />
+      <pnp:FieldRef ID="{EAABEF6C-6E45-45BA-B532-9A52678EACE5}" Name="KDTOExternalSharing" />
+      <pnp:FieldRef ID="{CE452A37-6C2E-4C1A-9370-85C3D6A32814}" Name="KDTOStatus" />
+      <pnp:FieldRef ID="{741275F6-4509-46FC-9929-91D75456AEEA}" Name="KDTOPreferedUrl" />
+    </pnp:FieldRefs>
+  </pnp:ContentType>
+</pnp:ContentTypes>
+
+

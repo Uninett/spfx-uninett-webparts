@@ -1,0 +1,31 @@
+﻿<pnp:Lists xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+  <pnp:ListInstance Title="Bestillinger" OnQuickLaunch="false" TemplateType="100" Url="Lists/bestillinger" RemoveExistingContentTypes="true" EnableFolderCreation="false" ContentTypesEnabled="true" Hidden="true" NoCrawl="true" >
+    <pnp:ContentTypeBindings>
+      <pnp:ContentTypeBinding ContentTypeID="0x01006723DC5874B448DBA9EB9966245656FA" Default="true"/>
+      <pnp:ContentTypeBinding ContentTypeID="0x0100DB027F48E8544E67AE646920383C7DC6" />
+      <pnp:ContentTypeBinding ContentTypeID="0x0100DC8802B232844410BC4B3339D325E8DD" />
+    </pnp:ContentTypeBindings>
+    <pnp:Views RemoveExistingViews="false">
+      <View Name="{B0186B20-2D95-446B-A982-ED3E8E4F233F}" DefaultView="TRUE" DisplayName="Alle bestillinger">
+        <Query>
+          <OrderBy>
+            <FieldRef Name="Modified" Ascending="FALSE"/>
+          </OrderBy>
+        </Query>
+        <ViewFields>
+          <FieldRef Name="LinkTitle" />
+          <FieldRef Name="ContentType" />
+          <FieldRef Name="KDTOStatus" />
+        </ViewFields>
+      </View>
+    </pnp:Views>
+
+    <pnp:FieldRefs>
+      <pnp:FieldRef Name="LinkTitle" ID="{82642ec8-ef9b-478f-acf9-31f7d45fbc31}" DisplayName="Navn" />
+      <pnp:FieldRef Name="LinkTitleNoMenu" ID="{bc91a437-52e7-49e1-8c4e-4698904b2b6d}" DisplayName="Navn" />
+      <pnp:FieldRef Name="Title" ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" DisplayName="Navn" />
+      <pnp:FieldRef Name="ContentType" ID="{c042a256-787d-4a6f-8a8a-cf6ab767f12d}" DisplayName="Områdetype" />
+    </pnp:FieldRefs>
+    
+  </pnp:ListInstance>
+</pnp:Lists>

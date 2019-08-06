@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+    <pnp:Preferences Generator="OfficeDevPnP.Core, Version=2.25.1804.1, Culture=neutral, PublicKeyToken=5e633289e95c321a" />
+    <pnp:Templates ID="CONTAINER-TEMPLATE-ADD-TEMPLATEHUB">
+        <pnp:ProvisioningTemplate ID="TEMPLATE-ADD-TEMPLATEHUB" Version="1" BaseSiteTemplate="GROUP#0" Scope="RootSite">
+            <pnp:CustomActions>
+                <pnp:SiteCustomActions>
+                    <pnp:CustomAction Title="TemplateHub"
+                     Name="templatehub.spfx"
+                     RegistrationId = "101"
+                     RegistrationType = "List"
+                     Location="ClientSideExtension.ListViewCommandSet"
+                     ClientSideComponentId="997fe955-efac-4f36-8383-e51c3c8eed40"
+                     ClientSideComponentProperties="{}" />
+                </pnp:SiteCustomActions>
+            </pnp:CustomActions>
+            <pnp:Lists>
+                <pnp:ListInstance 
+                    Title="TempFiles TemplateHub" 
+                    Description="" 
+                    TemplateType="101" 
+                    Url="TempFiles TemplateHub" 
+                    EnableVersioning="false" 
+                    TemplateFeatureID="00bfea71-e717-4e80-aa17-d0c71b360101" 
+                    EnableAttachments="false" 
+                    IsApplicationList="true"
+                    Hidden="true">
+                    <pnp:ContentTypeBindings>
+                        <pnp:ContentTypeBinding ContentTypeID="0x0101" Default="true" />
+                        <pnp:ContentTypeBinding ContentTypeID="0x0120" />
+                    </pnp:ContentTypeBindings>
+                </pnp:ListInstance >
+            </pnp:Lists>
+        </pnp:ProvisioningTemplate>
+    </pnp:Templates>
+</pnp:Provisioning>

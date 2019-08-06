@@ -1,0 +1,372 @@
+{
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#schemaExtensions/$entity",
+    "id": "extvcs569it_InmetaGenericSchema",
+    "description": "Generic Schema Extension by Inmeta Consulting AS",
+    "targetTypes": [
+        "Group"
+    ],
+    "status": "InDevelopment",
+    "owner": "1e2415d6-9fac-42a5-89b4-1c623d72cbe6",
+    "properties": [
+        {
+            "name": "KeyString00", // SiteType
+            "type": "String"
+        },
+        {
+            "name": "LabelString00",
+            "type": "String"
+        },
+        {
+            "name": "ValueString00",
+            "type": "String"
+        },
+        {
+            "name": "KeyString01", // Title
+            "type": "String"
+        },
+        {
+            "name": "LabelString01",
+            "type": "String"
+        },
+        {
+            "name": "ValueString01",
+            "type": "String"
+        },
+        {
+            "name": "KeyString02", //KDTODescription
+            "type": "String"
+        },
+        {
+            "name": "LabelString02",
+            "type": "String"
+        },
+        {
+            "name": "ValueString02",
+            "type": "String"
+        },
+        {
+            "name": "KeyString03", // KDTOOwner
+            "type": "String"
+        },
+        {
+            "name": "LabelString03",
+            "type": "String"
+        },
+        {
+            "name": "ValueString03",
+            "type": "String"
+        },
+        {
+            "name": "KeyString04", // KDTOParentDepartment
+            "type": "String"
+        },
+        {
+            "name": "LabelString04",
+            "type": "String"
+        },
+        {
+            "name": "ValueString04",
+            "type": "String"
+        },
+        {
+            "name": "KeyString05", // KDTOOwnedDepartment
+            "type": "String"
+        },
+        {
+            "name": "LabelString05",
+            "type": "String"
+        },
+        {
+            "name": "ValueString05",
+            "type": "String"
+        },
+        {
+            "name": "KeyString06", // KDTOProjectNumber
+            "type": "String"
+        },
+        {
+            "name": "LabelString06",
+            "type": "String"
+        },
+        {
+            "name": "ValueString06", 
+            "type": "String"
+        },
+        {
+            "name": "KeyString07", // KDTOShortName
+            "type": "String"
+        },
+        {
+            "name": "LabelString07",
+            "type": "String"
+        },
+        {
+            "name": "ValueString07",
+            "type": "String"
+        },
+        {
+            "name": "KeyString08", // KDTOProjectGoal
+            "type": "String"
+        },
+        {
+            "name": "LabelString08",
+            "type": "String"
+        },
+        {
+            "name": "ValueString08",
+            "type": "String"
+        },
+        {
+            "name": "KeyString09", // KDTOProjectPurpose
+            "type": "String"
+        },
+        {
+            "name": "LabelString09",
+            "type": "String"
+        },
+        {
+            "name": "ValueString09",
+            "type": "String"
+        },
+        {
+            "name": "KeyInteger00",
+            "type": "String"
+        },
+        {
+            "name": "LabelInteger00",
+            "type": "String"
+        },
+        {
+            "name": "ValueInteger00",
+            "type": "Integer"
+        },
+        {
+            "name": "KeyInteger01",
+            "type": "String"
+        },
+        {
+            "name": "LabelInteger01",
+            "type": "String"
+        },
+        {
+            "name": "ValueInteger01",
+            "type": "Integer"
+        },
+        {
+            "name": "KeyInteger02",
+            "type": "String"
+        },
+        {
+            "name": "LabelInteger02",
+            "type": "String"
+        },
+        {
+            "name": "ValueInteger02",
+            "type": "Integer"
+        },
+        {
+            "name": "KeyInteger03",
+            "type": "String"
+        },
+        {
+            "name": "LabelInteger03",
+            "type": "String"
+        },
+        {
+            "name": "ValueInteger03",
+            "type": "Integer"
+        },
+        {
+            "name": "KeyInteger04",
+            "type": "String"
+        },
+        {
+            "name": "LabelInteger04",
+            "type": "String"
+        },
+        {
+            "name": "ValueInteger04",
+            "type": "Integer"
+        },
+        {
+            "name": "KeyBoolean00",
+            "type": "String"
+        },
+        {
+            "name": "LabelBoolean00",
+            "type": "String"
+        },
+        {
+            "name": "ValueBoolean00",
+            "type": "Boolean"
+        },
+        {
+            "name": "KeyBoolean01",
+            "type": "String"
+        },
+        {
+            "name": "LabelBoolean01",
+            "type": "String"
+        },
+        {
+            "name": "ValueBoolean01",
+            "type": "Boolean"
+        },
+        {
+            "name": "KeyBoolean02",
+            "type": "String"
+        },
+        {
+            "name": "LabelBoolean02",
+            "type": "String"
+        },
+        {
+            "name": "ValueBoolean02",
+            "type": "Boolean"
+        },
+        {
+            "name": "KeyBoolean03",
+            "type": "String"
+        },
+        {
+            "name": "LabelBoolean03",
+            "type": "String"
+        },
+        {
+            "name": "ValueBoolean03",
+            "type": "Boolean"
+        },
+        {
+            "name": "KeyBoolean04",
+            "type": "String"
+        },
+        {
+            "name": "LabelBoolean04",
+            "type": "String"
+        },
+        {
+            "name": "ValueBoolean04",
+            "type": "Boolean"
+        },
+        {
+            "name": "KeyDateTime00", // KDTOStartDate
+            "type": "String"
+        },
+        {
+            "name": "LabelDateTime00",
+            "type": "String"
+        },
+        {
+            "name": "ValueDateTime00",
+            "type": "DateTime"
+        },
+        {
+            "name": "KeyDateTime01", // KDTOEndDate
+            "type": "String"
+        },
+        {
+            "name": "LabelDateTime01",
+            "type": "String"
+        },
+        {
+            "name": "ValueDateTime01",
+            "type": "DateTime"
+        },
+        {
+            "name": "KeyDateTime02",
+            "type": "String"
+        },
+        {
+            "name": "LabelDateTime02",
+            "type": "String"
+        },
+        {
+            "name": "ValueDateTime02",
+            "type": "DateTime"
+        },
+        {
+            "name": "KeyDateTime03",
+            "type": "String"
+        },
+        {
+            "name": "LabelDateTime03",
+            "type": "String"
+        },
+        {
+            "name": "ValueDateTime03",
+            "type": "DateTime"
+        },
+        {
+            "name": "KeyDateTime04",
+            "type": "String"
+        },
+        {
+            "name": "LabelDateTime04",
+            "type": "String"
+        },
+        {
+            "name": "ValueDateTime04",
+            "type": "DateTime"
+        },
+        {
+            "name": "KeyBinary00",
+            "type": "String"
+        },
+        {
+            "name": "LabelBinary00",
+            "type": "String"
+        },
+        {
+            "name": "ValueBinary00",
+            "type": "Binary"
+        },
+        {
+            "name": "KeyBinary01",
+            "type": "String"
+        },
+        {
+            "name": "LabelBinary01",
+            "type": "String"
+        },
+        {
+            "name": "ValueBinary01",
+            "type": "Binary"
+        },
+        {
+            "name": "KeyBinary02",
+            "type": "String"
+        },
+        {
+            "name": "LabelBinary02",
+            "type": "String"
+        },
+        {
+            "name": "ValueBinary02",
+            "type": "Binary"
+        },
+        {
+            "name": "KeyBinary03",
+            "type": "String"
+        },
+        {
+            "name": "LabelBinary03",
+            "type": "String"
+        },
+        {
+            "name": "ValueBinary03",
+            "type": "Binary"
+        },
+        {
+            "name": "KeyBinary04",
+            "type": "String"
+        },
+        {
+            "name": "LabelBinary04",
+            "type": "String"
+        },
+        {
+            "name": "ValueBinary04",
+            "type": "Binary"
+        }
+    ]
+}

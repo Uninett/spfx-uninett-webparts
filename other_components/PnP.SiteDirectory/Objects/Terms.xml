@@ -1,0 +1,35 @@
+﻿<pnp:TermGroups xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+  <pnp:TermGroup Name="Uninett" ID="84cfcb01-c118-4848-bc63-bb1901c2a4d6" Description="">
+    <pnp:TermSets>
+      <pnp:TermSet Name="GlobalNavigation" ID="a3a784a3-88fa-4ba9-88f2-0e44ebe298fc" Description="">
+        <pnp:CustomProperties>
+          <pnp:Property Key="_Sys_Nav_IsNavigationTermSet" Value="True" />
+        </pnp:CustomProperties>
+        <pnp:Terms>
+          <pnp:Term Name="Start" ID="8e194f0b-9762-4d6d-9fbe-6a29b0c9a6cf" SourceTermId="8e194f0b-9762-4d6d-9fbe-6a29b0c9a6cf">
+            <pnp:Terms />
+            <pnp:LocalCustomProperties>
+              <pnp:Property Key="_Sys_Nav_SimpleLinkUrl" Value="" />
+            </pnp:LocalCustomProperties>
+          </pnp:Term>
+          <pnp:Term Name="Wiki" ID="8b721d51-73ec-425b-af70-1c88047f15bf" SourceTermId="8b721d51-73ec-425b-af70-1c88047f15bf">
+            <pnp:Terms />
+            <pnp:LocalCustomProperties>
+              <pnp:Property Key="_Sys_Nav_SimpleLinkUrl" Value="" />
+            </pnp:LocalCustomProperties>
+          </pnp:Term>
+        </pnp:Terms>
+      </pnp:TermSet>
+      <pnp:TermSet Name="Department" ID="d7b95001-2bd0-4aae-ad1d-9a6ed6b44061" Description="">
+        <pnp:Terms>
+          <pnp:Term Name="Start" ID="88421aa2-105f-4a2f-8b24-02a6c884efaa" SourceTermId="88421aa2-105f-4a2f-8b24-02a6c884efaa">
+            <pnp:Terms />
+          </pnp:Term>
+          <pnp:Term Name="Test" ID="18f0ead0-18e0-4406-b077-40a0d24b859b" SourceTermId="18f0ead0-18e0-4406-b077-40a0d24b859b">
+            <pnp:Terms />
+          </pnp:Term>
+        </pnp:Terms>
+      </pnp:TermSet>
+    </pnp:TermSets>
+  </pnp:TermGroup>
+</pnp:TermGroups>
