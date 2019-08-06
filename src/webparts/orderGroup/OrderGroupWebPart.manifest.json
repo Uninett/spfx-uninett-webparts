@@ -16,8 +16,8 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
     "group": { "default": "Other" },
-    "title": { "default": "Create Site Button" },
-    "description": { "default": "Create Site Button description" },
+    "title": { "default": "Order Site Button" },
+    "description": { "default": "Order Site Button description" },
     "officeFabricIconFontName": "PageAdd",
     "properties": {
       "description": "OrderGroup",
