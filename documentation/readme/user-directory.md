@@ -6,7 +6,7 @@ The web part uses MS Graph REST API to retrieve Office 365 users from Azure AD.
 Using either the built-in search box or the [Search Box](#search-box) web part, you can filter users by name or department.
 
 <p align="center">
-  <img src="img/user-directory.JPG" alt="User Directory demo" styles="max-width: 85%;"/>
+  <img src="img/user-directory.JPG" alt="User Directory demo" styles="width: 85%;"/>
 </p>
 
 ## Features
@@ -19,13 +19,20 @@ Using either the built-in search box or the [Search Box](#search-box) web part, 
 
 ## Properties
 
-- **API:** The MS Graph query for the group of users you want to display (e.g. *users* for all users, or *groups/{group_ID}/members* for users in a specific group). If you want to retrieve more than 100 users, add *?$top=999* at the end of the query.
-- **Compact mode:** Toggle between compact and normal row spacing.
-- **Row colour:** Toggle between single row colour (white) and alternating row colours (blue and white).
-- **Search box source:** Toggle between using the built-in search box and the Search Box web part. If you want to use the Search Box web part, simply add it to the page and it will automatically connect to the User Directory.
-  - **Placeholder text:** Specify the placeholder text that is shown when the search box is empty (for built-in search box).
-- **Select columns:** Use the checkboxes to select the columns you want to display in the User Directory.
-- **Custom column headers:** Lets you create custom column headers. Leave the fields blank to use the default column headers.
+- **API:**  
+The MS Graph query for the group of users you want to display (e.g. *users* for all users, or *groups/{group_ID}/members* for users in a specific group). If you want to retrieve more than 100 users, add *?$top=999* at the end of the query.
+- **Compact mode:**  
+Toggle between compact and normal row spacing.
+- **Row colour:**  
+Toggle between single row colour (white) and alternating row colours (blue and white).
+- **Search box source:**  
+Toggle between using the built-in search box and the Search Box web part. If you want to use the Search Box web part, simply add it to the page and it will automatically connect to the User Directory.
+  - **Placeholder text:**  
+  Specify the placeholder text that is shown when the search box is empty (for built-in search box).
+- **Select columns:**  
+Use the checkboxes to select the columns you want to display in the User Directory.
+- **Custom column headers:**  
+Lets you create custom column headers. Leave the fields blank to use the default column headers.
 
 
 # Search Box
@@ -41,5 +48,6 @@ Its functions are identical to the built-in search box of User Directory.
 
 ## Properties
 
-- **Placeholder text:** Specify the placeholder text that is shown when the search box is empty.
+- **Placeholder text:**  
+Specify the placeholder text that is shown when the search box is empty.
 

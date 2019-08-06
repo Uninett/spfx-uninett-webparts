@@ -2,10 +2,10 @@
 
 Displays SharePoint sites from your Office 365 tenant in a customised [DetailsList](https://developer.microsoft.com/en-us/fabric#/controls/web/detailslist) component.  
 
-New sites can be created using the [Order Site Button](order-site.md) web part.
+New sites can be created using the [Order Site Button](#order-site-button) web part.
 
 <p align="center">
-  <img src="img/site-directory.JPG" alt="Site Directory demo" style="max-width: 80%;"/>
+  <img src="img/site-directory.JPG" alt="Site Directory demo" style="width: 85%;"/>
 </p>
 
 ## Features
@@ -16,11 +16,16 @@ New sites can be created using the [Order Site Button](order-site.md) web part.
 
 ## Properties
 
-- **List rows per page:** Decide how many rows to display on one page
-- **Show New button:** Display New button in toolbar, allowing users to create new sites
-- **Hide Department column:** Toggle visibility of Department column
-- **Site types:** A comma separated list of possible site types (e.g. Aktivitet,Seksjon,Prosjekt)
-- **Search settings:** Toggle between Graph filter search and Javascript search
+- **List rows per page:**  
+Decide how many rows to display on one page
+- **Show New button:**  
+Display New button in toolbar, allowing users to create new sites
+- **Hide Department column:**  
+Toggle visibility of Department column
+- **Site types:**  
+A comma separated list of possible site types (e.g. Aktivitet,Seksjon,Prosjekt)
+- **Search settings:**  
+Toggle between Graph filter search and Javascript search
 
 
 # Order Site Button
