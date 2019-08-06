@@ -1,11 +1,11 @@
 # Uninett SPFx SharePoint Web Parts
 
-A collection of web parts developed by Uninett.
+A collection of web parts developed by Uninett.  
 
-* [Site Directory](documentation/readme/site-directory.md)
-* [Create Site Button](documentation/readme/create-site.md)
-* [User Directory](documentation/readme/user-directory.md)
-* [Search Box](documentation/readme/search-box.md)
+See individual READMEs for each web part:
+
+* [Site Directory + Order Site Button](documentation/readme/site-directory.md)
+* [User Directory + Search Box](documentation/readme/user-directory.md)
 * [Social Links](documentation/readme/social-links.md)
 * [Flip Clock](documentation/readme/flip-clock.md)
 

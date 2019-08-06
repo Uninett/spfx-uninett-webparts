@@ -3,7 +3,11 @@
 Displays users from your Office 365 tenant in a customised [DetailsList](https://developer.microsoft.com/en-us/fabric#/controls/web/detailslist) component.  
 
 The web part uses MS Graph REST API to retrieve Office 365 users from Azure AD.  
-Using either the built-in search box or the [Search Box](search-box.md) web part, you can filter users by name or department.
+Using either the built-in search box or the [Search Box](#search-box) web part, you can filter users by name or department.
+
+<p align="center">
+  <img src="img/user-directory.JPG" alt="User Directory demo" styles="max-width: 85%;"/>
+</p>
 
 ## Features
 
@@ -23,6 +27,19 @@ Using either the built-in search box or the [Search Box](search-box.md) web part
 - **Select columns:** Use the checkboxes to select the columns you want to display in the User Directory.
 - **Custom column headers:** Lets you create custom column headers. Leave the fields blank to use the default column headers.
 
+
+# Search Box
+
+Simply add this to a page with a User Directory on it to be able to search through the directory.
+
+This web part uses the [ReactiveX (RxJs)](http://reactivex.io/) library to allow communication between the two web parts.  
+Its functions are identical to the built-in search box of User Directory.
+
 <p align="center">
-  <img src="img/user-directory.JPG" alt="User Directory demo"/>
+  <img src="img/search-box.JPG" alt="Search Box demo"/>
 </p>
+
+## Properties
+
+- **Placeholder text:** Specify the placeholder text that is shown when the search box is empty.
+
