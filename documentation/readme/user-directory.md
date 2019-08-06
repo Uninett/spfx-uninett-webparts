@@ -6,7 +6,7 @@ The web part uses MS Graph REST API to retrieve Office 365 users from Azure AD.
 Using either the built-in search box or the [Search Box](#search-box) web part, you can filter users by name or department.
 
 <p align="center">
-  <img src="img/user-directory.JPG" alt="User Directory demo" styles="width: 85%;"/>
+  <img src="img/user-directory.JPG" alt="User Directory demo" width="85%"/>
 </p>
 
 ## Features

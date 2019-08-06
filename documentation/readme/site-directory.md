@@ -5,7 +5,7 @@ Displays SharePoint sites from your Office 365 tenant in a customised [DetailsLi
 New sites can be created using the [Order Site Button](#order-site-button) web part.
 
 <p align="center">
-  <img src="img/site-directory.JPG" alt="Site Directory demo" style="width: 85%;"/>
+  <img src="img/site-directory.JPG" alt="Site Directory demo" width="85%"/>
 </p>
 
 ## Features
