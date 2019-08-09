@@ -27,10 +27,7 @@
       <Visible>False</Visible>
     </None>
     <Content Include="Deploy-AzureResourceGroup.ps1" />
-    <Content Include="LogicApp - Copy.parameters.Unit.json" />
-    <Content Include="LogicApp.Unit.json" />
     <Content Include="LogicApp.parameters.Uninett.json" />
-    <Content Include="LogicApp.parameters.Unit.json" />
     <Content Include="LogicApp.Uninett.json" />
     <Content Include="LogicApp.parameters.json" />
   </ItemGroup>

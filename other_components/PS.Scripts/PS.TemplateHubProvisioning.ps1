@@ -2,7 +2,7 @@
 # $WarningPreference = "SilentlyContinue"
 # $DebugPreference = "SilentlyContinue"
 # $ErrorActionPreference = "Continue"
-Import-Module $PSScriptRoot\SharePointPnPPowerShellOnline\SharePointPnPPowerShellOnline.psd1
+Import-Module $PSScriptRoot\SharePointPnPPowerShell\SharePointPnPPowerShellOnline.psd1
 Write-Progress -Activity "Starting process" -PercentComplete 0
 
 $templateHubComponentId = "997fe955-efac-4f36-8383-e51c3c8eed40"

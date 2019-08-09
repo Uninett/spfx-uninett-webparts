@@ -2,7 +2,7 @@
 <pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:Preferences Generator="OfficeDevPnP.Core, Version=2.25.1804.1, Culture=neutral, PublicKeyToken=5e633289e95c321a">
         <pnp:Parameters>
-          <pnp:Parameter Key="SiteOrderUrl">https://iktuninett.sharepoint.com/sites/eureka</pnp:Parameter>
+          <pnp:Parameter Key="SiteOrderUrl">https://liveadmfeide.sharepoint.com/sites/TestSite</pnp:Parameter>
         </pnp:Parameters>
     </pnp:Preferences>
     <pnp:Templates ID="CONTAINER-TEMPLATE-ACTIVITY-SITE">
