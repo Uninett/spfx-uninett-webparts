@@ -2,8 +2,8 @@
 # CUSTOM .GITIGNORE #
 #####################
 
-LogicApp*.json
-local.settings.*.json
+LogicApp.parameters.json
+local.settings.json
 
 ###################
 # SPFx .GITIGNORE #

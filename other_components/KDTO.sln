@@ -12,7 +12,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azure.Functions", "Azure.Fu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PnP.SiteDirectory", "PnP.SiteDirectory\PnP.SiteDirectory.csproj", "{45929445-29FF-4151-B26B-84CB1C1E39FE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplyPowershhell", "Azure.ApplyPowershell\ApplyPowershhell.csproj", "{6A40E2F1-9092-4191-A10A-3C0FEDE66429}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplyPowershell", "Azure.ApplyPowershell\ApplyPowershell.csproj", "{6A40E2F1-9092-4191-A10A-3C0FEDE66429}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

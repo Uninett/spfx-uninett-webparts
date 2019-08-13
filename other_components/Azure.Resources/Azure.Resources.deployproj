@@ -27,9 +27,8 @@
       <Visible>False</Visible>
     </None>
     <Content Include="Deploy-AzureResourceGroup.ps1" />
-    <Content Include="LogicApp.parameters.Uninett.json" />
-    <Content Include="LogicApp.Uninett.json" />
     <Content Include="LogicApp.parameters.json" />
+    <Content Include="LogicApp.json" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>

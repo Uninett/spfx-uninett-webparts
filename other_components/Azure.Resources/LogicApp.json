@@ -1,0 +1,1701 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+  "parameters": {
+    "connections_office365_name": {
+      "defaultValue": "office365",
+      "type": "string"
+    },
+    "connections_office365_displayName": {
+      "type": "string",
+      "defaultValue": "admin@contoso.onmicrosoft.com"
+    },
+    "connections_sharepointonline_name": {
+      "defaultValue": "sharepointonline",
+      "type": "string"
+    },
+    "connections_sharepointonline_displayName": {
+      "defaultValue": "admin@contoso.onmicrosoft.com",
+      "type": "string"
+    },
+    "sites_SiteProvisioningEngine_name": {
+      "defaultValue": "SiteProvisioningEngine",
+      "type": "string"
+    },
+    "workflows_ProvisioningEngineTrigger_name": {
+      "defaultValue": "ProvisioningEngineTrigger",
+      "type": "string"
+    },
+    "workflows_ProvisioningEngineFlow_name": {
+      "defaultValue": "ProvEngineTriggerFlow",
+      "type": "string"
+    },
+    "sites_ApplyPowershhell_name": {
+      "defaultValue": "ApplyPowershell",
+      "type": "string"
+    },
+    "siteOrderUrl": {
+      "defaultValue": "https://contoso.sharepoint.com/sites/Company",
+      "type": "string"
+    },
+    "storageAccounts_siteprovisioningengine_name": {
+      "defaultValue": "siteprovisioningengine",
+      "type": "string"
+    },
+    "serverfarms_NorthEuropePlan_name": {
+      "defaultValue": "NorthEuropePlan",
+      "type": "string"
+    },
+    "orderListId": {
+      "defaultValue": "7355a4bf-463f-45f6-a7fa-9999dbe3ff89",
+      "type": "string"
+    },
+    "flowUrl": {
+      "defaultValue": "https://prod-43.westeurope.logic.azure.com:443/workflows/d99bbaca426949f2b747ee09b485bc98/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=6TdmLTPohCPeu4wyrGyAk7AU4X34ND3t67yKnf0b-_8",
+      "type": "string"
+    },
+    "appSettings_TenantAdminUrl": {
+      "defaultValue": "https://contoso-admin.sharepoint.com",
+      "type": "string"
+    },
+    "appSettings_SPGroupsSiteUrl": {
+      "defaultValue": "https://contoso.sharepoint.com/sites/Company",
+      "type": "string"
+    },
+    "appSettings_SPUserPassword": {
+      "defaultValue": "Password1234",
+      "type": "string"
+    },
+    "appSettings_SPUserId": {
+      "defaultValue": "admin@contoso.onmicrosoft.com",
+      "type": "string"
+    },
+    "appSettings_AADClientId": {
+      "defaultValue": "de9141e7-0ca9-427b-ba38-886f712ba793",
+      "type": "string"
+    },
+    "appSettings_AADClientSecret": {
+      "defaultValue": "$h#*pRLhsW{fKqEh~r[3mv2Pk)hm=}(J",
+      "type": "string"
+    },
+    "appSettings_AADDomain": {
+      "defaultValue": "contoso.onmicrosoft.com",
+      "type": "string"
+    },
+    "appSettings_SPClientId": {
+      "defaultValue": "5d91435e-23d4-4d91-89dc-fe0b5eceb338",
+      "type": "string"
+    },
+    "appSettings_SPClientSecret": {
+      "defaultValue": "GQ`'ZD]C?L(58n;En'2R)J+sKg*Mg_`p",
+      "type": "string"
+    },
+    "appSettings_OrgName": {
+      "defaultValue": "contoso",
+      "type": "string"
+    },
+    "emailRecipient": {
+      "defaultValue": "sp_admin@contoso.onmicrosoft.com",
+      "type":  "string"
+    }
+  },
+  "variables": {
+    "storageACcountid": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_siteprovisioningengine_name'))]"
+  },
+  "resources": [
+    {
+      "comments": "",
+      "type": "Microsoft.Logic/workflows",
+      "name": "[parameters('workflows_ProvisioningEngineTrigger_name')]",
+      "apiVersion": "2017-07-01",
+      "location": "westeurope",
+      "tags": {},
+      "scale": null,
+      "properties": {
+        "state": "Enabled",
+        "definition": {
+          "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+          "contentVersion": "1.0.0.0",
+          "parameters": {
+            "siteOrderUrl": {
+              "defaultValue": "https://contoso.sharepoint.com/sites/Company",
+              "type": "string"
+            },
+            "$connections": {
+              "defaultValue": {},
+              "type": "Object"
+            },
+            "orderListId": {
+              "defaultValue": "21c4fd5e-b0f2-419e-88c2-46aaa917e2a9",
+              "type": "string"
+            },
+            "flowUrl": {
+              "defaultValue": "https://prod-43.westeurope.logic.azure.com:443/workflows/d99bbaca426949f2b747ee09b485bc98/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=6TdmLTPohCPeu4wyrGyAk7AU4X34ND3t67yKnf0b-_8",
+              "type": "string"
+            },
+            "emailRecipient": {
+              "defaultValue": "sp-admin@contoso.onmicrosoft.com",
+              "type":  "string"
+            }
+          },
+          "triggers": {
+            "When_an_item_is_created_or_modified": {
+              "recurrence": {
+                "frequency": "Minute",
+                "interval": 5
+              },
+              "type": "ApiConnection",
+              "runtimeConfiguration": {
+                "concurrency": {
+                  "runs": 1
+                }
+              },
+              "inputs": {
+                "host": {
+                  "connection": {
+                    "name": "@parameters('$connections')['sharepointonline']['connectionId']"
+                  }
+                },
+                "method": "get",
+                "path": "/datasets/@{encodeURIComponent(encodeURIComponent(parameters('siteOrderUrl')))}/tables/@{encodeURIComponent(encodeURIComponent(parameters('orderListId')))}/onupdateditems"
+              }
+            }
+          },
+          "actions": {
+            "For_each": {
+              "actions": {
+                "Condition": {
+                  "actions": {
+                    "Condition_2": {
+                      "actions": {},
+                      "expression": {
+                        "and": [
+                          {
+                            "equals": [
+                              "@outputs('HTTP')['statusCode']",
+                              200
+                            ]
+                          }
+                        ]
+                      },
+                      "runAfter": {
+                        "HTTP": [
+                          "Succeeded"
+                        ]
+                      },
+                      "type": "If"
+                    },
+                    "HTTP": {
+                      "inputs": {
+                        "body": {
+                          "body": "@items('For_each')"
+                        },
+                        "headers": {
+                          "Content-Type": "application/json"
+                        },
+                        "method": "POST",
+                        "retryPolicy": {
+                          "type": "none"
+                        },
+                        "uri": "@parameters('flowUrl')"
+                      },
+                      "runAfter": {},
+                      "type": "Http"
+                    }
+                  },
+                  "runAfter": {},
+                  "expression": {
+                    "and": [
+                      {
+                        "equals": [
+                          "@items('For_each')['KDTOStatus']['Value']",
+                          "Create"
+                        ]
+                      }
+                    ]
+                  },
+                  "type": "If"
+                }
+              },
+              "foreach": "@triggerBody()?['value']",
+              "runAfter": {
+              },
+              "type": "Foreach"
+            }
+          },
+          "outputs": {}
+        },
+        "parameters": {
+          "siteOrderUrl": {
+            "value": "[parameters('siteOrderUrl')]"
+          },
+          "flowUrl": {
+            "value": "[parameters('flowUrl')]"
+          },
+          "$connections": {
+            "value": {
+              "office365": {
+                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_office365_name'))]",
+                "connectionName": "[parameters('connections_office365_name')]",
+                "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/westeurope/managedApis/office365')]"
+              },
+              "sharepointonline": {
+                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_sharepointonline_name'))]",
+                "connectionName": "[parameters('connections_sharepointonline_name')]",
+                "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/westeurope/managedApis/sharepointonline')]"
+              }
+            }
+          },
+          "orderListId": {
+            "value": "[parameters('orderListId')]"
+          },
+          "emailRecipient": {
+            "value":  "[parameters('emailRecipient')]"
+          }
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('sites_SiteProvisioningEngine_name'))]",
+        "[resourceId('Microsoft.Web/sites', parameters('sites_ApplyPowershhell_name'))]",
+        "[resourceId('Microsoft.Web/connections', parameters('connections_office365_name'))]",
+        "[resourceId('Microsoft.Web/connections', parameters('connections_sharepointonline_name'))]"
+      ]
+    },
+    {
+      "comments": "",
+      "type": "Microsoft.Logic/workflows",
+      "name": "[parameters('workflows_ProvisioningEngineFlow_name')]",
+      "apiVersion": "2017-07-01",
+      "location": "westeurope",
+      "tags": {},
+      "scale": null,
+      "properties": {
+        "state": "Enabled",
+        "definition": {
+          "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+          "contentVersion": "1.0.0.0",
+          "parameters": {
+            "siteOrderUrl": {
+              "defaultValue": "https://contoso.sharepoint.com/sites/Company",
+              "type": "string"
+            },
+            "$connections": {
+              "defaultValue": {},
+              "type": "Object"
+            },
+            "orderListId": {
+              "defaultValue": "7355a4bf-463f-45f6-a7fa-9999dbe3ff89",
+              "type": "string"
+            }
+          },
+          "triggers": {
+            "manual": {
+              "inputs": {
+                "method": "POST",
+                "schema": {
+                  "properties": {
+                    "body": {
+                      "properties": {
+                        "@@odata.etag": {
+                          "type": "string"
+                        },
+                        "Author": {
+                          "properties": {
+                            "@@odata.type": {
+                              "type": "string"
+                            },
+                            "Claims": {
+                              "type": "string"
+                            },
+                            "Department": {},
+                            "DisplayName": {
+                              "type": "string"
+                            },
+                            "Email": {
+                              "type": "string"
+                            },
+                            "JobTitle": {},
+                            "Picture": {
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "Author#Claims": {
+                          "type": "string"
+                        },
+                        "Created": {
+                          "type": "string"
+                        },
+                        "Editor": {
+                          "properties": {
+                            "@@odata.type": {
+                              "type": "string"
+                            },
+                            "Claims": {
+                              "type": "string"
+                            },
+                            "Department": {},
+                            "DisplayName": {
+                              "type": "string"
+                            },
+                            "Email": {
+                              "type": "string"
+                            },
+                            "JobTitle": {},
+                            "Picture": {
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "Editor#Claims": {
+                          "type": "string"
+                        },
+                        "ID": {
+                          "type": "integer"
+                        },
+                        "ItemInternalId": {
+                          "type": "string"
+                        },
+                        "KDTOEndDate": {
+                          "type": "string"
+                        },
+                        "KDTOExternalSharing": {
+                          "type": "boolean"
+                        },
+                        "KDTOOwner": {
+                          "properties": {
+                            "@@odata.type": {
+                              "type": "string"
+                            },
+                            "Claims": {
+                              "type": "string"
+                            },
+                            "Department": {},
+                            "DisplayName": {
+                              "type": "string"
+                            },
+                            "Email": {
+                              "type": "string"
+                            },
+                            "JobTitle": {},
+                            "Picture": {
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "KDTOOwner#Claims": {
+                          "type": "string"
+                        },
+                        "KDTOOwningDepartment": {
+                          "properties": {
+                            "@@odata.type": {
+                              "type": "string"
+                            },
+                            "Label": {
+                              "type": "string"
+                            },
+                            "Path": {},
+                            "TermGuid": {
+                              "type": "string"
+                            },
+                            "Value": {
+                              "type": "string"
+                            },
+                            "WssId": {
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "KDTOOwningDepartment#WssId": {
+                          "type": "integer"
+                        },
+                        "KDTOParentDepartment": {
+                          "properties": {
+                            "@@odata.type": {
+                              "type": "string"
+                            },
+                            "Id": {
+                              "type": "integer"
+                            },
+                            "Value": {
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "KDTOParentDepartment#Id": {
+                          "type": "integer"
+                        },
+                        "KDTOProjectGoal": {
+                          "type": "string"
+                        },
+                        "KDTOProjectNumber": {
+                          "type": "string"
+                        },
+                        "KDTOProjectPurpose": {
+                          "type": "string"
+                        },
+                        "KDTOSitePrivacy": {
+                          "properties": {
+                            "@@odata.type": {
+                              "type": "string"
+                            },
+                            "Id": {
+                              "type": "integer"
+                            },
+                            "Value": {
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "KDTOSitePrivacy#Id": {
+                          "type": "integer"
+                        },
+                        "KDTOStartDate": {
+                          "type": "string"
+                        },
+                        "KDTOStatus": {
+                          "properties": {
+                            "@@odata.type": {
+                              "type": "string"
+                            },
+                            "Id": {
+                              "type": "integer"
+                            },
+                            "Value": {
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "KDTOStatus#Id": {
+                          "type": "integer"
+                        },
+                        "Modified": {
+                          "type": "string"
+                        },
+                        "Title": {
+                          "type": "string"
+                        },
+                        "{ContentType}": {
+                          "properties": {
+                            "@@odata.type": {
+                              "type": "string"
+                            },
+                            "Id": {
+                              "type": "string"
+                            },
+                            "Name": {
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "{ContentType}#Id": {
+                          "type": "string"
+                        },
+                        "{FilenameWithExtension}": {
+                          "type": "string"
+                        },
+                        "{HasAttachments}": {
+                          "type": "boolean"
+                        },
+                        "{Identifier}": {
+                          "type": "string"
+                        },
+                        "{Link}": {
+                          "type": "string"
+                        },
+                        "{Name}": {
+                          "type": "string"
+                        },
+                        "{Path}": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "kind": "Http",
+              "type": "Request"
+            }
+          },
+          "actions": {
+            "Response": {
+              "inputs": {
+                "statusCode": 200
+              },
+              "kind": "Http",
+              "runAfter": {
+                "Condition": [
+                  "Succeeded"
+                ]
+              },
+              "type": "Response"
+            },
+            "Condition": {
+              "actions": {
+                "Condition_4": {
+                  "actions": {
+                    "ApplySiteTemplate": {
+                      "runAfter": {},
+                      "type": "Function",
+                      "inputs": {
+                        "function": {
+                          "id": "[concat(resourceId('Microsoft.Web/sites', parameters('sites_SiteProvisioningEngine_name')), '/functions/ApplySiteTemplate')]"
+                        },
+                        "headers": {
+                          "Content-Type": "application/json"
+                        },
+                        "method": "POST",
+                        "queries": {
+                          "siteUrl": "@{body('CreateOfficeGroup')['siteUrl']}",
+                          "template": "@{variables('template')}",
+                          "siteOrderUrl": "@{parameters('siteOrderUrl')}",
+                          "themeName": "@{variables('themeName')}"
+                        }
+                      }
+                    },
+                    "Condition_5": {
+                      "actions": {
+                        "Condition_6": {
+                          "actions": {
+                            "Send_an_email_4": {
+                              "runAfter": {},
+                              "type": "ApiConnection",
+                              "inputs": {
+                                "body": {
+                                  "Body": "Your ordered Sharepoint site is now ready for use.\n\nClick the link below to go to visit the new site.\n@{body('CreateOfficeGroup')['siteUrl']}",
+                                  "Subject": "Sharepoint site \"@{triggerBody()['body']?['Title']}\" is now created",
+                                  "To": "@triggerBody()['body']?['Author']['Email']"
+                                },
+                                "host": {
+                                  "connection": {
+                                    "name": "@parameters('$connections')['office365']['connectionId']"
+                                  }
+                                },
+                                "method": "post",
+                                "path": "/Mail"
+                              }
+                            },
+                            "Update_item_5": {
+                              "runAfter": {
+                                "Send_an_email_4": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "type": "ApiConnection",
+                              "inputs": {
+                                "body": {
+                                  "KDTOParentDepartment": {
+                                    "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference"
+                                  },
+                                  "KDTOSitePrivacy": {
+                                    "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference"
+                                  },
+                                  "KDTOStatus": {
+                                    "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                                    "Value": "Completed"
+                                  },
+                                  "Title": "@triggerBody()['body']?['Title']",
+                                  "{ContentType}": {
+                                    "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedContentType",
+                                    "Id": "@triggerBody()['body']?['{ContentType}']['Id']"
+                                  }
+                                },
+                                "host": {
+                                  "connection": {
+                                    "name": "@parameters('$connections')['sharepointonline']['connectionId']"
+                                  }
+                                },
+                                "method": "patch",
+                                "path": "/datasets/@{encodeURIComponent(encodeURIComponent(parameters('siteOrderUrl')))}/tables/@{encodeURIComponent(encodeURIComponent('Bestillinger'))}/items/@{encodeURIComponent(triggerBody()['body']?['ID'])}"
+                              }
+                            }
+                          },
+                          "runAfter": {
+                            "SetMetadata": [
+                              "Succeeded",
+                              "Failed"
+                            ]
+                          },
+                          "else": {
+                            "actions": {
+                              "Send_an_email_3": {
+                                "runAfter": {},
+                                "type": "ApiConnection",
+                                "inputs": {
+                                  "body": {
+                                    "Body": "The provisioning engine failed to set metadata for the newly created site named \"@{variables('displayName')}\".\n\nThe following error message was produced:\n\n@{body('SetMetadata')}",
+                                    "Subject": "Provisioning engine failed while provisionning a new site",
+                                    "To": "[parameters('emailRecipient')]"
+                                  },
+                                  "host": {
+                                    "connection": {
+                                      "name": "@parameters('$connections')['office365']['connectionId']"
+                                    }
+                                  },
+                                  "method": "post",
+                                  "path": "/Mail"
+                                }
+                              },
+                              "Update_item": {
+                                "runAfter": {
+                                  "Send_an_email_3": [
+                                    "Succeeded"
+                                  ]
+                                },
+                                "type": "ApiConnection",
+                                "inputs": {
+                                  "body": {
+                                    "KDTOParentDepartment": {
+                                      "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference"
+                                    },
+                                    "KDTOSitePrivacy": {
+                                      "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference"
+                                    },
+                                    "KDTOStatus": {
+                                      "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                                      "Value": "Error"
+                                    },
+                                    "Title": "@triggerBody()['body']?['Title']",
+                                    "{ContentType}": {
+                                      "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedContentType",
+                                      "Id": "@triggerBody()['body']?['{ContentType}']['Id']"
+                                    }
+                                  },
+                                  "host": {
+                                    "connection": {
+                                      "name": "@parameters('$connections')['sharepointonline']['connectionId']"
+                                    }
+                                  },
+                                  "method": "patch",
+                                  "path": "/datasets/@{encodeURIComponent(encodeURIComponent(parameters('siteOrderUrl')))}/tables/@{encodeURIComponent(encodeURIComponent('Bestillinger'))}/items/@{encodeURIComponent(triggerBody()['body']?['ID'])}"
+                                }
+                              }
+                            }
+                          },
+                          "expression": {
+                            "and": [
+                              {
+                                "equals": [
+                                  "@outputs('SetMetadata')['statusCode']",
+                                  200
+                                ]
+                              }
+                            ]
+                          },
+                          "type": "If"
+                        },
+                        "SetMetadata": {
+                          "runAfter": {
+                            "Set_metadata_variables": [
+                              "Succeeded"
+                            ]
+                          },
+                          "type": "Function",
+                          "inputs": {
+                            "body": "@variables('metadataToSend')",
+                            "function": {
+                              "id": "[concat(resourceId('Microsoft.Web/sites', parameters('sites_SiteProvisioningEngine_name')), '/functions/SetMetadata')]"
+                            },
+                            "method": "POST"
+                          }
+                        },
+                        "Set_metadata_variables": {
+                          "actions": {
+                            "Switch_2": {
+                              "runAfter": {},
+                              "cases": {
+                                "Case": {
+                                  "case": "Avdeling",
+                                  "actions": {
+                                    "Set_variable_12": {
+                                      "runAfter": {},
+                                      "type": "SetVariable",
+                                      "inputs": {
+                                        "name": "metadataToSend",
+                                        "value": {
+                                          "description": "@{triggerBody()['body']?['KDTOSiteDescription']}",
+                                          "displayName": "@{variables('displayName')}",
+                                          "groupId": "@{body('CreateOfficeGroup')['id']}",
+                                          "owners": [
+                                            "@{body('CreateOfficeGroup')['owner']}"
+                                          ],
+                                          "parentDepartment": "@{triggerBody()['body']?['KDTOParentDepartment']?['Value']}",
+                                          "shortName": "@{triggerBody()['body']?['KDTOShortName']}",
+                                          "siteType": "@{triggerBody()['body']?['{ContentType}']['Name']}",
+                                          "ownerDisplayName": "@{triggerBody()['body']?['KDTOOwner']['DisplayName']}",
+                                          "shortDisplayName": "@{triggerBody()['body']?['Title']}"
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "Case_2": {
+                                  "case": "Prosjekt",
+                                  "actions": {
+                                    "Set_variable_13": {
+                                      "runAfter": {},
+                                      "type": "SetVariable",
+                                      "inputs": {
+                                        "name": "metadataToSend",
+                                        "value": {
+                                          "description": "@{triggerBody()['body']?['KDTOSiteDescription']}",
+                                          "displayName": "@{variables('displayName')}",
+                                          "endDate": "@{triggerBody()['body']?['KDTOEndDate']}",
+                                          "groupId": "@{body('CreateOfficeGroup')['id']}",
+                                          "ownedDepartment": "@{triggerBody()['body']?['KDTOOwningDepartment']?['Value']}",
+                                          "owners": [
+                                            "@{body('CreateOfficeGroup')['owner']}"
+                                          ],
+                                          "parentDepartment": "@{triggerBody()['body']?['KDTOParentDepartment']?['Value']}",
+                                          "projectGoal": "@{triggerBody()['body']?['KDTOProjectGoal']}",
+                                          "projectNumber": "@{triggerBody()['body']?['KDTOProjectNumber']}",
+                                          "projectPurpose": "@{triggerBody()['body']?['KDTOProjectPurpose']}",
+                                          "siteType": "@{triggerBody()['body']?['{ContentType}']['Name']}",
+                                          "startDate": "@{triggerBody()['body']?['KDTOStartDate']}",
+                                          "ownerDisplayName": "@{triggerBody()['body']?['KDTOOwner']['DisplayName']}",
+                                          "shortDisplayName": "@{triggerBody()['body']?['Title']}"
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "Case_3": {
+                                  "case": "Aktivitet",
+                                  "actions": {
+                                    "Set_variable_14": {
+                                      "runAfter": {},
+                                      "type": "SetVariable",
+                                      "inputs": {
+                                        "name": "metadataToSend",
+                                        "value": {
+                                          "description": "@{triggerBody()['body']?['KDTOSiteDescription']}",
+                                          "displayName": "@{variables('displayName')}",
+                                          "groupId": "@{body('CreateOfficeGroup')['id']}",
+                                          "owners": [
+                                            "@{body('CreateOfficeGroup')['owner']}"
+                                          ],
+                                          "parentDepartment": "@{triggerBody()['body']?['KDTOParentDepartment']?['Value']}",
+                                          "siteType": "Aktivitet og Tjeneste",
+                                          "ownerDisplayName": "@{triggerBody()['body']?['KDTOOwner']['DisplayName']}",
+                                          "shortDisplayName": "@{triggerBody()['body']?['Title']}"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "default": {
+                                "actions": {}
+                              },
+                              "expression": "@triggerBody()['body']?['{ContentType}']['Name']",
+                              "type": "Switch"
+                            }
+                          },
+                          "runAfter": {},
+                          "type": "Scope"
+                        }
+                      },
+                      "runAfter": {
+                        "ApplySiteTemplate": [
+                          "Succeeded",
+                          "Failed"
+                        ]
+                      },
+                      "else": {
+                        "actions": {
+                          "Send_an_email_2": {
+                            "runAfter": {},
+                            "type": "ApiConnection",
+                            "inputs": {
+                              "body": {
+                                "Body": "The provisioning engine failed to apply a site template to the site named \"\".\n\nThe following error message was produced:\n\n@{body('ApplySiteTemplate')}",
+                                "Subject": "The provisioning engine failed to apply a site template",
+                                "To": "[parameters('emailRecipient')]"
+                              },
+                              "host": {
+                                "connection": {
+                                  "name": "@parameters('$connections')['office365']['connectionId']"
+                                }
+                              },
+                              "method": "post",
+                              "path": "/Mail"
+                            }
+                          },
+                          "Update_item_3": {
+                            "runAfter": {
+                              "Send_an_email_2": [
+                                "Succeeded"
+                              ]
+                            },
+                            "type": "ApiConnection",
+                            "inputs": {
+                              "body": {
+                                "KDTOParentDepartment": {
+                                  "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference"
+                                },
+                                "KDTOSitePrivacy": {
+                                  "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference"
+                                },
+                                "KDTOStatus": {
+                                  "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                                  "Value": "Error"
+                                },
+                                "Title": "@triggerBody()['body']?['Title']",
+                                "{ContentType}": {
+                                  "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedContentType",
+                                  "Id": "@triggerBody()['body']?['{ContentType}']['Id']"
+                                }
+                              },
+                              "host": {
+                                "connection": {
+                                  "name": "@parameters('$connections')['sharepointonline']['connectionId']"
+                                }
+                              },
+                              "method": "patch",
+                              "path": "/datasets/@{encodeURIComponent(encodeURIComponent(parameters('siteOrderUrl')))}/tables/@{encodeURIComponent(encodeURIComponent('Bestillinger'))}/items/@{encodeURIComponent(triggerBody()['body']?['ID'])}"
+                            }
+                          }
+                        }
+                      },
+                      "expression": {
+                        "and": [
+                          {
+                            "equals": [
+                              "@outputs('ApplySiteTemplate')['statusCode']",
+                              200
+                            ]
+                          }
+                        ]
+                      },
+                      "type": "If"
+                    }
+                  },
+                  "runAfter": {
+                    "CreateOfficeGroup": [
+                      "Succeeded",
+                      "Failed"
+                    ]
+                  },
+                  "else": {
+                    "actions": {
+                      "Send_an_email": {
+                        "runAfter": {},
+                        "type": "ApiConnection",
+                        "inputs": {
+                          "body": {
+                            "Body": "The provisioning engine produced the following error while trying to create the new site named @{triggerBody()['body']?['Title']}:\n\n@{body('CreateOfficeGroup')}",
+                            "Subject": "Provisioning engine failed while provisionning a new site",
+                            "To": "[parameters('emailRecipient')]"
+                          },
+                          "host": {
+                            "connection": {
+                              "name": "@parameters('$connections')['office365']['connectionId']"
+                            }
+                          },
+                          "method": "post",
+                          "path": "/Mail"
+                        }
+                      },
+                      "Update_item_4": {
+                        "runAfter": {
+                          "Send_an_email": [
+                            "Succeeded"
+                          ]
+                        },
+                        "type": "ApiConnection",
+                        "inputs": {
+                          "body": {
+                            "KDTOParentDepartment": {
+                              "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference"
+                            },
+                            "KDTOSitePrivacy": {
+                              "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference"
+                            },
+                            "KDTOStatus": {
+                              "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                              "Value": "Error"
+                            },
+                            "Title": "@triggerBody()['body']?['Title']",
+                            "{ContentType}": {
+                              "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedContentType",
+                              "Id": "@triggerBody()['body']?['{ContentType}']['Id']"
+                            }
+                          },
+                          "host": {
+                            "connection": {
+                              "name": "@parameters('$connections')['sharepointonline']['connectionId']"
+                            }
+                          },
+                          "method": "patch",
+                          "path": "/datasets/@{encodeURIComponent(encodeURIComponent(parameters('siteOrderUrl')))}/tables/@{encodeURIComponent(encodeURIComponent('Bestillinger'))}/items/@{encodeURIComponent(triggerBody()['body']?['ID'])}"
+                        }
+                      }
+                    }
+                  },
+                  "expression": {
+                    "and": [
+                      {
+                        "equals": [
+                          "@outputs('CreateOfficeGroup')['statusCode']",
+                          200
+                        ]
+                      }
+                    ]
+                  },
+                  "type": "If"
+                },
+                "CreateOfficeGroup": {
+                  "runAfter": {
+                    "Set_displayname_and_nickname_variables": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "Function",
+                  "inputs": {
+                    "body": {
+                      "displayName": "@variables('displayName')",
+                      "externalSharing": "@variables('externalSharing')",
+                      "isPrivate": "@variables('isPrivate')",
+                      "mailNickname": "@variables('mailNickname')",
+                      "owners": [
+                        "@triggerBody()['body']?['KDTOOwner']['Claims']"
+                      ]
+                    },
+                    "function": {
+                      "id": "[concat(resourceId('Microsoft.Web/sites', parameters('sites_SiteProvisioningEngine_name')), '/functions/CreateOfficeGroup')]"
+                    },
+                    "headers": {
+                      "Content-Type": "application/json"
+                    },
+                    "method": "POST"
+                  }
+                },
+                "Set_displayname_and_nickname_variables": {
+                  "actions": {
+                    "Switch": {
+                      "runAfter": {},
+                      "cases": {
+                        "Case": {
+                          "case": "Avdeling",
+                          "actions": {
+                            "Compose_-_displayName": {
+                              "runAfter": {},
+                              "type": "Compose",
+                              "inputs": "@concat('Avdeling: ',triggerBody()['body']?['Title'])"
+                            },
+                            "Compose_-_mailNickname": {
+                              "runAfter": {
+                                "Compose_-_displayName": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "type": "Compose",
+                              "inputs": "@concat('avdeling-',triggerBody()['body']?['Title'])"
+                            },
+                            "Set_variable": {
+                              "runAfter": {
+                                "Compose_-_mailNickname": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "type": "SetVariable",
+                              "inputs": {
+                                "name": "displayName",
+                                "value": "@{outputs('Compose_-_displayName')}"
+                              }
+                            },
+                            "Set_variable_2": {
+                              "runAfter": {
+                                "Set_variable": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "type": "SetVariable",
+                              "inputs": {
+                                "name": "mailNickname",
+                                "value": "@{outputs('Compose_-_mailNickname')}"
+                              }
+                            },
+                            "Set_variable_20": {
+                              "inputs": {
+                                "name": "themeName",
+                                "value": "Avdeling"
+                              },
+                              "runAfter": {
+                                "Set_variable_9": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "type": "SetVariable"
+                            },
+                            "Set_variable_9": {
+                              "runAfter": {
+                                "Set_variable_2": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "type": "SetVariable",
+                              "inputs": {
+                                "name": "template",
+                                "value": "AvdelingTemplate.xml"
+                              }
+                            }
+                          }
+                        },
+                        "Case_2": {
+                          "case": "Aktivitet",
+                          "actions": {
+                            "Compose_-_displayName2": {
+                              "runAfter": {},
+                              "type": "Compose",
+                              "inputs": "@concat('Aktivitet og Tjeneste: ',triggerBody()['body']?['Title'])"
+                            },
+                            "Compose_-_mailNickname2": {
+                              "runAfter": {
+                                "Compose_-_displayName2": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "type": "Compose",
+                              "inputs": "@concat('aktivitet-',triggerBody()['body']?['Title'])"
+                            },
+                            "Set_variable_10": {
+                              "runAfter": {
+                                "Set_variable_4": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "type": "SetVariable",
+                              "inputs": {
+                                "name": "template",
+                                "value": "AktivitetTemplate.xml"
+                              }
+                            },
+                            "Set_variable_21": {
+                              "inputs": {
+                                "name": "themeName",
+                                "value": "Aktivitet"
+                              },
+                              "runAfter": {
+                                "Set_variable_10": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "type": "SetVariable"
+                            },
+                            "Set_variable_3": {
+                              "runAfter": {
+                                "Compose_-_mailNickname2": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "type": "SetVariable",
+                              "inputs": {
+                                "name": "displayName",
+                                "value": "@{outputs('Compose_-_displayName2')}"
+                              }
+                            },
+                            "Set_variable_4": {
+                              "runAfter": {
+                                "Set_variable_3": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "type": "SetVariable",
+                              "inputs": {
+                                "name": "mailNickname",
+                                "value": "@{outputs('Compose_-_mailNickname2')}"
+                              }
+                            }
+                          }
+                        },
+                        "Case_3": {
+                          "case": "Prosjekt",
+                          "actions": {
+                            "Compose_-_displayName3": {
+                              "runAfter": {},
+                              "type": "Compose",
+                              "inputs": "@concat('Prosjekt: ',triggerBody()['body']?['Title'])"
+                            },
+                            "Compose_-_mailNickname3": {
+                              "runAfter": {
+                                "Condition_8": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "type": "Compose",
+                              "inputs": "@concat('prosjekt-',variables('projectNickname'))"
+                            },
+                            "Condition_8": {
+                              "actions": {
+                                "Set_variable_18": {
+                                  "runAfter": {},
+                                  "type": "SetVariable",
+                                  "inputs": {
+                                    "name": "projectNickname",
+                                    "value": "@triggerBody()['body']?['KDTOProjectNumber']"
+                                  }
+                                }
+                              },
+                              "runAfter": {
+                                "Compose_-_displayName3": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "else": {
+                                "actions": {
+                                  "Set_variable_19": {
+                                    "runAfter": {},
+                                    "type": "SetVariable",
+                                    "inputs": {
+                                      "name": "projectNickname",
+                                      "value": "@triggerBody()['body']?['KDTOPreferedUrl']"
+                                    }
+                                  }
+                                }
+                              },
+                              "expression": {
+                                "and": [
+                                  {
+                                    "not": {
+                                      "equals": [
+                                        "@triggerBody()['body']?['KDTOProjectNumber']",
+                                        null
+                                      ]
+                                    }
+                                  }
+                                ]
+                              },
+                              "type": "If"
+                            },
+                            "Set_variable_11": {
+                              "runAfter": {
+                                "Set_variable_6": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "type": "SetVariable",
+                              "inputs": {
+                                "name": "template",
+                                "value": "ProsjektTemplate.xml"
+                              }
+                            },
+                            "Set_variable_22": {
+                              "inputs": {
+                                "name": "themeName",
+                                "value": "Prosjekt"
+                              },
+                              "runAfter": {
+                                "Set_variable_11": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "type": "SetVariable"
+                            },
+                            "Set_variable_5": {
+                              "runAfter": {
+                                "Compose_-_mailNickname3": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "type": "SetVariable",
+                              "inputs": {
+                                "name": "displayName",
+                                "value": "@{outputs('Compose_-_displayName3')}"
+                              }
+                            },
+                            "Set_variable_6": {
+                              "runAfter": {
+                                "Set_variable_5": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "type": "SetVariable",
+                              "inputs": {
+                                "name": "mailNickname",
+                                "value": "@{outputs('Compose_-_mailNickname3')}"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "default": {
+                        "actions": {}
+                      },
+                      "expression": "@triggerBody()['body']?['{ContentType}']['Name']",
+                      "type": "Switch"
+                    }
+                  },
+                  "runAfter": {
+                    "Set_privacy_and_sharing_variables": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "Scope"
+                },
+                "Set_privacy_and_sharing_variables": {
+                  "actions": {
+                    "Condition_2": {
+                      "actions": {
+                        "Set_variable_7": {
+                          "runAfter": {},
+                          "type": "SetVariable",
+                          "inputs": {
+                            "name": "isPrivate",
+                            "value": true
+                          }
+                        }
+                      },
+                      "runAfter": {
+                        "Condition_3": [
+                          "Succeeded"
+                        ]
+                      },
+                      "expression": {
+                        "and": [
+                          {
+                            "equals": [
+                              "@triggerBody()['body']?['KDTOSitePrivacy']['Value']",
+                              "Closed"
+                            ]
+                          }
+                        ]
+                      },
+                      "type": "If"
+                    },
+                    "Condition_3": {
+                      "actions": {
+                        "Set_variable_8": {
+                          "runAfter": {},
+                          "type": "SetVariable",
+                          "inputs": {
+                            "name": "externalSharing",
+                            "value": true
+                          }
+                        }
+                      },
+                      "runAfter": {},
+                      "expression": {
+                        "and": [
+                          {
+                            "equals": [
+                              "@triggerBody()['body']?['KDTOExternalSharing']",
+                              true
+                            ]
+                          }
+                        ]
+                      },
+                      "type": "If"
+                    }
+                  },
+                  "runAfter": {},
+                  "type": "Scope"
+                }
+              },
+              "runAfter": {
+                "Initialize_variable_-_projectNickname": [
+                  "Succeeded"
+                ]
+              },
+              "expression": {
+                "and": [
+                  {
+                    "equals": [
+                      "@triggerBody()['body']['KDTOStatus']['Value']",
+                      "Create"
+                    ]
+                  }
+                ]
+              },
+              "type": "If"
+            },
+            "Initialize_variable_-_displayName": {
+              "runAfter": {},
+              "type": "InitializeVariable",
+              "inputs": {
+                "variables": [
+                  {
+                    "name": "displayName",
+                    "type": "String"
+                  }
+                ]
+              }
+            },
+            "Initialize_variable_-_externalSharing": {
+              "runAfter": {
+                "Initialize_variable_-_isPrivate": [
+                  "Succeeded"
+                ]
+              },
+              "type": "InitializeVariable",
+              "inputs": {
+                "variables": [
+                  {
+                    "name": "externalSharing",
+                    "type": "Boolean",
+                    "value": false
+                  }
+                ]
+              }
+            },
+            "Initialize_variable_-_themeName": {
+              "inputs": {
+                "variables": [
+                  {
+                    "name": "themeName",
+                    "type": "String"
+                  }
+                ]
+              },
+              "runAfter": {
+                "Initialize_variable_-_metadataToSend": [
+                  "Succeeded"
+                ]
+              },
+              "type": "InitializeVariable"
+            },
+            "Initialize_variable_-_isPrivate": {
+              "runAfter": {
+                "Initialize_variable_-_mailNickname": [
+                  "Succeeded"
+                ]
+              },
+              "type": "InitializeVariable",
+              "inputs": {
+                "variables": [
+                  {
+                    "name": "isPrivate",
+                    "type": "Boolean",
+                    "value": false
+                  }
+                ]
+              }
+            },
+            "Initialize_variable_-_mailNickname": {
+              "runAfter": {
+                "Initialize_variable_-_displayName": [
+                  "Succeeded"
+                ]
+              },
+              "type": "InitializeVariable",
+              "inputs": {
+                "variables": [
+                  {
+                    "name": "mailNickname",
+                    "type": "String"
+                  }
+                ]
+              }
+            },
+            "Initialize_variable_-_metadataToSend": {
+              "runAfter": {
+                "Initialize_variable_-_template": [
+                  "Succeeded"
+                ]
+              },
+              "type": "InitializeVariable",
+              "inputs": {
+                "variables": [
+                  {
+                    "name": "metadataToSend",
+                    "type": "Object"
+                  }
+                ]
+              }
+            },
+            "Initialize_variable_-_projectNickname": {
+              "runAfter": {
+                "Initialize_variable_-_themeName": [
+                  "Succeeded"
+                ]
+              },
+              "type": "InitializeVariable",
+              "inputs": {
+                "variables": [
+                  {
+                    "name": "projectNickname",
+                    "type": "String"
+                  }
+                ]
+              }
+            },
+            "Initialize_variable_-_template": {
+              "runAfter": {
+                "Initialize_variable_-_externalSharing": [
+                  "Succeeded"
+                ]
+              },
+              "type": "InitializeVariable",
+              "inputs": {
+                "variables": [
+                  {
+                    "name": "template",
+                    "type": "String"
+                  }
+                ]
+              }
+            }
+          },
+          "outputs": {}
+        },
+        "parameters": {
+          "siteOrderUrl": {
+            "value": "[parameters('siteOrderUrl')]"
+          },
+          "$connections": {
+            "value": {
+              "office365": {
+                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_office365_name'))]",
+                "connectionName": "[parameters('connections_office365_name')]",
+                "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/westeurope/managedApis/office365')]"
+              },
+              "sharepointonline": {
+                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_sharepointonline_name'))]",
+                "connectionName": "[parameters('connections_sharepointonline_name')]",
+                "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/westeurope/managedApis/sharepointonline')]"
+              }
+            }
+          },
+          "orderListId": {
+            "value": "[parameters('orderListId')]"
+          }
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('sites_SiteProvisioningEngine_name'))]",
+        "[resourceId('Microsoft.Web/sites', parameters('sites_ApplyPowershhell_name'))]",
+        "[resourceId('Microsoft.Web/connections', parameters('connections_office365_name'))]",
+        "[resourceId('Microsoft.Web/connections', parameters('connections_sharepointonline_name'))]"
+      ]
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/f88f5ab9-330a-49c1-96fc-0a93b980d57c/resourceGroups/KDTO/providers/Microsoft.Storage/storageAccounts/siteprovisioningengine'.",
+      "type": "Microsoft.Storage/storageAccounts",
+      "sku": {
+        "name": "Standard_LRS",
+        "tier": "Standard"
+      },
+      "kind": "Storage",
+      "name": "[parameters('storageAccounts_siteprovisioningengine_name')]",
+      "apiVersion": "2017-10-01",
+      "location": "northeurope",
+      "tags": {},
+      "scale": null,
+      "properties": {
+        "networkAcls": {
+          "bypass": "AzureServices",
+          "virtualNetworkRules": [],
+          "ipRules": [],
+          "defaultAction": "Allow"
+        },
+        "supportsHttpsTrafficOnly": false,
+        "encryption": {
+          "services": {
+            "file": {
+              "enabled": true
+            },
+            "blob": {
+              "enabled": true
+            }
+          },
+          "keySource": "Microsoft.Storage"
+        }
+      },
+      "dependsOn": []
+    },
+    {
+      "comments": "",
+      "type": "Microsoft.Web/connections",
+      "name": "[parameters('connections_office365_name')]",
+      "apiVersion": "2016-06-01",
+      "location": "westeurope",
+      "scale": null,
+      "properties": {
+        "displayName": "[parameters('connections_office365_displayName')]",
+        "customParameterValues": {},
+        "api": {
+          "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/westeurope/managedApis/', parameters('connections_office365_name'))]"
+        }
+      },
+      "dependsOn": []
+    },
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2015-04-01",
+      "name": "[parameters('serverfarms_NorthEuropePlan_name')]",
+      "location": "northeurope",
+      "properties": {
+        "name": "[parameters('serverfarms_NorthEuropePlan_name')]",
+        "computeMode": "Dynamic",
+        "sku": "Dynamic"
+      }
+    },
+    {
+      "comments": "",
+      "type": "Microsoft.Web/connections",
+      "name": "[parameters('connections_sharepointonline_name')]",
+      "apiVersion": "2016-06-01",
+      "location": "westeurope",
+      "scale": null,
+      "properties": {
+        "displayName": "[parameters('connections_sharepointonline_displayName')]",
+        "customParameterValues": {},
+        "api": {
+          "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/westeurope/managedApis/', parameters('connections_sharepointonline_name'))]"
+        }
+      },
+      "dependsOn": []
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/f88f5ab9-330a-49c1-96fc-0a93b980d57c/resourceGroups/KDTO/providers/Microsoft.Web/sites/ApplyPowershell'.",
+      "type": "Microsoft.Web/sites",
+      "kind": "functionapp",
+      "name": "[parameters('sites_ApplyPowershhell_name')]",
+      "apiVersion": "2016-08-01",
+      "location": "North Europe",
+      "scale": null,
+      "properties": {
+        "enabled": true,
+        "hostNameSslStates": [
+          {
+            "name": "[concat(parameters('sites_ApplyPowershhell_name'),'applypowershhell.azurewebsites.net')]",
+            "sslState": "Disabled",
+            "virtualIP": null,
+            "thumbprint": null,
+            "toUpdate": null,
+            "hostType": "Standard"
+          },
+          {
+            "name": "[concat(parameters('sites_ApplyPowershhell_name'),'applypowershhell.scm.azurewebsites.net')]",
+            "sslState": "Disabled",
+            "virtualIP": null,
+            "thumbprint": null,
+            "toUpdate": null,
+            "hostType": "Repository"
+          }
+        ],
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_NorthEuropePlan_name'))]",
+        "reserved": false,
+        "siteConfig": null,
+        "scmSiteAlsoStopped": false,
+        "hostingEnvironmentProfile": null,
+        "clientAffinityEnabled": false,
+        "clientCertEnabled": false,
+        "hostNamesDisabled": false,
+        "containerSize": 1536,
+        "dailyMemoryTimeQuota": 0,
+        "cloningInfo": null
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_NorthEuropePlan_name'))]"
+      ],
+      "resources": [
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2015-08-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('sites_ApplyPowershhell_name'))]"
+          ],
+          "tags": {
+            "displayName": "ApplyPowershellAppSettings"
+          },
+          "properties": {
+            "AzureWebJobsDashboard": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccounts_siteprovisioningengine_name'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]",
+            "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccounts_siteprovisioningengine_name'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]",
+            "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccounts_siteprovisioningengine_name'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]",
+            "WEBSITE_CONTENTSHARE": "[toLower(parameters('sites_ApplyPowershhell_name'))]",
+            "FUNCTIONS_EXTENSION_VERSION": "~1",
+            "WEBSITE_NODE_DEFAULT_VERSION": "6.5.0",
+            "TenantAdminUPN": "[parameters('appSettings_SPUserId')]",
+            "OrgName": "[parameters('appSettings_OrgName')]",
+            "Password": "[parameters('appSettings_SPUserPassword')]"
+          }
+        }
+      ]
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/f88f5ab9-330a-49c1-96fc-0a93b980d57c/resourceGroups/KDTO/providers/Microsoft.Web/sites/SiteProvisioningEngine'.",
+      "type": "Microsoft.Web/sites",
+      "kind": "functionapp",
+      "name": "[parameters('sites_SiteProvisioningEngine_name')]",
+      "apiVersion": "2016-08-01",
+      "location": "North Europe",
+      "scale": null,
+      "properties": {
+        "enabled": true,
+        "hostNameSslStates": [
+          {
+            "name": "[concat(parameters('sites_SiteProvisioningEngine_name'),'siteprovisioningengine.azurewebsites.net')]",
+            "sslState": "Disabled",
+            "virtualIP": null,
+            "thumbprint": null,
+            "toUpdate": null,
+            "hostType": "Standard"
+          },
+          {
+            "name": "[concat(parameters('sites_SiteProvisioningEngine_name'),'siteprovisioningengine.scm.azurewebsites.net')]",
+            "sslState": "Disabled",
+            "virtualIP": null,
+            "thumbprint": null,
+            "toUpdate": null,
+            "hostType": "Repository"
+          }
+        ],
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_NorthEuropePlan_name'))]",
+        "reserved": false,
+        "siteConfig": null,
+        "scmSiteAlsoStopped": false,
+        "hostingEnvironmentProfile": null,
+        "clientAffinityEnabled": false,
+        "clientCertEnabled": false,
+        "hostNamesDisabled": false,
+        "containerSize": 1536,
+        "dailyMemoryTimeQuota": 0,
+        "cloningInfo": null
+      },
+      "dependsOn": [],
+      "resources": [
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2015-08-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('sites_SiteProvisioningEngine_name'))]"
+          ],
+          "tags": {
+            "displayName": "SiteProvisioningAppSettings"
+          },
+          "properties": {
+            "AzureWebJobsDashboard": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccounts_siteprovisioningengine_name'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]",
+            "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccounts_siteprovisioningengine_name'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]",
+            "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccounts_siteprovisioningengine_name'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]",
+            "WEBSITE_CONTENTSHARE": "[toLower(parameters('sites_SiteProvisioningEngine_name'))]",
+            "FUNCTIONS_EXTENSION_VERSION": "~1",
+            "WEBSITE_NODE_DEFAULT_VERSION": "6.5.0",
+            "AADClientId": "[parameters('appSettings_AADClientId')]",
+            "AADClientSecret": "[parameters('appSettings_AADClientSecret')]",
+            "AADDomain": "[parameters('appSettings_AADDomain')]",
+            "SPClientId": "[parameters('appSettings_SPClientId')]",
+            "SPClientSecret": "[parameters('appSettings_SPClientSecret')]",
+            "SPUserId": "[parameters('appSettings_SPUserId')]",
+            "SPUserPassword": "[parameters('appSettings_SPUserPassword')]",
+            "SPGroupsSiteUrl": "[parameters('appSettings_SPGroupsSiteUrl')]",
+            "TenantAdminUrl": "[parameters('appSettings_TenantAdminUrl')]"
+          }
+        }
+      ]
+    }
+  ]
+}
