@@ -311,10 +311,10 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-/Rederi.LogicApp.NewEntityCreateGroup/parameters.local.json
-/PnP.SiteDirectory/extractedTemplate.xml
-/PnP.SiteDirectory/log.txt
-/Azure.Functions/Properties/PublishProfiles/SiteProvisioningEngine - Web Deploy.pubxml
-/Azure.ApplyPowershell/Properties/PublishProfiles
-/Azure.Functions/Properties/PublishProfiles
-/Azure.Functions/Files/extractedTemplate.xml
+/other_components/Rederi.LogicApp.NewEntityCreateGroup/parameters.local.json
+/other_components/PnP.SiteDirectory/extractedTemplate.xml
+/other_components/PnP.SiteDirectory/log.txt
+/other_components/Azure.Functions/Properties/PublishProfiles/SiteProvisioningEngine - Web Deploy.pubxml
+/other_components/Azure.ApplyPowershell/Properties/PublishProfiles
+/other_components/Azure.Functions/Properties/PublishProfiles
+/other_components/Azure.Functions/Files/extractedTemplate.xml
