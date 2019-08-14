@@ -1,0 +1,59 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+
+    "connections_office365_name": {
+      "value": "office365"
+    },
+    "connections_office365_displayName": {
+      "value": "admin@contoso.onmicrosoft.com"
+    },
+    "connections_sharepointonline_name": {
+      "value": "sharepointonline"
+    },
+    "connections_sharepointonline_displayName": {
+      "value": "admin@contoso.onmicrosoft.com"
+    },
+    "sites_SiteProvisioningEngine_name": {
+      "value": "SiteProvisioningEngine"
+    },
+    "workflows_ProvisioningEngineTrigger_name": {
+      "value": "ProvisioningEngineTrigger"
+    },
+    "workflows_ProvisioningEngineFlow_name": {
+      "value": "ProvEngineTriggerFlow"
+    },
+    "sites_ApplyPowershhell_name": {
+      "value": "ApplyPowershell"
+    },
+    "siteOrderUrl": {
+      "value": "https://contoso.sharepoint.com/sites/Company"
+    },
+    "storageAccounts_siteprovisioningengine_name": {
+      "value": "siteprovisioningengine"
+    },
+    "serverfarms_NorthEuropePlan_name": {
+      "value": "NorthEuropePlan"
+    },
+    "orderListId": {
+      "value": "29885d20-4a96-438d-9eb2-025148cefbd0"
+    },
+    "flowUrl": {
+      "value": "https://prod-43.westeurope.logic.azure.com:443/workflows/d99bbaca426949f2b747ee09b485bc98/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=6TdmLTPohCPeu4wyrGyAk7AU4X34ND3t67yKnf0b-_8"
+    },
+    "emailRecipient": {
+      "value": "sp_admin@contoso.onmicrosoft.com"
+    },
+    "appSettings_TenantAdminUrl": { "value": "https://contoso-admin.sharepoint.com" },
+    "appSettings_SPGroupsSiteUrl": { "value": "https://contoso.sharepoint.com/sites/Company" },
+    "appSettings_SPUserPassword": { "value": "Password1234" },
+    "appSettings_SPUserId": { "value": "admin@contoso.onmicrosoft.com" },
+    "appSettings_AADClientId": { "value": "de9141e7-0ca9-427b-ba38-886f712ba793" },
+    "appSettings_AADClientSecret": { "value": "$h#*pRLhsW{fKqEh~r[3mv2Pk)hm=}(J" },
+    "appSettings_AADDomain": { "value": "contoso.onmicrosoft.com" },
+    "appSettings_SPClientId": { "value": "5d91435e-23d4-4d91-89dc-fe0b5eceb338" },
+    "appSettings_SPClientSecret": { "value": "GQ`'ZD]C?L(58n;En'2R)J+sKg*Mg_`p" },
+    "appSettings_OrgName": { "value": "contoso" }
+  }
+}

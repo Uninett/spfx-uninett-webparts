@@ -47,11 +47,15 @@
       "type": "string"
     },
     "orderListId": {
-      "defaultValue": "7355a4bf-463f-45f6-a7fa-9999dbe3ff89",
+      "defaultValue": "29885d20-4a96-438d-9eb2-025148cefbd0",
       "type": "string"
     },
     "flowUrl": {
       "defaultValue": "https://prod-43.westeurope.logic.azure.com:443/workflows/d99bbaca426949f2b747ee09b485bc98/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=6TdmLTPohCPeu4wyrGyAk7AU4X34ND3t67yKnf0b-_8",
+      "type": "string"
+    },
+    "emailRecipient": {
+      "defaultValue": "sp_admin@contoso.onmicrosoft.com",
       "type": "string"
     },
     "appSettings_TenantAdminUrl": {
@@ -93,10 +97,6 @@
     "appSettings_OrgName": {
       "defaultValue": "contoso",
       "type": "string"
-    },
-    "emailRecipient": {
-      "defaultValue": "sp_admin@contoso.onmicrosoft.com",
-      "type":  "string"
     }
   },
   "variables": {

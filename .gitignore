@@ -2,8 +2,8 @@
 # CUSTOM .GITIGNORE #
 #####################
 
-LogicApp.parameters.json
-local.settings.json
+LogicApp.Uninett.parameters.json
+local.Uninett.settings.json
 
 ###################
 # SPFx .GITIGNORE #
