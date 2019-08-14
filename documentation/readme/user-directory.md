@@ -5,9 +5,7 @@ Displays users from your Office 365 tenant in a customised [DetailsList](https:/
 The web part uses MS Graph REST API to retrieve Office 365 users from Azure AD.  
 Using either the built-in search box or the [Search Box](#search-box) web part, you can filter users by name or department.
 
-<p align="center">
-  <img src="img/user-directory.JPG" alt="User Directory demo" width="85%"/>
-</p>
+![User Directory demo](img/user-directory.JPG)
 
 ## Features
 
@@ -42,9 +40,7 @@ Simply add this to a page with a User Directory on it to be able to search throu
 This web part uses the [ReactiveX (RxJs)](http://reactivex.io/) library to allow communication between the two web parts.  
 Its functions are identical to the built-in search box of User Directory.
 
-<p align="center">
-  <img src="img/search-box.JPG" alt="Search Box demo"/>
-</p>
+![Search Box demo](img/search-box.JPG)
 
 ## Properties
 

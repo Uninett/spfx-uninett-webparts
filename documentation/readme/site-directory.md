@@ -4,9 +4,7 @@ Displays SharePoint sites from your Office 365 tenant in a customised [DetailsLi
 
 New sites can be created using the [Order Site Button](#order-site-button) web part.
 
-<p align="center">
-  <img src="img/site-directory.JPG" alt="Site Directory demo" width="85%"/>
-</p>
+![Site Directory demo](img/site-directory.JPG)
 
 ## Features
 
@@ -32,7 +30,7 @@ Toggle between Graph filter search and Javascript search
 
 Lets you order a new, customised SharePoint site.
 
-<img src="img/order-site.JPG" alt="Order site demo"/> | <img src="img/order-site-2.JPG" alt="Order site demo 2"/>
+![Order site demo](img/order-site.JPG) | ![Order site demo 2](img/order-site-2.JPG)
 --- | ---
 
 ## Features

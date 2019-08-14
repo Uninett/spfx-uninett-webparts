@@ -6,6 +6,4 @@ Web part that contains icons, with links, to social media. Property to change ba
 - LinkedIn
 - YouTube
 
-<p align="center">
-  <img src="img/social-links.JPG" alt="Social links demo"/>
-</p>
+![Social links demo](img/social-links.JPG)

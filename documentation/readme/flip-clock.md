@@ -11,6 +11,4 @@ Flip clock that lets you toggle between two modes:
 
 General properties let you switch between the modes, change clock size and toggle between black and white text color.
 
-<p align="center">
-  <img src="img/flip-clock.JPG" alt="FlipClock demo"/>
-</p>
+![FlipClock demo](img/flip-clock.JPG)
