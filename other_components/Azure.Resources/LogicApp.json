@@ -30,10 +30,6 @@
       "defaultValue": "ProvEngineTriggerFlow",
       "type": "string"
     },
-    "sites_ApplyPowershhell_name": {
-      "defaultValue": "ApplyPowershell",
-      "type": "string"
-    },
     "siteOrderUrl": {
       "defaultValue": "https://contoso.sharepoint.com/sites/Company",
       "type": "string"
@@ -256,7 +252,6 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Web/sites', parameters('sites_SiteProvisioningEngine_name'))]",
-        "[resourceId('Microsoft.Web/sites', parameters('sites_ApplyPowershhell_name'))]",
         "[resourceId('Microsoft.Web/connections', parameters('connections_office365_name'))]",
         "[resourceId('Microsoft.Web/connections', parameters('connections_sharepointonline_name'))]"
       ]
@@ -1474,7 +1469,6 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Web/sites', parameters('sites_SiteProvisioningEngine_name'))]",
-        "[resourceId('Microsoft.Web/sites', parameters('sites_ApplyPowershhell_name'))]",
         "[resourceId('Microsoft.Web/connections', parameters('connections_office365_name'))]",
         "[resourceId('Microsoft.Web/connections', parameters('connections_sharepointonline_name'))]"
       ]
@@ -1556,74 +1550,6 @@
         }
       },
       "dependsOn": []
-    },
-    {
-      "comments": "Generalized from resource: '/subscriptions/f88f5ab9-330a-49c1-96fc-0a93b980d57c/resourceGroups/KDTO/providers/Microsoft.Web/sites/ApplyPowershell'.",
-      "type": "Microsoft.Web/sites",
-      "kind": "functionapp",
-      "name": "[parameters('sites_ApplyPowershhell_name')]",
-      "apiVersion": "2016-08-01",
-      "location": "North Europe",
-      "scale": null,
-      "properties": {
-        "enabled": true,
-        "hostNameSslStates": [
-          {
-            "name": "[concat(parameters('sites_ApplyPowershhell_name'),'applypowershhell.azurewebsites.net')]",
-            "sslState": "Disabled",
-            "virtualIP": null,
-            "thumbprint": null,
-            "toUpdate": null,
-            "hostType": "Standard"
-          },
-          {
-            "name": "[concat(parameters('sites_ApplyPowershhell_name'),'applypowershhell.scm.azurewebsites.net')]",
-            "sslState": "Disabled",
-            "virtualIP": null,
-            "thumbprint": null,
-            "toUpdate": null,
-            "hostType": "Repository"
-          }
-        ],
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_NorthEuropePlan_name'))]",
-        "reserved": false,
-        "siteConfig": null,
-        "scmSiteAlsoStopped": false,
-        "hostingEnvironmentProfile": null,
-        "clientAffinityEnabled": false,
-        "clientCertEnabled": false,
-        "hostNamesDisabled": false,
-        "containerSize": 1536,
-        "dailyMemoryTimeQuota": 0,
-        "cloningInfo": null
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_NorthEuropePlan_name'))]"
-      ],
-      "resources": [
-        {
-          "name": "appsettings",
-          "type": "config",
-          "apiVersion": "2015-08-01",
-          "dependsOn": [
-            "[resourceId('Microsoft.Web/sites', parameters('sites_ApplyPowershhell_name'))]"
-          ],
-          "tags": {
-            "displayName": "ApplyPowershellAppSettings"
-          },
-          "properties": {
-            "AzureWebJobsDashboard": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccounts_siteprovisioningengine_name'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]",
-            "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccounts_siteprovisioningengine_name'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]",
-            "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccounts_siteprovisioningengine_name'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]",
-            "WEBSITE_CONTENTSHARE": "[toLower(parameters('sites_ApplyPowershhell_name'))]",
-            "FUNCTIONS_EXTENSION_VERSION": "~1",
-            "WEBSITE_NODE_DEFAULT_VERSION": "6.5.0",
-            "TenantAdminUPN": "[parameters('appSettings_SPUserId')]",
-            "OrgName": "[parameters('appSettings_OrgName')]",
-            "Password": "[parameters('appSettings_SPUserPassword')]"
-          }
-        }
-      ]
     },
     {
       "comments": "Generalized from resource: '/subscriptions/f88f5ab9-330a-49c1-96fc-0a93b980d57c/resourceGroups/KDTO/providers/Microsoft.Web/sites/SiteProvisioningEngine'.",
