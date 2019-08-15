@@ -1,28 +1,38 @@
 # Order Site documentation
 
+## Permissions
+
+### Operational permissions
+
+- Create a new Office 365 user account with the following settings:
+  - **Name**: o365@\<yourtenant>.onmicrosoft.com
+  - **Roles**: SharePoint administrator
+  - Assign the following licenses:
+    - Exchange Online
+    - Office 365
+- Give the new user account the Owner role (Full control) in your SharePoint Site Collection
+- 
+### Deployment permissions
+
+## Edit files
+
+
+
 ## Deployment
 
 ### Create new Resource Group
 
 Start by creating a new Resource Group in your Azure Subscription.
 
-### Create Function Apps
+### Create Function App
 
-1. Create a new Function App in the Resource Group with the following settings:
-   - App name: \<YourTenantName>SiteProvEngine (e.g. *ContosoSiteProvEngine*)
-   - OS: Windows
-   - Hosting Plan: Consumption Plan
-   - Location: same as your Resource Group
-   - Runtime Stack: .NET Core
-   - Storage: Create new -> \<yourtenantname>siteprovengine (e.g. *contosositeprovengine*)  
-
-2. Create another Function App with the following settings:
-   - App name: \<YourTenantName>ApplyPowershell (e.g. *ContosoApplyPowershell*)
-   - OS: Windows
-   - Hosting Plan: Consumption Plan
-   - Location: same as your Resource Group
-   - Runtime Stack: .NET Core
-   - Storage: Use existing -> \<yourtenantname>siteprovengine (e.g. *contosositeprovengine*)
+Create a new Function App in the Resource Group with the following settings:
+- **App name**: \<YourTenantName>SiteProvEngine (e.g. *ContosoSiteProvEngine*)
+- **OS**: Windows
+- **Hosting Plan**: Consumption Plan
+- **Location**: same as your Resource Group
+- **Runtime Stack**: .NET Core
+- **Storage**: Create new -> \<yourtenantname>siteprovengine (e.g. *contosositeprovengine*)
   
 ### Publish Function Apps
 
