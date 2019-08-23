@@ -10,14 +10,14 @@
   
       // Azure AD - Registered at Azure Active Directory -> App Registrations
       "AADClientId": "de9141e7-0ca9-427b-ba38-886f712ba793",
-      "AADClientSecret": "$h#*pRLhsW{fKqEh~r[3mv2Pk)hm=}(J",
-      "AADDomain": "<yourtenant>.microsoft.com",
+      "AADClientSecret": "OODEh8sEL2AR/To6qc7uXRtyAatawLlJdO4qoXw8EJM=",
+      "AADDomain": "<yourtenant>.onmicrosoft.com",
   
       // SharePoint - Registered at _layouts/15/AppRegNew.aspx
       "SPClientId": "5d91435e-23d4-4d91-89dc-fe0b5eceb338",
-      "SPClientSecret": "GQ`'ZD]C?L(58n;En'2R)J+sKg*Mg_`p",
+      "SPClientSecret": "MGXcDkRp7+EwcfaC+lM5kF+nqIH87k4kXKYHGT7AlP4=",
   
-      "SPUserId": "admin@<yourtenant>.onmicrosoft.com",
+      "SPUserId": "o365@<yourtenant>.onmicrosoft.com",
       "SPUserPassword": "Password1234",
       "SPGroupsSiteUrl": "https://<yourtenant>.sharepoint.com/sites/Company",
       "TenantAdminUrl": "https://<yourtenant>-admin.sharepoint.com"
