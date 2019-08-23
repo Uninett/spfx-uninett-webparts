@@ -28,6 +28,12 @@ Toggle between Graph filter search and Javascript search
 
 # Order Site Button
 
+This web part requires you to set up several different components before it can be used. 
+
+Please refer to the [detailed documentation](/other_components/README.md).
+
+___
+
 Lets you order a new, customised SharePoint site.
 
 ![Order site demo](img/order-site.JPG) | ![Order site demo 2](img/order-site-2.JPG)

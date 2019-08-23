@@ -1,4 +1,9 @@
-# Site Directory documentation
+# Order Site Button documentation
+
+This is a detailed guide on how to set up and deploy the different components that the Order Site Button web part depends on.  
+
+If something is unclear, submit an issue and I will try to answer as well as I can.
+___
 
 ## Permissions
 
@@ -9,25 +14,27 @@
      - Exchange Online
      - Office 365
 2. In your SharePoint Site Collection, assign the **Owner** role (Full control) to the new user
-3. In the Azure Portal, assign the **Application administrator** role to the new user
+3. In Azure Active Directory in the Azure Portal, assign the **Application administrator** role to the new user
 
 ## Create SharePoint and Azure Apps
 
 ### Register SP app
 
-1. Log into the SharePoint admin center with the user created in the previous step
-2. Go to https://yourtenant-admin.sharepoint.com/_layouts/15/AppRegNew.aspx
+1. Log into the SharePoint admin center with the new o365 user
+2. Go to https://yourtenant-admin.sharepoint.com/_layouts/15/AppRegNew.aspx  
+   (replace *yourtenant* with actual tenant name)
 3. Generate a Client Id and Client Secret (*make sure to write these down!*)
 4. Set the **Title** to "provengineapp"
 5. App Domain and Redirect URI are not important, so just copy the example values
 6. Click **Create**
    
-   ![AppRegNew](img/appregnew.JPG)
+   ![AppRegNew](doc/img/appregnew.JPG)
 
 
 ### Configure SP app
 
-1. Go to https://yourtenant-admin.sharepoint.com/_layouts/15/AppInv.aspx
+1. Go to https://yourtenant-admin.sharepoint.com/_layouts/15/AppInv.aspx  
+   (replace *yourtenant* with actual tenant name)
 2. Paste the Client Id from the provengineapp into the **App Id** field and click **Lookup**
 3. Copy and paste the following snippet into the **Permission Request XML** field:
     ```
@@ -35,32 +42,36 @@
         <AppPermissionRequest Scope="http://sharepoint/content/tenant" Right="FullControl" />
     </AppPermissionRequests>
     ```
+
+   ![AppInv](doc/img/appinv.JPG)
+
 4. Click **Create**
 5. Click **Trust It** when asked to to trust provengineapp
    
-   ![AppInv](img/appinv.JPG)
+
 
 ### Register AD App
 
 1. Go to https://portal.azure.com (still logged in as the new o365 user)
 2. Go to Azure Active Directory -> App registrations and click **New registration**
-3. Set the following settings and click **Register**:
+3. Set the following settings:
     - **Name**: ProvisioningEngine
     - **Supported account types**: Accounts in any organizational directory (Any Azure AD directory - Multitenant) and personal Microsoft accounts (e.g. Skype, Xbox)
     - **Redirect URI**: `http://localhost`
-4. Go to **Authentication** in your new Azure App and change these settings:
+4. Click **Register**
+5. Go to **Authentication** in your new Azure App and change these settings:
     - **Live SDK support**: No
     - **Default client type**: Yes
-5. Go to **Certificates & secrets** and click **New client secret**.  
+6. Go to **Certificates & secrets** and click **New client secret**.  
    Set the expiration to "Never" and click **Add**.  
    *Make sure to write down the new client secret!*
-6. Go to **API permissions** and add the following MS Graph permissions:
+7. Go to **API permissions** and add the following MS Graph permissions:
    - Directory.ReadWrite.All
    - Group.ReadWrite.All
    - User.Read.All
   
-7. After adding the permissions, click **Grant admin consent for \<Your Tenant>**
-8. While you are in your new Azure App, make note of its **Application (client) ID**, which is found in the Overview tab
+8. After adding the permissions, click **Grant admin consent for \<Your Tenant>**
+9. While you are in your new Azure App, make note of its **Application (client) ID**, which is found in the Overview tab
 
 ## PowerShell scripts
 
@@ -157,16 +168,16 @@ Create a new Function App in the Resource Group with the following settings:
 - **Runtime Stack**: .NET Core
 - **Storage**: Create new -> \<yourtenantname>siteprovengine (e.g. *contosositeprovengine*)
   
-### Publish Function Apps
+### Publish Function App
 
 1. Open KDTO.sln in Visual Studio 2019
 2. Connect your Azure subscription to Visual Studio and log in with the o365 user
 3. Right-click the Azure.Functions project and select **Build**
 4. Right-click the Azure.Functions project and select **Publish**
 5. Pick **Azure Functions Consumption Plan** as a publish target
-6. Choose "Select Existing" (check "Run from package file") and click **Publish**  
+6. Choose "Select Existing" (uncheck "Run from package file") and click **Publish**  
       
-   ![Publish Function App](img/publishapp.png)
+   ![Publish Function App](doc/img/publishapp.png)
 
 7. Select the *SiteProvEngine* Function App in your Resource Group and click **OK**
 
@@ -179,7 +190,7 @@ Create a new Function App in the Resource Group with the following settings:
    - **Deployment template**: logicapp.json
    - **Template parameters files**: logicapp.parameters.json
  
-   ![Deploy logic](img/deploylogic.JPG)
+   ![Deploy logic](doc/img/deploylogic.JPG)
 
 4. Click **Deploy**
 
@@ -212,7 +223,7 @@ There is one value in the *LogicApp.parameters.json* file we haven't touched yet
 3. Copy the value from **HTTP POST URL**.  
    This is the flowUrl that we are after
 
-![Flow URL](img/flowurl.png)
+![Flow URL](doc/img/flowurl.png)
 
 4. Replace the **flowUrl** value in *LogicApp.parameters.json* with the copied value
 
