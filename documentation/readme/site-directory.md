@@ -30,7 +30,7 @@ Toggle between Graph filter search and Javascript search
 
 This web part requires you to set up several different components before it can be used. 
 
-Please refer to the [detailed documentation](/other_components/README.md).
+Please refer to the [detailed documentation](/other_components/DOCUMENTATION.md).
 
 ___
 
