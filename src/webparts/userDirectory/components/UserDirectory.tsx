@@ -50,6 +50,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
   private _visibleColumns: IColumn[];
   private _showSorted: boolean;
   private _isApiCorrect: boolean;
+  private _errorLog: string;
   
   constructor(props: IUserDirectoryProps, state: IUserDirectoryState) {
     super(props);
@@ -92,6 +93,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
           <Stack horizontalAlign='center'>
             <Text block>{strings.BadApi1}</Text>
             <Text block>{strings.BadApi2}</Text>
+            <Text block>{this._errorLog}</Text>
           </Stack>
       </Fabric>
       );
@@ -330,6 +332,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
               console.error(err);
               // Re-renders component with error message
               this._isApiCorrect = false;
+              this._errorLog = err.message;
               this.forceUpdate();
               return;
             }            
@@ -352,7 +355,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
             });
                         
             // Update user array and component state
-            users.sort((a, b) => (a.displayName > b.displayName) ? 1 : -1)
+            users.sort((a, b) => (a.displayName > b.displayName) ? 1 : -1);
             this._allUsers = users;
             this.setState(
               {

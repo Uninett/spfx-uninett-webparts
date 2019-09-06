@@ -4,10 +4,10 @@ A collection of web parts developed by Uninett.
 
 See individual READMEs for each web part:
 
-* [Site Directory & Order Site Button](documentation/readme/site-directory.md)
-* [User Directory & Search Box](documentation/readme/user-directory.md)
-* [Social Links](documentation/readme/social-links.md)
-* [Flip Clock](documentation/readme/flip-clock.md)
+* [Site Directory & Order Site Button](readme/site-directory.md)
+* [User Directory & Search Box](readme/user-directory.md)
+* [Social Links](readme/social-links.md)
+* [Flip Clock](readme/flip-clock.md)
 
 
 ___
