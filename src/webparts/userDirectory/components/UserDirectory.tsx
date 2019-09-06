@@ -4,6 +4,7 @@ import * as strings from 'UserDirectoryWebPartStrings';
 import { IUserDirectoryProps } from './IUserDirectoryProps';
 import { IUserDirectoryState } from './IUserDirectoryState';
 import { IUserItem } from './IUserItem';
+import { PersonaCard } from "./PersonaCard/PersonaCard";
 
 import { escape } from '@microsoft/sp-lodash-subset';
 
@@ -120,6 +121,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
           enableShimmer={this._allUsers == undefined}
           shimmerLines={30}
         />
+        
         { users.length == 0 && (
          <Stack horizontalAlign='center'>
           <Text>{strings.NoUsers}</Text>
@@ -128,25 +130,6 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       </Fabric>
     );
   }
-
-  // Attempt to make column headers bold
-  /*
-  private _onRenderDetailsHeader(detailsHeaderProps: IDetailsHeaderProps) {
-    const customStyles: Partial<IDetailsHeaderStyles> = {};
-
-    customStyles.root = {
-      //fontSize: "14px",
-      fontWeight: 600
-    };
-    console.log("style set");
-    return (
-      <DetailsHeader
-        {...detailsHeaderProps}
-        styles={customStyles}
-      />
-    );
-  }
-  */
 
   private _onRenderRow = (props: IDetailsRowProps): JSX.Element => {
     const customStyles: Partial<IDetailsRowStyles> = {};
@@ -307,7 +290,10 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
   
 
   private _onColumnClick = (ev: React.MouseEvent<HTMLElement>, column: IColumn): void => {
+    this._sort(column);
+  }
 
+  private _sort = (column: IColumn): void => {
     const columns = this._visibleColumns;
     const users = this.state.users;
     const newColumns: IColumn[] = columns.slice();
@@ -334,7 +320,6 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
     this.props.context.msGraphClientFactory
       .getClient()
       .then((client: MSGraphClient): void => {
-        // From https://github.com/microsoftgraph/msgraph-sdk-javascript sample
         client
           .api(this.props.api)
           .version("v1.0")
@@ -367,6 +352,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
             });
                         
             // Update user array and component state
+            users.sort((a, b) => (a.displayName > b.displayName) ? 1 : -1)
             this._allUsers = users;
             this.setState(
               {
