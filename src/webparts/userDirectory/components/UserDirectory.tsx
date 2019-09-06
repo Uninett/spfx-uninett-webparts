@@ -4,14 +4,10 @@ import * as strings from 'UserDirectoryWebPartStrings';
 import { IUserDirectoryProps } from './IUserDirectoryProps';
 import { IUserDirectoryState } from './IUserDirectoryState';
 import { IUserItem } from './IUserItem';
-import { PersonaCard } from "./PersonaCard/PersonaCard";
-
-import { escape } from '@microsoft/sp-lodash-subset';
+import { LivePersonaCard } from './LivePersonaCard/LivePersonaCard';
 
 import { MSGraphClient } from "@microsoft/sp-http";
 
-import { TextField } from 'office-ui-fabric-react/lib/TextField';
-import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import { Fabric } from 'office-ui-fabric-react/lib/Fabric';
 import { DetailsList, DetailsListLayoutMode, Selection, SelectionMode, IColumn, ConstrainMode, buildColumns, IDetailsRowProps, IDetailsRowStyles, DetailsRow} from 'office-ui-fabric-react/lib/DetailsList';
 import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList';
@@ -118,7 +114,7 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
           isHeaderVisible={true}
           constrainMode={ConstrainMode.horizontalConstrained}
           //onRenderDetailsHeader={this._onRenderDetailsHeader}
-          onRenderItemColumn={_renderItemColumn}
+          onRenderItemColumn={this._renderItemColumn}
           onRenderRow={this._onRenderRow}          
           enableShimmer={this._allUsers == undefined}
           shimmerLines={30}
@@ -151,6 +147,35 @@ export default class UserDirectory extends React.Component<IUserDirectoryProps, 
       }
     }
     return <DetailsRow {...props} styles={customStyles} />;
+  }
+
+  // Re-render values in certain columns with correct type of content
+  private _renderItemColumn = (item: IUserItem, index: number, column: IColumn): JSX.Element => {
+    const fieldContent = item[column.fieldName as keyof IUserItem] as string;
+  
+    switch (column.key) {
+      case 'colPhoto':      
+        return <Image src={"/_layouts/15/userphoto.aspx?size=L&username=" + fieldContent} width={photoSize} height={photoSize} imageFit={ImageFit.cover} shouldFadeIn={false} styles={imageStyle}/>;
+      
+      case 'colName':
+        return(
+          <LivePersonaCard
+            user={item}
+            serviceScope={this.props.context.serviceScope}
+          >
+          <div>{item.displayName}</div>
+          </LivePersonaCard>      
+        );
+  
+      case 'colMail':
+        return <Link href={"mailto:" + fieldContent}>{fieldContent}</Link>;
+  
+      case 'colPhone':
+        return <Link href={"tel:" + fieldContent}>{fieldContent}</Link>;
+  
+      default:
+        return <span>{fieldContent}</span>;
+    }
   }
 
   private _onReceiveData = (
@@ -377,20 +402,3 @@ function _copyAndSort<T>(items: T[], columnKey: string, isSortedDescending?: boo
     .sort((a: T, b: T) => ((isSortedDescending ? a[key] < b[key] : a[key] > b[key]) ? 1 : -1));
 }
 
-function _renderItemColumn(item: IUserItem, index: number, column: IColumn) {
-  const fieldContent = item[column.fieldName as keyof IUserItem] as string;
-
-  switch (column.key) {
-    case 'colPhoto':      
-      return <Image src={"/_layouts/15/userphoto.aspx?size=L&username=" + fieldContent} width={photoSize} height={photoSize} imageFit={ImageFit.cover} shouldFadeIn={false} styles={imageStyle}/>;
-
-    case 'colMail':
-      return <Link href={"mailto:" + fieldContent}>{fieldContent}</Link>;
-
-    case 'colPhone':
-      return <Link href={"tel:" + fieldContent}>{fieldContent}</Link>;
-
-    default:
-      return <span>{fieldContent}</span>;
-  }
-}
