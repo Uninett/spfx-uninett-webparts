@@ -3,7 +3,7 @@
   "solution": {
     "name": "spfx-uninett-webparts-client-side-solution",
     "id": "e7b6dc50-727d-44fa-95ff-23d5d97d6163",
-    "version": "1.3.0.3",
+    "version": "1.3.1.0",
     "includeClientSideAssets": true,
     "isDomainIsolated": false,
     "webApiPermissionRequests": [
