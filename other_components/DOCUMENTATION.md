@@ -1,6 +1,6 @@
-# Order Site Button documentation
+# Site Directory backend documentation
 
-This is a detailed guide on how to set up and deploy the different components that the Order Site Button web part depends on.  
+This is a detailed guide on how to set up and deploy the different components that the "Site Directory" depends on.  
 
 If something is unclear, submit an issue and I will try to answer as well as I can.
 ___
