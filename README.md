@@ -33,4 +33,5 @@ This package produces the following:
 gulp test - TODO
 gulp serve - TODO
 gulp bundle - TODO
-gulp package-solution - TODO```
+gulp package-solution - TODO
+```
