@@ -1,7 +1,9 @@
 # Site Directory
 
-Displays SharePoint sites from your Office 365 tenant in a customised [DetailsList](https://developer.microsoft.com/en-us/fabric#/controls/web/detailslist) component.  
+The "Site Directory" depends on a backend to work.
+Please refer to the [detailed documentation](/other_components/DOCUMENTATION.md).
 
+"Site Directory" displays SharePoint sites from your Office 365 tenant in a customised [DetailsList](https://developer.microsoft.com/en-us/fabric#/controls/web/detailslist) component.
 New sites can be created using the [Order Site Button](#order-site-button) web part.
 
 ![Site Directory demo](img/site-directory.JPG)
