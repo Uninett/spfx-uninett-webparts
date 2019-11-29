@@ -232,7 +232,7 @@ class Project extends React.Component<IProjectProps, any> {
                     </div>
                 </div>
             ) : ''}
-            
+
 
             {/*<div className="ms-Grid-row">
                 <div className={styles.positioning + " " + styles.taxonomy}>
@@ -332,14 +332,14 @@ class Project extends React.Component<IProjectProps, any> {
     }
 
     private _setName = (title: string) => {
-        
+
         this.setState({
             projectName: title
         });
     }
 
     private _onFinishClick = () => {
-        
+
         if (this.state.people.length > 0 && this.state.projectName != "") {
 
             if (!this.props.hideParentDepartment && this.state.parentDepartment == "") {
@@ -363,7 +363,7 @@ class Project extends React.Component<IProjectProps, any> {
                         'KDTOParentDepartment': this.state.parentDepartment,
                         //'KDTOOwningDepartment': { __metadata: { type: "SP.Taxonomy.TaxonomyFieldValue" }, TermGuid: this.state.owningDepartment.id, WssId: -1 },
                         'KDTOSitePrivacy': this.state.privacySetting,
-                        'KDTOExternalSharing': false
+                        'KDTOExternalSharing': this.state.externalShare
                     };
                     this.props.updateList(data);
                 }
