@@ -13,6 +13,7 @@ declare interface IOrderGroupWebPartStrings {
   ActivityName: string;
   ActivityDescription: string;
   OpenForExternalSharing: string;
+  CreateMicrosoftTeam: string;
   Cancel: string;
   Finish: string;
   IncompleteAlert: string;

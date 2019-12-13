@@ -31,6 +31,7 @@ class Activity extends React.Component<IActivityProps, IActivityState> {
             parentDepartment: "",
             privacySetting: "Closed",
             externalShare: true,
+            createTeam: true,
             people: []
         };
     }
@@ -87,7 +88,7 @@ class Activity extends React.Component<IActivityProps, IActivityState> {
                     />
                 </div>
             </div>
-            
+
             {!this.props.hideParentDepartment ? (
                 <div className="ms-Grid-row">
                     <div className={styles.positioning}>
@@ -100,7 +101,7 @@ class Activity extends React.Component<IActivityProps, IActivityState> {
                     </div>
                 </div>
             ) : ''}
-            
+
 
             <div className="ms-Grid-row">
                 <div className={styles.positioning}>
@@ -118,11 +119,21 @@ class Activity extends React.Component<IActivityProps, IActivityState> {
                         label={strings.OpenForExternalSharing}
                         id='checkbox1'
                         defaultChecked={true}
-                        onChange={this._onCheckboxChange}
+                        onChange={this._onExternalShareChange}
                     />
                 </div>
             </div>
 
+            <div className="ms-Grid-row">
+                <div className={styles.positioning}>
+                    <Checkbox
+                        label={strings.CreateMicrosoftTeam}
+                        id='checkbox2'
+                        defaultChecked={true}
+                        onChange={this._onCreateTeamChange}
+                    />
+                </div>
+            </div>
 
             <div className="ms-Grid-row">
                 <div className={styles.positioning}>
@@ -142,7 +153,7 @@ class Activity extends React.Component<IActivityProps, IActivityState> {
         </div>);
     }
 
-    private _onCheckboxChange = (ev: React.FormEvent<HTMLElement>, isChecked: boolean) => {
+    private _onExternalShareChange = (ev: React.FormEvent<HTMLElement>, isChecked: boolean) => {
         if (isChecked == false) {
             this.setState({ externalShare: false });
         }
@@ -151,9 +162,18 @@ class Activity extends React.Component<IActivityProps, IActivityState> {
         }
     }
 
+    private _onCreateTeamChange = (ev: React.FormEvent<HTMLElement>, isChecked: boolean) => {
+      if (isChecked == false) {
+          this.setState({ createTeam: false });
+      }
+      else {
+          this.setState({ createTeam: true });
+      }
+    }
+
     private _onFinishClick = () => {
         if (this.state.people.length > 0 && this.state.activityName !== "") {
-            
+
             if (!this.props.hideParentDepartment && this.state.parentDepartment == "") {
                 alert(strings.IncompleteAlert);
             } else {
@@ -164,7 +184,8 @@ class Activity extends React.Component<IActivityProps, IActivityState> {
                     'KDTOSiteDescription': this.state.activityDescription,
                     'KDTOParentDepartment': this.state.parentDepartment,
                     'KDTOSitePrivacy': this.state.privacySetting,
-                    'KDTOExternalSharing': this.state.externalShare
+                    'KDTOExternalSharing': this.state.externalShare,
+                    'KDTOCreateTeam': this.state.createTeam
                 };
                 this.props.updateList(data);
             }

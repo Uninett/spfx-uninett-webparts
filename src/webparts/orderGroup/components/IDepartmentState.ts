@@ -7,5 +7,6 @@ export interface IDepartmentState {
     // shortName: string;
     privacySetting: Key;
     externalShare: boolean;
+    createTeam: boolean;
     people?: SharePointUserPersona[];
 }

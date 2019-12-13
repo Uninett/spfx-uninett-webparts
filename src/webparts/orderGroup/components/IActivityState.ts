@@ -7,5 +7,6 @@ export interface IActivityState {
     parentDepartment: string;
     privacySetting: Key;
     externalShare: boolean;
+    createTeam: boolean;
     people?: SharePointUserPersona[];
 }

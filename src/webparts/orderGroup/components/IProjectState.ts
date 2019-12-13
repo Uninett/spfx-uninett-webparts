@@ -17,5 +17,6 @@ export interface IPRojectState {
     owningDepartment?: ITaxonomyObject;
     privacySetting: Key;
     externalShare: boolean;
+    createTeam: boolean;
     people?: SharePointUserPersona[];
 }

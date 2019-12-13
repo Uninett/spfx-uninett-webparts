@@ -100,6 +100,7 @@ class Project extends React.Component<IProjectProps, any> {
             owningDepartment: null,
             privacySetting: "Closed",
             externalShare: true,
+            createTeam: true,
             people: []
         };
     }
@@ -269,6 +270,17 @@ class Project extends React.Component<IProjectProps, any> {
 
             <div className="ms-Grid-row">
                 <div className={styles.positioning}>
+                    <Checkbox
+                        label={strings.CreateMicrosoftTeam}
+                        id='checkbox3'
+                        defaultChecked={true}
+                        onChange={this._onCreateTeamChange}
+                    />
+                </div>
+            </div>
+
+            <div className="ms-Grid-row">
+                <div className={styles.positioning}>
                     <DefaultButton
                         text={strings.Cancel}
                         onClick={this.props.cancel}
@@ -292,6 +304,15 @@ class Project extends React.Component<IProjectProps, any> {
         else {
             this.setState({ externalShare: true });
         }
+    }
+
+    private _onCreateTeamChange = (ev: React.FormEvent<HTMLElement>, isChecked: boolean) => {
+      if (isChecked == false) {
+          this.setState({ createTeam: false });
+      }
+      else {
+          this.setState({ createTeam: true });
+      }
     }
 
     private _onTaxonomyChanged = (Name, Option) => {
@@ -363,7 +384,8 @@ class Project extends React.Component<IProjectProps, any> {
                         'KDTOParentDepartment': this.state.parentDepartment,
                         //'KDTOOwningDepartment': { __metadata: { type: "SP.Taxonomy.TaxonomyFieldValue" }, TermGuid: this.state.owningDepartment.id, WssId: -1 },
                         'KDTOSitePrivacy': this.state.privacySetting,
-                        'KDTOExternalSharing': this.state.externalShare
+                        'KDTOExternalSharing': this.state.externalShare,
+                        'KDTOCreateTeam': this.state.createTeam
                     };
                     this.props.updateList(data);
                 }

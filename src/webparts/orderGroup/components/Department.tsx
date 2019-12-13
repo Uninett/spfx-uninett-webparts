@@ -5,6 +5,7 @@ import { Label } from 'office-ui-fabric-react/lib/Label';
 import { PeoplePicker } from './PeoplePicker';
 import { WebPartContext } from "@microsoft/sp-webpart-base";
 import { ParentDepartment } from './ParentDepartment';
+import { Checkbox, ICheckboxStyles, ICheckboxProps } from 'office-ui-fabric-react/lib/Checkbox';
 import { IDepartmentState } from './IDepartmentState';
 import { SharePointUserPersona } from '../models/PeoplePicker';
 import * as strings from 'OrderGroupWebPartStrings';
@@ -29,6 +30,7 @@ class Department extends React.Component<IDepartmentProps, any> {
             departmentDescription: "",
             // shortName: "",
             externalShare: false,
+            createTeam: true,
             privacySetting: "Closed",
             people: [],
             parentDepartment: ""
@@ -121,6 +123,17 @@ class Department extends React.Component<IDepartmentProps, any> {
 
             <div className="ms-Grid-row">
                 <div className={styles.positioning}>
+                    <Checkbox
+                        label={strings.CreateMicrosoftTeam}
+                        id='checkbox2'
+                        defaultChecked={true}
+                        onChange={this._onCreateTeamChange}
+                    />
+                </div>
+            </div>
+
+            <div className="ms-Grid-row">
+                <div className={styles.positioning}>
                     <DefaultButton
                         text={strings.Cancel}
                         onClick={this.props.cancel}
@@ -137,8 +150,17 @@ class Department extends React.Component<IDepartmentProps, any> {
         </div>);
     }
 
+    private _onCreateTeamChange = (ev: React.FormEvent<HTMLElement>, isChecked: boolean) => {
+      if (isChecked == false) {
+          this.setState({ createTeam: false });
+      }
+      else {
+          this.setState({ createTeam: true });
+      }
+    }
+
     private _onFinishClick = () => {
-        
+
         if (this.state.people.length > 0 && this.state.departmentName != "") {
 
             if (!this.props.hideParentDepartment && this.state.parentDepartment == "") {
@@ -152,11 +174,12 @@ class Department extends React.Component<IDepartmentProps, any> {
                     // 'KDTOShortName': this.state.shortName,
                     'KDTOParentDepartment': this.state.parentDepartment,
                     'KDTOSitePrivacy': this.state.privacySetting,
-                    'KDTOExternalSharing': false
+                    'KDTOExternalSharing': this.state.externalShare,
+                    'KDTOCreateTeam': this.state.createTeam
                 };
                 this.props.updateList(data);
             }
-            
+
         }
         else {
             alert(strings.IncompleteAlert);
