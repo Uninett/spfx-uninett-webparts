@@ -1,4 +1,4 @@
-﻿<pnp:ContentTypes xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+<pnp:ContentTypes xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
   <pnp:ContentType ID="0x01006723DC5874B448DBA9EB9966245656FA" Name="Avdeling" Group="{parameter:GenericContentTypesGroup}" Description="Contenttype for Site Creation list" Inherits="false">
     <pnp:FieldRefs>
       <pnp:FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" Required="true" />
@@ -8,6 +8,7 @@
       <pnp:FieldRef ID="{5639FFA9-C62E-4513-B7C7-CCCA2B5E92C2}" Name="KDTOParentDepartment" />
       <pnp:FieldRef ID="{E2A125E8-DAD5-464E-B1AA-3A8FB16CAF86}" Name="KDTOSitePrivacy" />
       <pnp:FieldRef ID="{EAABEF6C-6E45-45BA-B532-9A52678EACE5}" Name="KDTOExternalSharing" />
+      <pnp:FieldRef ID="{48F095C3-256C-49DD-A42E-993DAF80FC21}" Name="KDTOCreateTeam" />
       <pnp:FieldRef ID="{CE452A37-6C2E-4C1A-9370-85C3D6A32814}" Name="KDTOStatus" />
     </pnp:FieldRefs>
   </pnp:ContentType>
@@ -19,6 +20,7 @@
       <pnp:FieldRef ID="{5639FFA9-C62E-4513-B7C7-CCCA2B5E92C2}" Name="KDTOParentDepartment" />
       <pnp:FieldRef ID="{E2A125E8-DAD5-464E-B1AA-3A8FB16CAF86}" Name="KDTOSitePrivacy" />
       <pnp:FieldRef ID="{EAABEF6C-6E45-45BA-B532-9A52678EACE5}" Name="KDTOExternalSharing" />
+      <pnp:FieldRef ID="{48F095C3-256C-49DD-A42E-993DAF80FC21}" Name="KDTOCreateTeam" />
       <pnp:FieldRef ID="{CE452A37-6C2E-4C1A-9370-85C3D6A32814}" Name="KDTOStatus" />
     </pnp:FieldRefs>
   </pnp:ContentType>
@@ -35,6 +37,7 @@
       <pnp:FieldRef ID="{6A505804-C196-4F40-9E57-ED3492A923D6}" Name="KDTOOwningDepartment" />
       <pnp:FieldRef ID="{E2A125E8-DAD5-464E-B1AA-3A8FB16CAF86}" Name="KDTOSitePrivacy" />
       <pnp:FieldRef ID="{EAABEF6C-6E45-45BA-B532-9A52678EACE5}" Name="KDTOExternalSharing" />
+      <pnp:FieldRef ID="{48F095C3-256C-49DD-A42E-993DAF80FC21}" Name="KDTOCreateTeam" />
       <pnp:FieldRef ID="{CE452A37-6C2E-4C1A-9370-85C3D6A32814}" Name="KDTOStatus" />
       <pnp:FieldRef ID="{741275F6-4509-46FC-9929-91D75456AEEA}" Name="KDTOPreferedUrl" />
     </pnp:FieldRefs>

@@ -359,6 +359,9 @@
                         "KDTOExternalSharing": {
                           "type": "boolean"
                         },
+                        "KDTOCreateTeam": {
+                          "type": "boolean"
+                        },
                         "KDTOOwner": {
                           "properties": {
                             "@@odata.type": {
@@ -961,6 +964,7 @@
                     "body": {
                       "displayName": "@variables('displayName')",
                       "externalSharing": "@variables('externalSharing')",
+                      "createTeam": "@variables('createTeam')",
                       "isPrivate": "@variables('isPrivate')",
                       "mailNickname": "@variables('mailNickname')",
                       "owners": [
@@ -1292,6 +1296,30 @@
                         ]
                       },
                       "type": "If"
+                    },
+                    "Condition_-_CreateTeam": {
+                      "actions": {
+                        "Set_variable_CreateTeam": {
+                          "runAfter": {},
+                          "type": "SetVariable",
+                          "inputs": {
+                            "name": "createTeam",
+                            "value": true
+                          }
+                        }
+                      },
+                      "runAfter": {},
+                      "expression": {
+                        "and": [
+                          {
+                            "equals": [
+                              "@triggerBody()['body']?['KDTOCreateTeam']",
+                              true
+                            ]
+                          }
+                        ]
+                      },
+                      "type": "If"
                     }
                   },
                   "runAfter": {},
@@ -1326,6 +1354,23 @@
                   }
                 ]
               }
+            },
+            "Initialize_variable_-_createTeam": {
+              "inputs": {
+                "variables": [
+                  {
+                    "name": "createTeam",
+                    "type": "boolean",
+                    "value": false
+                  }
+                ]
+              },
+              "runAfter": {
+                "Initialize_variable_-_externalSharing": [
+                  "Succeeded"
+                ]
+              },
+              "type": "InitializeVariable"
             },
             "Initialize_variable_-_externalSharing": {
               "runAfter": {
@@ -1427,7 +1472,7 @@
             },
             "Initialize_variable_-_template": {
               "runAfter": {
-                "Initialize_variable_-_externalSharing": [
+                "Initialize_variable_-_createTeam": [
                   "Succeeded"
                 ]
               },

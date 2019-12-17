@@ -11,7 +11,7 @@ using Office365Groups.Library.ModelValidation;
 namespace Office365Groups.Library
 {
 	public class OfficeGroupInfo
-	{																		 
+	{
 		[Required(ErrorMessage = "DisplayName is required")]
 		public string DisplayName { get; set; }
 
@@ -33,7 +33,9 @@ namespace Office365Groups.Library
 		[Required(ErrorMessage = "isPrivate is required")]
 		public bool IsPrivate { get; set; } = false;
 
-        public bool ExternalSharing { get; set; } = false;
+    public bool ExternalSharing { get; set; } = false;
+
+    public bool CreateTeam { get; set; } = false;
 
 		public string SiteUrl { get; set; }
 

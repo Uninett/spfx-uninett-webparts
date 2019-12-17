@@ -14,6 +14,7 @@ using Microsoft.SharePoint.Client;
 using System.Linq;
 using Office365Groups.Library.Helpers;
 using Group = Microsoft.Graph.Group;
+using Team = Microsoft.Graph.Team;
 
 namespace Rederi.Functions
 {
@@ -51,8 +52,15 @@ namespace Rederi.Functions
 
                     // getting siteurl may take time.
                     groupInfo.SiteUrl = EnsureGroupSiteUrl(currentGroup, accessToken);
-                    
+
                     groupInfo.GroupId = currentGroup.GroupId;
+
+                    if (groupInfo.CreateTeam)
+                    {
+                        FnLog.Info($"Creating team >>>");
+                        CreateTeamFromGroup(groupInfo.GroupId);
+          }
+                    
                 }
                 else
                 {
@@ -61,7 +69,7 @@ namespace Rederi.Functions
 
                     CreateOfficeGroup.FnLog.Info($"OrderId: {itemId} - Updating a group is no longer supported >>>");
 
- 
+
                     return req.CreateResponse(HttpStatusCode.OK);
 
                 }
@@ -85,11 +93,11 @@ namespace Rederi.Functions
                     createdGroup.Owner = owner;
                     createGroupStatus = HttpStatusCode.OK;
 
-                    
+
                     // Set external sharing on group
                     var accessToken = AuthHelper.GetMSGraphAccessToken();
                     SetSharingCapabilities(accessToken, createdGroup.Id, groupReq.ExternalSharing);
-                        
+
 
                 }
                 catch (Exception e)
@@ -107,27 +115,45 @@ namespace Rederi.Functions
             {
                 return ErrorHandler.CreateExceptionResponse(req, e);
             }
-            
+
 
         }
 
 
         public static void SetSharingCapabilities(string accessToken, string groupId, bool sharing)
         {
-        
+
             // Disable/Enable sharing on group
             OfficeGroupUtility.AllowToAddGuests(groupId, sharing, accessToken);
             CreateOfficeGroup.FnLog.Info($"External sharing set to: {sharing}");
 
         }
 
-        /// <summary>
-        /// Returns the URL of the Modern SharePoint Site backing an Office 365 Group (i.e. Unified Group)
-        /// </summary>
-        /// <param name="currentGroup">The Office 365 Group</param>
-        /// <param name="accessToken">The OAuth 2.0 Access Token to use for invoking the Microsoft Graph</param>
-        /// <returns>The URL of the modern site backing the Office 365 Group</returns>
-        private static string EnsureGroupSiteUrl(UnifiedGroupEntity currentGroup, string accessToken)
+    public static async void CreateTeamFromGroup(string groupId)
+    {
+      var graphClient = GraphHelper.GetAuthenticatedClient();
+
+      var team = new Team
+      {
+        AdditionalData = new Dictionary<string, object>()
+            {
+              {"group@odata.bind","https://graph.microsoft.com/v1.0/groups('" + groupId + "')"},
+              {"template@odata.bind","https://graph.microsoft.com/beta/teamsTemplates('standard')"}
+            }
+      };
+
+      await graphClient.Teams
+        .Request()
+        .AddAsync(team);
+    }
+
+    /// <summary>
+    /// Returns the URL of the Modern SharePoint Site backing an Office 365 Group (i.e. Unified Group)
+    /// </summary>
+    /// <param name="currentGroup">The Office 365 Group</param>
+    /// <param name="accessToken">The OAuth 2.0 Access Token to use for invoking the Microsoft Graph</param>
+    /// <returns>The URL of the modern site backing the Office 365 Group</returns>
+    private static string EnsureGroupSiteUrl(UnifiedGroupEntity currentGroup, string accessToken)
         {
             if (string.IsNullOrEmpty(currentGroup.SiteUrl))
             {
@@ -201,14 +227,14 @@ namespace Rederi.Functions
 
                 // Add listItem author
                 FieldUserValue authorsValue = (FieldUserValue) listItem["Author"];
-                User principal = clientContext.Web.GetUserById(authorsValue.LookupId);
+                Microsoft.SharePoint.Client.User principal = clientContext.Web.GetUserById(authorsValue.LookupId);
                 SetListItemRole(listItem, clientContext, principal, RoleType.Administrator);
 
                 // Add Owners
                 FieldUserValue[] ownersValue = listItem["NrkGroupOwner"] as FieldUserValue[];
                 foreach (FieldUserValue ownerValue in ownersValue)
                 {
-                    User ownerUser = clientContext.Web.GetUserById(ownerValue.LookupId);
+                    Microsoft.SharePoint.Client.User ownerUser = clientContext.Web.GetUserById(ownerValue.LookupId);
                     SetListItemRole(listItem, clientContext, ownerUser, RoleType.Contributor);
                 }
 
@@ -216,7 +242,7 @@ namespace Rederi.Functions
                 FieldUserValue[] membersValue = listItem["NrkMembers"] as FieldUserValue[];
                 foreach (FieldUserValue memberValue in membersValue)
                 {
-                    User memberUser = clientContext.Web.GetUserById(memberValue.LookupId);
+                    Microsoft.SharePoint.Client.User memberUser = clientContext.Web.GetUserById(memberValue.LookupId);
                     SetListItemRole(listItem, clientContext, memberUser, RoleType.Reader);
                 }
 
@@ -506,7 +532,7 @@ namespace Rederi.Functions
                     2. Compare with /Members
                     3. Register the difference as /Members
                     4. Add Owners to /Members
-             * 
+             *
              * */
             // Work with members
             List<string> newMembers = new List<string>();
@@ -535,10 +561,10 @@ namespace Rederi.Functions
             var graphClient = GraphHelper.GetAuthenticatedClient();
 
             /***
-             * 
+             *
                 Removing:
-                    Get Owners and Members, 
-                    compare with already registered users, 
+                    Get Owners and Members,
+                    compare with already registered users,
                     remove the difference from both /Owners and /Members
              */
             try
@@ -594,7 +620,7 @@ namespace Rederi.Functions
 
             FieldUserValue[] owners = new FieldUserValue[1];
             FieldUserValue authorsValue = (FieldUserValue) listItem["Author"];
-            User principal = clientContext.Web.GetUserById(authorsValue.LookupId);
+            Microsoft.SharePoint.Client.User principal = clientContext.Web.GetUserById(authorsValue.LookupId);
 
             clientContext.Load(principal);
             clientContext.ExecuteQuery();

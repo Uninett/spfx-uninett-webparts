@@ -1,4 +1,4 @@
-﻿<pnp:SiteFields xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+<pnp:SiteFields xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
   <!-- Felles felter -->
   <Field ID="{E2A125E8-DAD5-464E-B1AA-3A8FB16CAF86}" Name="KDTOSitePrivacy" DisplayName="Open/Closed" Type="Choice" Group="{parameter:GenericFieldsGroup}" Description="Lukkede områder er kun tilgjengelige for eiere og medlemmer av gruppen. Åpne er synlige og tilgjengelige for alle.">
     <Default>Open</Default>
@@ -8,6 +8,9 @@
     </CHOICES>
   </Field>
   <Field ID="{EAABEF6C-6E45-45BA-B532-9A52678EACE5}" Name="KDTOExternalSharing" DisplayName="External sharing" Type="Boolean" Group="{parameter:GenericFieldsGroup}">
+    <Default>0</Default>
+  </Field>
+  <Field ID="{48F095C3-256C-49DD-A42E-993DAF80FC21}" Name="KDTOCreateTeam" DisplayName="Create Microsoft Team" Type="Boolean" Group="{parameter:GenericFieldsGroup}">
     <Default>0</Default>
   </Field>
   <Field ID="{7FB561DE-C289-4B92-A8F7-16EA3B0FF416}" Name="KDTOSiteDescription" DisplayName="Description" Type="Note" Group="{parameter:GenericFieldsGroup}" Description="" ShowInNewForm="TRUE" />
