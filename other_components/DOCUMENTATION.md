@@ -78,7 +78,7 @@ ___
 ### Deploy SharePoint List
 
 1. Open PowerShell ISE.  
-   Make sure you have the *sharepoint-pnp* module installed.
+   Make sure you have the *SharePointPnPPowerShellOnline* module installed.
 
 2. Navigate to the PnP.SiteDirectory project
 3. Connect to your Site Collection:
@@ -88,7 +88,7 @@ ___
 4. Log in with the o365 user
 5. Deploy the project:
    ```
-   ApplyPnPProvisioningTemplate -Path ./RootTemplate.Uninett.xml
+   Apply-PnPProvisioningTemplate -Path ./RootTemplate.Uninett.xml
    ```
 
 6. A new SharePoint List called "Bestillinger" can now be found at your Site Collection URL + `/Lists/bestillinger`.  
