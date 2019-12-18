@@ -55,11 +55,12 @@ namespace Rederi.Functions
 
                     groupInfo.GroupId = currentGroup.GroupId;
 
-                    if (groupInfo.CreateTeam)
+                    FnLog.Info($"Create team: " + groupInfo.CreateTeam + " >>>");
+                    if (groupInfo.CreateTeam == true)
                     {
                         FnLog.Info($"Creating team >>>");
                         CreateTeamFromGroup(groupInfo.GroupId);
-          }
+                    }
                     
                 }
                 else

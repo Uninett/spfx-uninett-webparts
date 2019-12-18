@@ -16,23 +16,38 @@ using Microsoft.Online.SharePoint.TenantAdministration;
 namespace Rederi.Functions
 {
     public static class ApplySiteTemplate
-    {
+    {   
+        public static TraceWriter FnLog { get; set; }
+
         [FunctionName("ApplySiteTemplate")]
         public static HttpResponseMessage Run([HttpTrigger(AuthorizationLevel.Function, "post", Route = null)]HttpRequestMessage req, ExecutionContext executionContext, TraceWriter log)
-        {
+        {            
+            FnLog = log;
+            OfficeGroupUtility.Logger = FnLog;
+
+      
+            FnLog.Info($"Get params  >>>");
+
             var siteUrl = req.GetParam("siteUrl");
             var templateName = req.GetParam("template");
             var siteOrderUrl = req.GetParam("siteOrderUrl");
             var themeName = req.GetParam("themeName");
 
             if(string.IsNullOrEmpty(siteUrl) || string.IsNullOrEmpty(templateName)) throw new ArgumentException("siteUrl or template cannot be empty");
+                        
+            FnLog.Info($"Get path and stuff  >>>");
 
             var path = executionContext.FunctionDirectory;
             var pathToFolder = Path.GetFullPath(Path.Combine(path, @"..\Files\"));
 
+            FnLog.Info($"Path to folder: {pathToFolder}  >>>");
+      
+            FnLog.Info($"Get filesystemconnector  >>>");
+
             //We need a stupid FileSystemConnector to be able to get hold of the files declared in the Files node.
             var fileSystemConnector = new FileSystemConnector(pathToFolder, string.Empty);
 
+            FnLog.Info($"Get templateprovider  >>>");
             var templateProvider = new XMLFileSystemTemplateProvider
             {
                 Connector = fileSystemConnector
@@ -40,9 +55,13 @@ namespace Rederi.Functions
 
             ProvisioningTemplateApplyingInformation pti = new ProvisioningTemplateApplyingInformation();
 
-            var template = templateProvider.GetTemplate(templateName);
+            FnLog.Info($"Template name: {templateName} >>>");
+            FnLog.Info($"Get template  >>>");
+            var template = templateProvider.GetTemplate(templateName);      
+            FnLog.Info($"Set template connector  >>>");
             template.Connector = fileSystemConnector;
-
+            
+            FnLog.Info($"Applying template  >>>");
 
             // Apply PnP template
             try
