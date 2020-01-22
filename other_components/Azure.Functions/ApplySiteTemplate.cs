@@ -57,7 +57,17 @@ namespace Rederi.Functions
 
             FnLog.Info($"Template name: {templateName} >>>");
             FnLog.Info($"Get template  >>>");
-            var template = templateProvider.GetTemplate(templateName);      
+            var template = new OfficeDevPnP.Core.Framework.Provisioning.Model.ProvisioningTemplate();
+            try
+            {
+              template = templateProvider.GetTemplate(templateName);
+            }
+            catch (Exception e)
+            {
+              var errorMessage = string.Format($"Failed to get template: {e.Message}");
+              log.Error($"Failed to get template: {e.Message}", e, e.Source);
+              return req.CreateErrorResponse(HttpStatusCode.InternalServerError, errorMessage);
+            } 
             FnLog.Info($"Set template connector  >>>");
             template.Connector = fileSystemConnector;
             
